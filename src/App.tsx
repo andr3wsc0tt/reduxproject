@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import Home from './components/Home'
-import EditProfilePage from './components/EditProfile'
-import ProfilePage from './components/Profile'
-import ErrorPage from './components/Error'
+import Home from './components/HomePage'
+import EditProfilePage from './components/EditProfilePage'
+import ProfilePage from './components/ProfilePage'
+import ErrorPage from './components/ErrorPage'
 
 import {RootState} from './store'
 import {addProfile} from './store/actions/actions'
@@ -11,7 +11,6 @@ import {connect} from 'react-redux';
 import {Profile} from '../src/store/types/types'
 
 export interface IAppProps{
-  profiles: Profile[]
 }
 
 export class App extends React.Component<IAppProps> {
@@ -37,7 +36,6 @@ export class App extends React.Component<IAppProps> {
 
 const mapStateToProps = (state : RootState) => {
   return {
-      profiles: state.profile.profiles,
   };
 }
 
