@@ -8,7 +8,7 @@ import ErrorPage from './components/ErrorPage'
 import {RootState} from './store'
 import {addProfile} from './store/actions/actions'
 import {connect} from 'react-redux';
-import {Profile} from '../src/store/types/types'
+// import {Profile} from '../src/store/types/types'
 
 export interface IAppProps{
 }
