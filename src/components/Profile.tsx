@@ -12,11 +12,22 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
   public render() {
     let {match, profiles} = this.props;
     let who = match.params.userId;
-
-    console.log(profiles, who);
+    let about = "";
+    if (who == profiles[0].id)
+    {
+      who = profiles[0].name;
+      about = profiles[0].aboutMe;
+    }
+    else{
+      who = "Stranger";
+      about = "Who are you?"
+    }
 
     return (
+      <>
         <h2>Welcome {who}!</h2>
+        <h3>About Me: {about}</h3>
+      </>
     );
   }
 }
