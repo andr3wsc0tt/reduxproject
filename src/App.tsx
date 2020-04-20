@@ -8,8 +8,14 @@ import ErrorPage from './components/Error'
 import {RootState} from './store'
 import {addProfile} from './store/actions/actions'
 import {connect} from 'react-redux';
+import {Profile} from '../src/store/types/types'
 
-function App() {
+export interface IAppProps{
+  profiles: Profile[]
+}
+
+export class App extends React.Component<IAppProps> {
+  public render(){
   return (
     <>
     <Router>
@@ -26,11 +32,12 @@ function App() {
       </Router>
     </>
   );
+  }
 }
 
 const mapStateToProps = (state : RootState) => {
   return {
-      profile: state.profile.profiles,
+      profiles: state.profile.profiles,
   };
 }
 
