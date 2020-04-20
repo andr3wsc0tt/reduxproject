@@ -1,25 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import Home from './components/Home'
+import EditProfile from './components/EditProfile'
+import Profile from './components/Profile'
+import Error from './components/Error'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Router>
+        <ul>
+          <li><Link to="/edit-profile/">Edit Profile</Link></li>
+          <li><Link to="/profile/">Profile</Link></li>
+        </ul>
+        <Switch>
+          <Route exact path="/" component={Home}/>
+          <Route path="/profile/:userId" component={Profile}/>
+          <Route path="/edit-profile/:userId" component={EditProfile}/>
+          <Route component={Error}/>
+        </Switch>
+      </Router>
+    </>
   );
 }
 
