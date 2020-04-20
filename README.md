@@ -1,6 +1,6 @@
 "# Redux-Project" 
 
-I did this: npx create-react-app router-redex --typescript -->
+I did this: npx create-react-app router-redex --typescript
 
 You do this: 
     npm install --save redux @types/redux
