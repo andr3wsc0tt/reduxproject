@@ -1,9 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Home from './components/Home'
-import EditProfile from './components/EditProfile'
-import Profile from './components/Profile'
-import Error from './components/Error'
+import EditProfilePage from './components/EditProfile'
+import ProfilePage from './components/Profile'
+import ErrorPage from './components/Error'
+
+import {RootState} from './store'
+import {addProfile} from './store/actions/actions'
+import {connect} from 'react-redux';
 
 function App() {
   return (
@@ -15,13 +19,22 @@ function App() {
         </ul>
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route path="/profile/:userId" component={Profile}/>
-          <Route path="/edit-profile/:userId" component={EditProfile}/>
-          <Route component={Error}/>
+          <Route path="/profile/:userId" component={ProfilePage}/>
+          <Route path="/edit-profile/:userId" component={EditProfilePage}/>
+          <Route component={ErrorPage}/>
         </Switch>
       </Router>
     </>
   );
 }
 
-export default App;
+const mapStateToProps = (state : RootState) => {
+  return {
+      profile: state.profile.profiles,
+  };
+}
+
+export default connect (
+  mapStateToProps,
+  {addProfile},
+)(App);
