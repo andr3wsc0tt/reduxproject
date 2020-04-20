@@ -13,7 +13,7 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
     let {match, profiles} = this.props;
     let who = match.params.userId;
     let about = "";
-    if (who == profiles[0].id)
+    if (who === profiles[0].id)
     {
       who = profiles[0].name;
       about = profiles[0].aboutMe;
