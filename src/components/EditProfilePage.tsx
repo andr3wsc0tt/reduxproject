@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { JSXAttribute } from '@babel/types';
 
 export interface IAboutProps {
     match : any
