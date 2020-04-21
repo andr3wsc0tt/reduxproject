@@ -16,6 +16,7 @@ export class App extends React.Component<IAppProps> {
   public render(){
   return (
     <>
+    
     <Router>
         <ul>
           <li><Link to="/edit-profile/">Edit Profile</Link></li>
@@ -27,8 +28,11 @@ export class App extends React.Component<IAppProps> {
           <Route path="/edit-profile/:userId" component={EditProfilePage}/>
           <Route component={ErrorPage}/>
         </Switch>
+
       </Router>
+      
     </>
+    
   );
   }
 }
