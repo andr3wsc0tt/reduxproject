@@ -62,9 +62,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
       )
     }
     return (
-<<<<<<< HEAD
-      <h2>Home Page :)</h2>
-=======
       
       <Grid columns='equal'>
       <Grid.Row >
@@ -132,7 +129,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         </Grid.Row>
     </Grid>
     
->>>>>>> 8e771e1b5f8a4f32747cad3fb1ccbc2d06cd36fb
     );
   }
 }

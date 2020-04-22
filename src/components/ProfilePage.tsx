@@ -11,23 +11,9 @@ export interface IProfilePageProps {
 export class ProfilePage extends React.Component<IProfilePageProps> {
   public render() {
     let {match, profiles} = this.props;
-<<<<<<< HEAD
-    let who = match.params.userId;
-    let about = "";
-    if (who === profiles[0].id)
-    {
-      who = profiles[0].name;
-      about = profiles[0].aboutMe;
-    }
-    else{
-      who = "Stranger";
-      about = "Who are you?"
-    }
-=======
     let who = profiles[0].name;
     let about = profiles[0].aboutMe;
 
->>>>>>> 8e771e1b5f8a4f32747cad3fb1ccbc2d06cd36fb
 
     return (
       <>
