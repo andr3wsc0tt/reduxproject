@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Divider,Button, Form, Grid, Header, Segment, Container,Input} from 'semantic-ui-react'
+import { Divider,Button, Form, Grid, Header, Segment, Container, Input,} from 'semantic-ui-react'
 export interface IHomeProps {
 }
 export default class Home extends React.Component<IHomeProps> {
