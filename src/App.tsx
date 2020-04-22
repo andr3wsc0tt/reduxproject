@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch, useHistory, Redirect } from "react-router-dom";
 import Home from './components/HomePage'
 import EditProfilePage from './components/EditProfilePage'
 import ProfilePage from './components/ProfilePage'
@@ -10,22 +10,31 @@ import {addProfile} from './store/actions/actions'
 import {connect} from 'react-redux';
 
 export interface IAppProps{
+  loggedIn: boolean
 }
 
 export class App extends React.Component<IAppProps> {
+
   public render(){
+  
+  let {loggedIn } = this.props;
+  if (loggedIn === true){
+    return (
+      <>
+      <Router>
+      <Redirect to="./profile/1"/>
+      <Link to="" component={ProfilePage}/>
+    </Router>
+    </>
+    )
+  }
+
   return (
     <>
     
     <Router>
-        <ul>
-          <li><Link to="/edit-profile/">Edit Profile</Link></li>
-          <li><Link to="/profile/">Profile</Link></li>
-        </ul>
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route path="/profile/:userId" component={ProfilePage}/>
-          <Route path="/edit-profile/:userId" component={EditProfilePage}/>
           <Route component={ErrorPage}/>
         </Switch>
 
@@ -39,6 +48,7 @@ export class App extends React.Component<IAppProps> {
 
 const mapStateToProps = (state : RootState) => {
   return {
+    loggedIn: state.profile.loggedIn
   };
 }
 

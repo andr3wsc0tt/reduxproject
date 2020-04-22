@@ -11,22 +11,15 @@ export interface IProfilePageProps {
 export class ProfilePage extends React.Component<IProfilePageProps> {
   public render() {
     let {match, profiles} = this.props;
-    let who = match.params.userId;
-    let about = "";
-    if (who === profiles[0].id)
-    {
-      who = profiles[0].name;
-      about = profiles[0].aboutMe;
-    }
-    else{
-      who = "Stranger";
-      about = "Who are you?"
-    }
+    let who = profiles[0].name;
+    let about = profiles[0].aboutMe;
+
 
     return (
       <>
         <h2>Welcome {who}!</h2>
         <h3>About Me: {about}</h3>
+        <button onClick={() => alert("HI")}></button>
       </>
     );
   }
