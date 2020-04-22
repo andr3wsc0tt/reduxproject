@@ -4,11 +4,14 @@ import {checkPass} from '../store/actions/actions'
 import {ProfileActionTypes, Profile} from '../store/types/types'
 import { RootState } from '../store';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
+import ProfilePage from './ProfilePage';
 
 export interface IHomeProps {
   checkPass: typeof checkPass,
   profiles: Profile[],
-  loggedIn: boolean
+  loggedIn: boolean,
+  location?: Router
 }
 
 export interface IHomeState{
@@ -43,6 +46,19 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 }
 
   public render() {
+    let {loggedIn } = this.props;
+    console.log(loggedIn);
+    if (loggedIn === true || sessionStorage.getItem('loggedIn')){
+      sessionStorage.setItem('loggedIn', 'true');
+      return (
+        <>
+        <Router>
+        <Redirect to='./profile/1'/>
+        <Link to="" component={ProfilePage}/>
+      </Router>
+      </>
+      )
+    }
     return (
       
       <Grid columns='equal'>

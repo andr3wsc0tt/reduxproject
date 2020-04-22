@@ -10,24 +10,11 @@ import {addProfile} from './store/actions/actions'
 import {connect} from 'react-redux';
 
 export interface IAppProps{
-  loggedIn: boolean
 }
 
 export class App extends React.Component<IAppProps> {
 
   public render(){
-  
-  let {loggedIn } = this.props;
-  if (loggedIn === true){
-    return (
-      <>
-      <Router>
-      <Redirect to="./profile/1"/>
-      <Link to="" component={ProfilePage}/>
-    </Router>
-    </>
-    )
-  }
 
   return (
     <>
@@ -48,7 +35,6 @@ export class App extends React.Component<IAppProps> {
 
 const mapStateToProps = (state : RootState) => {
   return {
-    loggedIn: state.profile.loggedIn
   };
 }
 
