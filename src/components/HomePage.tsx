@@ -48,7 +48,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
   public render() {
     let {loggedIn } = this.props;
     console.log(loggedIn);
-    if (loggedIn === true || sessionStorage.getItem('loggedIn')){
+    if (loggedIn === true || sessionStorage.getItem('loggedIn') == 'true'){
       sessionStorage.setItem('loggedIn', 'true');
       return (
         <>

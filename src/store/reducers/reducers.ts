@@ -21,8 +21,12 @@ export function profileReducer(state = initialState, action: ProfileActionTypes)
             }
         case CHECK_PASS:
             let cred = state.loggedIn;
-            if (action.payload[0] == "Andrew" && action.payload[1] == "1")
-                cred = true;
+            const uName = state.profiles.filter(profile => profile.name == action.payload[0]);
+            
+            if (uName.length){
+                if (uName[0].password == action.payload[1])
+                    cred = true;
+            }
             return{
                 ...state,
                 loggedIn : cred
