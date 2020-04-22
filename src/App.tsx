@@ -25,8 +25,13 @@ export class App extends React.Component<IAppProps> {
       return (
         <>
         <Router>
+          <Switch>
+            <Route path='/profile'>
+          <Link to="" component={ProfilePage}/>
         <Redirect to={`/profile/${uName}`}/>
-        <Link to="" component={ProfilePage}/>
+        </Route>
+        <Route path="/edit-profile/" component={EditProfilePage}/>
+        </Switch>
       </Router>
       </>
       )
