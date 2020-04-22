@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import ProfilePage from './ProfilePage';
 
+
 export interface IHomeProps {
   checkPass: typeof checkPass,
   profiles: Profile[],
