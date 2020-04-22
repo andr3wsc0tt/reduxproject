@@ -19,7 +19,7 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
       <>
         <h2>Welcome {who}!</h2>
         <h3>About Me: {about}</h3>
-        <button onClick={() => alert("HI")}></button>
+        <button onClick={() => sessionStorage.clear()}>Log Out</button>
       </>
     );
   }

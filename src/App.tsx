@@ -17,13 +17,15 @@ export interface IAppProps{
 export class App extends React.Component<IAppProps> {
 
   public render(){
+    let { profiles } = this.props;
 
     if (sessionStorage.getItem('loggedIn') == 'true'){
-      sessionStorage.setItem('loggedIn', 'true');
+      const uName = sessionStorage.getItem('userName')
+      
       return (
         <>
         <Router>
-        <Redirect to='/profile/1'/>
+        <Redirect to={`/profile/${uName}`}/>
         <Link to="" component={ProfilePage}/>
       </Router>
       </>

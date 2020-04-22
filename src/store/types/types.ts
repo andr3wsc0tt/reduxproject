@@ -2,7 +2,8 @@ export interface Profile {
     id: number,
     name: string,
     aboutMe: string,
-    password: string
+    password: string,
+    loggedIn: boolean
 }
 
 export interface ProfileState {
