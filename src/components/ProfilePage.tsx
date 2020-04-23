@@ -3,6 +3,7 @@ import { RootState } from "../store";
 import { connect } from "react-redux";
 import { Profile } from "../store/types/types";
 import { logOut } from "../store/actions/actions";
+import EditProfilePage from './EditProfilePage';
 
 import {
   Image,
@@ -18,6 +19,7 @@ import {
 } from "semantic-ui-react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { Link } from "react-router-dom";
 
 export interface IProfilePageProps {
   match: any;
@@ -44,6 +46,13 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
     sessionStorage.setItem("userName", "");
     console.log(profiles);
   };
+ 
+redirect = () => {
+    let {profiles} = this.props;
+    let uName = profiles.filter(profile => profile.loggedIn == true);
+    setTimeout(()=>window.location.reload(), 5);
+  }
+
 
   public render() {
     let { profiles } = this.props;
@@ -53,7 +62,8 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
     return (
       <Segment>
         <Grid divided="vertically">
-          <Grid.Row columns={5}>
+        <h2>Welcome {who}!</h2>
+           <Grid.Row columns={5}>
             <Grid.Column></Grid.Column>
             <Grid.Column floated="right">
               <Dropdown text="Groups">
@@ -78,9 +88,11 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
           </Grid.Row>
 
           <Grid.Row columns={3}>
+          
             <Grid.Column>
-              <Container fluid>
-                <Header as="h1"> Explore </Header>
+            <h3>About Me: {about}</h3>
+              <Container fluid><br></br>
+                <Header as="h4"> Explore </Header>
 
                 <Radio as="h2" label="Networking Events" defaultChecked />
                 <br></br>
@@ -123,13 +135,18 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
               </Form>
             </Grid.Column>
             <Grid.Column>
-              <Calendar />
+              <Calendar /><br></br>
+              
+              {/* <Link to={`/edit-profile/${who}`} component={EditProfilePage}>Edit</Link> */}
+              <Link to="/edit-profile/Mo" onClick={() => setTimeout(()=>window.location.reload(), 5)}><Button>Edit profile</Button></Link>
+
+       
+        <Button color='red' onClick={this.loggedOut}>Log Out</Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        <h2>Welcome {who}!</h2>
-        <h3>About Me: {about}</h3>
-        <button onClick={this.loggedOut}>Log Out</button>
+        
+       
       </Segment>
     );
   }
