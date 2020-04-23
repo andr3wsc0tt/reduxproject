@@ -14,6 +14,13 @@ let initialState : ProfileState = {
             password: "password",
             loggedIn: false
         }
+        ,{
+            id: 5,
+            name: "Mohammad",
+            aboutMe: "I'm Mohammad",
+            password: "pass",
+            loggedIn: false
+        }
     ],
     loggedIn: false
 

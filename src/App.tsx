@@ -8,7 +8,6 @@ import {Profile} from './store/types/types';
 import {RootState} from './store';
 import {addProfile} from './store/actions/actions';
 import {connect} from 'react-redux';
-import NavBar from './components/subcomponents/NavBar';
 import About from './components/EditProfilePage';
 import LogOut from './components/subcomponents/LogOut';
 
@@ -48,7 +47,7 @@ export class App extends React.Component<IAppProps> {
   return (
     <>
     <Router>
-      <NavBar />
+     
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/ProfilePage" component={ProfilePage}/>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import NavBar from '../components/subcomponents/NavBar';
 import {Profile} from '../store/types/types'
 
-import { Image, Segment, Grid, Dropdown, Container, Header, Radio, Form, TextArea, Button } from 'semantic-ui-react';
+import { Image, Segment, Grid, Dropdown, Container, Header, Radio, Form, TextArea, Button, GridColumn } from 'semantic-ui-react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
@@ -51,6 +51,9 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
     
     <Grid.Row columns={3}>
       <Grid.Column>
+      <h2>Welcome {who}!</h2>
+        <h3>About Me: {about}</h3>
+       
       <Container fluid>
       <Header as='h1'> Explore </Header>
 
@@ -77,13 +80,16 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
       </Grid.Column>
       <Grid.Column>
 
-      <Calendar />
+      <Calendar /><br></br>
+      <br></br>
+      <Segment basic textAlign={"center"}>
+        <Button style={{textAlign: "center"}} color='red' onClick={() => sessionStorage.clear()}>Log Out</Button>
+    </Segment>
+        
       </Grid.Column>
-    </Grid.Row>
+         </Grid.Row>
   </Grid>
-        <h2>Welcome {who}!</h2>
-        <h3>About Me: {about}</h3>
-        <button onClick={() => sessionStorage.clear()}>Log Out</button>
+       
   </Segment>
 
     );
