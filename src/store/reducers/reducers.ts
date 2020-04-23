@@ -25,6 +25,7 @@ export function profileReducer(state = initialState, action: ProfileActionTypes)
         case ADD_PROFILE:
             return{
                 ...state,
+                loggedIn: true,
                 profiles: [...state.profiles, action.payload]
             }
         case CHECK_PASS:

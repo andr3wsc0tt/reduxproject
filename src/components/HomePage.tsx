@@ -64,25 +64,32 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 
     addProfile( {id: 2, name: signUpUser, password: signUpPass, aboutMe: "", loggedIn: true});
     sessionStorage.setItem('profiles', JSON.stringify({profiles:profiles, loggedIn:loggedIn}));
+
+    this.setState({signUpUser: "", signUpPass: ""});
   }
   public render() {
     let {loggedIn, profiles } = this.props;
 
-    console.log(loggedIn);
     if (loggedIn === true || sessionStorage.getItem('loggedIn') == 'true'){
       let userName = sessionStorage.getItem('userName');
-      let uName = profiles.filter(profile => profile.name == userName);
-      console.log(profiles);
-      if (loggedIn == true)
+      let uName = profiles.filter(profile => profile.loggedIn == true);
+
+      let destString = "";
+
+      if (loggedIn == true){
         sessionStorage.setItem('userName', uName[0].name);
-      else if (userName != undefined)
+        destString = uName[0].name;
+      }
+      else if (userName != undefined){
         sessionStorage.setItem('userName', userName);
+        destString = userName;
+      }
       sessionStorage.setItem('loggedIn', 'true');
-      
+    
       return (
         <>
         <Router>
-        <Redirect to={`/profile/${uName[0].name}`}/>
+        <Redirect to={`/profile/${destString}`}/>
         <Link to="" component={ProfilePage}/>
       </Router>
       </>
