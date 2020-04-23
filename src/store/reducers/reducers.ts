@@ -23,8 +23,17 @@ let initialState: ProfileState = {
       aboutMe: "I'm Mo",
       password: "pass",
       loggedIn: false
-    }
+    },
+
+    {
+        id: 3,
+        name: "Cai",
+        aboutMe: "I'm Cai",
+        password: "12345",
+        loggedIn: false
+      }
   ],
+  
   loggedIn: false,
   numUsers: 3
 };

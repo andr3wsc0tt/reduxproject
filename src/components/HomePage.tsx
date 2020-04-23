@@ -10,6 +10,7 @@ import {
   Container,
   Input
 } from "semantic-ui-react";
+
 import { checkPass, addProfile } from "../store/actions/actions";
 
 import { ProfileActionTypes, Profile } from "../store/types/types";
