@@ -26,28 +26,21 @@ export class App extends React.Component<IAppProps> {
       const uName = sessionStorage.getItem('userName')
       
       return (
-        <Fragment>
-          <NavBar/>
-          <>
-            <Router>            
-              <Switch>
-                <Route path='/profile'>
-                  <Link to="" component={ProfilePage}/>
-                  <Redirect to={`/profile/${uName}`}/>
-                </Route>
-                <Route path="/EditrProfilePage/" component={EditProfilePage}/>
-                <Route path="/LogOut/" component={LogOut}/>
-                  {/*<Link to="" component={Home}/>
 
-                 <Redirect path="/HomePage/" component={Home}/>
-                 <Route path='/EditProfilePage'>
-                 <Link to="" component={EditProfilePage}/>
-                </Route>*/}
-              </Switch>
-          </Router>
-          </>
-        </Fragment>
-        
+        <>
+        <Router>
+          <Switch>
+          <Route exact path="/" component={Home}/>
+
+            <Route path='/profile'>
+          <Link to="" component={ProfilePage}/>
+        <Redirect to={`/profile/${uName}`}/>
+        </Route>
+        <Route path="/edit-profile/" component={EditProfilePage}/>
+        </Switch>
+      </Router>
+      </>
+
       )
     }
   
