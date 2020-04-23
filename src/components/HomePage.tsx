@@ -125,6 +125,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
       );
     }
     return (
+      <Segment>
       <Grid columns="equal">
         <Grid.Row>
           <Grid.Column></Grid.Column>
@@ -217,6 +218,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
           </Grid.Column>
         </Grid.Row>
       </Grid>
+      </Segment>
     );
   }
 }
