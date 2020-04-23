@@ -26,6 +26,8 @@ export class App extends React.Component<IAppProps> {
         <>
         <Router>
           <Switch>
+          <Route exact path="/" component={Home}/>
+
             <Route path='/profile'>
           <Link to="" component={ProfilePage}/>
         <Redirect to={`/profile/${uName}`}/>

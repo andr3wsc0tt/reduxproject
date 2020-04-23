@@ -19,6 +19,7 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
 
 
     return (
+
       <Segment>
       <Grid divided='vertically'>
     <Grid.Row columns={5}>
@@ -78,7 +79,11 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
       </Grid.Column>
     </Grid.Row>
   </Grid>
+        <h2>Welcome {who}!</h2>
+        <h3>About Me: {about}</h3>
+        <button onClick={() => sessionStorage.clear()}>Log Out</button>
   </Segment>
+
     );
   }
 }
