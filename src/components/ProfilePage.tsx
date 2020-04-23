@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { RootState } from '../store';
 import { connect } from 'react-redux';
-import {Profile} from '../store/types/types'
+import {Profile} from '../store/types/types';
+import NavBar from '../components/subcomponents/NavBar';
 
 export interface IProfilePageProps {
   match: any,

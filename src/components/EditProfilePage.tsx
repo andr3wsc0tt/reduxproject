@@ -1,4 +1,5 @@
 import * as React from 'react';
+import NavBar from '../components/subcomponents/NavBar';
 
 export interface IAboutProps {
     match : any
