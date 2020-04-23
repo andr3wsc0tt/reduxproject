@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Profile } from "../store/types/types";
 import { logOut } from "../store/actions/actions";
 import EditProfilePage from '../components/EditProfilePage'
-import {Link, Redirect} from 'react-router-dom';
+import {Link, Redirect, Route} from 'react-router-dom';
 
 import {
   Image,
@@ -52,10 +52,10 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
     let {profiles} = this.props;
     let uName = profiles.filter(profile => profile.loggedIn == true);
     return (
-    <>
-    <Link to="" component={EditProfilePage} />
-    <Redirect to={`/edit-profile/${uName}`} />
-    </>
+      <Route path="/profile">
+      <Link to="" component={ProfilePage} />
+      <Redirect to={`/profile/${uName}`} />
+    </Route>
     );
   }
 
@@ -156,7 +156,6 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
         <h2>Welcome {who}!</h2>
         <h3>About Me: {uName[0].aboutMe}</h3>
         <button onClick={this.loggedOut}>Log Out</button>
-        <button onClick={this.redirect}>Edit Profile</button>
       </Segment>
     );
   }
