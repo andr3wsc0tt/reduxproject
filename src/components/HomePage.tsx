@@ -84,17 +84,17 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
   public render() {
     let { loggedIn, profiles } = this.props;
 
-    if (loggedIn === true || sessionStorage.getItem("loggedIn") == "true") {
+    if (loggedIn === true || sessionStorage.getItem("loggedIn") === "true") {
       sessionStorage.setItem(
         "profiles",
         JSON.stringify({ profiles: profiles, loggedIn: loggedIn })
       );
       let userName = sessionStorage.getItem("userName");
-      let uName = profiles.filter(profile => profile.loggedIn == true);
+      let uName = profiles.filter(profile => profile.loggedIn === true);
 
       let destString = "";
 
-      if (loggedIn == true) {
+      if (loggedIn === true) {
         sessionStorage.setItem("userName", uName[0].name);
         sessionStorage.setItem("loggedIn", "true");
         destString = uName[0].name;
