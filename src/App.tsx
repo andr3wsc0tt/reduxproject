@@ -45,6 +45,7 @@ export class App extends React.Component<IAppProps> {
   return (
     <>
     <Router>
+      <NavBar />
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route component={ErrorPage}/>

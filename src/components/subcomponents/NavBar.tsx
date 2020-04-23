@@ -17,28 +17,21 @@ export default class NavBar extends React.Component<INavBarProps> {
                     Home
                 </Menu.Item>
 
+
                 <Menu.Item
                     as={Link}
-                    to={`/groups`}
-                    name='groups'
+                    to={`/page2`}
+                    name='otherpage'
                 >
-                    Activities
+                   Edit Profile
                 </Menu.Item>
 
                 <Menu.Item
                     as={Link}
-                    to={`/page1`}
+                    to={`/page3`}
                     name='otherpage'
                 >
-                    Another Page
-                </Menu.Item>
-
-                <Menu.Item
-                    as={Link}
-                    to={`/fsdsdffsdsdf23484h0rhw0e8rfbwne0fnbads0fshfb0p42jpias09idashj0dsa`}
-                    name='otherpage'
-                >
-                    Broken Link Page
+                    Logout
                 </Menu.Item>
             </Menu>
         );
