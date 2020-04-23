@@ -1,7 +1,7 @@
-import {ProfileState, ADD_PROFILE, ProfileActionTypes, CHECK_PASS} from '../types/types'
+import {ProfileState, ADD_PROFILE, ProfileActionTypes, CHECK_PASS, Profile} from '../types/types'
 import { identifier } from '@babel/types';
 
-const initialState : ProfileState = {
+let initialState : ProfileState = {
     profiles: [
         {
             id: 1,
@@ -12,6 +12,12 @@ const initialState : ProfileState = {
         }
     ],
     loggedIn: false
+}
+let update = sessionStorage.getItem('profiles');
+let updateState : ProfileState;
+if (update !== null){
+    updateState = JSON.parse(update);
+    initialState = updateState;
 }
 
 export function profileReducer(state = initialState, action: ProfileActionTypes) : ProfileState {

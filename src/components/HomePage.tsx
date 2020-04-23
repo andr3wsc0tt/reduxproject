@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Divider,Button, Form, Grid, Header, Segment, Container,Input} from 'semantic-ui-react'
-import {checkPass} from '../store/actions/actions'
+import {checkPass, addProfile} from '../store/actions/actions'
 import {ProfileActionTypes, Profile} from '../store/types/types'
 import { RootState } from '../store';
 import { connect } from 'react-redux';
@@ -10,6 +10,7 @@ import ProfilePage from './ProfilePage';
 
 export interface IHomeProps {
   checkPass: typeof checkPass,
+  addProfile: typeof addProfile,
   profiles: Profile[],
   loggedIn: boolean,
   location?: Router
@@ -17,14 +18,16 @@ export interface IHomeProps {
 
 export interface IHomeState{
   userName: string,
-  passWord: string
+  passWord: string,
+  signUpUser: string,
+  signUpPass: string
 }
 
 export class Home extends React.Component<IHomeProps, IHomeState> {
 
   constructor(props: IHomeProps){
     super(props);
-    this.state = {userName: "", passWord: ""};
+    this.state = {userName: "", passWord: "", signUpPass: "", signUpUser: ""};
   }
 
   handleUserChange = (e : React.FormEvent<HTMLInputElement> ) => {
@@ -35,6 +38,14 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     this.setState({passWord : e.currentTarget.value})
   }
 
+  handleSignUserChange = (e : React.FormEvent<HTMLInputElement> ) => {
+    this.setState({signUpUser : e.currentTarget.value})
+  }
+
+  handleSignPassChange = (e : React.FormEvent<HTMLInputElement> ) => {
+    this.setState({signUpPass : e.currentTarget.value})
+  }
+
   handleOnClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> ) => {
     event.preventDefault();
     let {userName, passWord} = this.state;
@@ -43,14 +54,23 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     let cred : Array<string> = [userName, passWord];
     checkPass(cred);
     this.setState({userName : "", passWord: ""});
-
 }
 
+  handleSignUp = (e : React.MouseEvent<HTMLButtonElement, MouseEvent> ) => {
+    e.preventDefault();
+
+    let {signUpPass, signUpUser} = this.state;
+    let {profiles, addProfile, loggedIn} = this.props;
+
+    addProfile( {id: 2, name: signUpUser, password: signUpPass, aboutMe: "", loggedIn: true});
+    sessionStorage.setItem('profiles', JSON.stringify({profiles:profiles, loggedIn:loggedIn}));
+  }
   public render() {
     let {loggedIn, profiles } = this.props;
     console.log(loggedIn);
     if (loggedIn === true || sessionStorage.getItem('loggedIn') == 'true'){
-      const uName = profiles.filter(profile => profile.loggedIn == true);
+      const uName = profiles.filter(profile => profile.name == sessionStorage.getItem('userName'));
+      console.log(profiles);
       sessionStorage.setItem('loggedIn', 'true');
       sessionStorage.setItem('userName', uName[0].name);
       return (
@@ -63,7 +83,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
       )
     }
     return (
-      
       <Grid columns='equal'>
       <Grid.Row >
         <Grid.Column></Grid.Column>
@@ -106,7 +125,13 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         </Header>
         <Form size='large'>
           <Segment stacked>
-            <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' />
+            <Form.Input 
+            fluid icon='user' 
+            iconPosition='left' 
+            placeholder='E-mail address'
+            value={this.state.signUpUser} 
+            onChange={this.handleSignUserChange}/>
+
             <Form.Input
               fluid
               icon='lock'
@@ -120,8 +145,10 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
               iconPosition='left'
               placeholder='confirm-Password'
               type='password'
+              value={this.state.signUpPass} 
+              onChange={this.handleSignPassChange}
             />
-            <Button color='green' fluid size='large'>
+            <Button color='green' fluid size='large' onClick={this.handleSignUp}>
               SignUp
             </Button>
           </Segment>
@@ -143,5 +170,5 @@ const mapStateToProps = (state: RootState, ownProps : IHomeProps) => {
 
 export default connect(
   mapStateToProps,
-  {checkPass},
+  {checkPass, addProfile},
 )(Home);
