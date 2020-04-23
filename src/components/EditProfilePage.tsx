@@ -1,7 +1,6 @@
 import * as React from 'react';
 
-import { Grid, Input, Divider, Container, Header, Radio, Form, Segment, TextArea, Button } from 'semantic-ui-react';
-
+import { Card, Icon, Image, Grid, Input, Divider, Container, Header, Radio, Form, Segment, TextArea, Button } from 'semantic-ui-react';
 
 export interface IAboutProps {
     match : any
@@ -26,7 +25,25 @@ export default class About extends React.Component<IAboutProps> {
         <Grid.Column >
           
         <Container fluid>
-      <Header as='h1'> <i className="user circle icon"></i></Header>
+        <Card>
+          <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false} />
+          <Card.Content>
+            <Card.Header>Andrew Scott</Card.Header>
+            <Card.Meta>
+              <span className='date'>Joined in 2020</span>
+            </Card.Meta>
+            <Card.Description>
+              Andrew is a great guy :-).
+            </Card.Description>
+          </Card.Content>
+          <Card.Content extra>
+            {/* <a>
+              <Icon name='user' />
+              22 Friends
+            </a> */}
+          </Card.Content>
+        </Card>
+      {/* <Header as='h1'> <i className="user circle icon"></i></Header> */}
 
       <Radio as='h3' label='Education' defaultChecked /><br></br>
       <Radio label='Events' defaultChecked /><br></br>

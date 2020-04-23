@@ -1,13 +1,14 @@
 import * as React from 'react';
+
 import { Divider,Button, Form, Grid, Header, Segment, Container,Input} from 'semantic-ui-react'
 import {checkPass, addProfile} from '../store/actions/actions'
+
 import {ProfileActionTypes, Profile} from '../store/types/types'
 import { RootState } from '../store';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import ProfilePage from './ProfilePage';
 import NavBar from './subcomponents/NavBar';
-
 
 export interface IHomeProps {
   checkPass: typeof checkPass,
@@ -71,6 +72,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
   public render() {
     let {loggedIn, profiles } = this.props;
 
+
     if (loggedIn === true || sessionStorage.getItem('loggedIn') == 'true'){
       let userName = sessionStorage.getItem('userName');
       let uName = profiles.filter(profile => profile.loggedIn == true);
@@ -85,6 +87,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         sessionStorage.setItem('userName', userName);
         destString = userName;
       }
+
       sessionStorage.setItem('loggedIn', 'true');
     
       return (
@@ -100,7 +103,8 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
       <Grid columns='equal'>
       <Grid.Row >
         <Grid.Column></Grid.Column>
-        <Grid.Column></Grid.Column>
+        <Grid.Column>
+        </Grid.Column>
         <Grid.Column floated='right'> 
             <Input fluid icon='user' iconPosition='left' placeholder='Username'  value={this.state.userName} onChange={this.handleUserChange} />
             </Grid.Column >

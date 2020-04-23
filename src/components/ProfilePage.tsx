@@ -3,7 +3,8 @@ import { RootState } from '../store';
 import { connect } from 'react-redux';
 import NavBar from '../components/subcomponents/NavBar';
 import {Profile} from '../store/types/types'
-import { Segment, Grid, Dropdown, Container, Header, Radio, Form, TextArea, Button } from 'semantic-ui-react';
+
+import { Image, Segment, Grid, Dropdown, Container, Header, Radio, Form, TextArea, Button } from 'semantic-ui-react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 

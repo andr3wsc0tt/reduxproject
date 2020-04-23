@@ -17,6 +17,7 @@ export interface IAppProps{
   profiles: Profile[]
 }
 
+
 export class App extends React.Component<IAppProps> {
 
   public render(){
