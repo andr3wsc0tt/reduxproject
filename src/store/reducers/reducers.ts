@@ -3,7 +3,9 @@ import {ProfileState, ADD_PROFILE, ProfileActionTypes, CHECK_PASS, Profile} from
 
 import { identifier } from '@babel/types';
 
+
 let initialState : ProfileState = {
+
     profiles: [
         {
             id: 1,
@@ -34,15 +36,15 @@ export function profileReducer(state = initialState, action: ProfileActionTypes)
         case CHECK_PASS:
             let cred = state.loggedIn;
             let index = 0;
-            const uName = state.profiles.filter(profile => profile.name == action.payload[0]);
+            const uName = state.profiles.filter(profile => profile.name === action.payload[0]);
             state.profiles.forEach((profile, i) => {
-                if (profile.name == uName[0].name){
+                if (profile.name === uName[0].name){
                     index = i;
                 }
             })
                         
             if (uName.length){
-                if (uName[0].password == action.payload[1]){
+                if (uName[0].password === action.payload[1]){
                     cred = true;
                 }
             }
