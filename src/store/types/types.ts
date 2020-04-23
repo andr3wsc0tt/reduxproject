@@ -1,26 +1,33 @@
 export interface Profile {
-    id: number,
-    name: string,
-    aboutMe: string,
-    password: string,
-    loggedIn: boolean
+  id: number;
+  name: string;
+  aboutMe: string;
+  password: string;
+  loggedIn: boolean;
 }
 
 export interface ProfileState {
-    profiles: Profile[],
-    loggedIn: boolean
+  profiles: Profile[];
+  loggedIn: boolean;
+  numUsers: number;
 }
 
 export const ADD_PROFILE = "ADD_PROFILE";
 export const CHECK_PASS = "CHECK_PASS";
+export const LOG_OUT = "LOG_OUT";
 
 interface addProfile {
-    type: typeof ADD_PROFILE,
-    payload: Profile
+  type: typeof ADD_PROFILE;
+  payload: Profile;
 }
 interface checkPass {
-    type: typeof CHECK_PASS,
-    payload: string[]
+  type: typeof CHECK_PASS;
+  payload: string[];
 }
 
-export type ProfileActionTypes = addProfile | checkPass;
+interface logOut {
+  type: typeof LOG_OUT;
+  payload: Profile;
+}
+
+export type ProfileActionTypes = addProfile | checkPass | logOut;
