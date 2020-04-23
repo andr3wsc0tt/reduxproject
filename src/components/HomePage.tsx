@@ -69,16 +69,28 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
   handleSignUp = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
-    let { signUpPass, signUpUser } = this.state;
-    let { addProfile } = this.props;
+    let { signUpPass, signUpUser } = this.state; // info put into form
+    let { addProfile, profiles } = this.props;
 
-    addProfile({
-      id: 2,
-      name: signUpUser,
-      password: signUpPass,
-      aboutMe: "",
-      loggedIn: true
+    profiles.forEach((profile, i) => {
+      if (profile.name === signUpUser) {
+        // display an error message
+      }
+      else {
+        addProfile({ // reducer/action 
+          id: 2,
+          name: signUpUser,
+          password: signUpPass,
+          aboutMe: "",
+          loggedIn: true
+        });
+      }
     });
+
+    
+
+
+
     this.setState({ signUpUser: "", signUpPass: "" });
   };
   public render() {
