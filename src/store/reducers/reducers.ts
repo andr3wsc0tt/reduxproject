@@ -1,4 +1,6 @@
+
 import {ProfileState, ADD_PROFILE, ProfileActionTypes, CHECK_PASS, Profile} from '../types/types'
+
 import { identifier } from '@babel/types';
 
 let initialState : ProfileState = {
@@ -12,6 +14,7 @@ let initialState : ProfileState = {
         }
     ],
     loggedIn: false
+
 }
 let update = sessionStorage.getItem('profiles');
 let updateState : ProfileState;
