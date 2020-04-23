@@ -3,6 +3,8 @@ import { RootState } from "../store";
 import { connect } from "react-redux";
 import { Profile } from "../store/types/types";
 import { logOut } from "../store/actions/actions";
+import EditProfilePage from '../components/EditProfilePage'
+import {Link, Redirect} from 'react-router-dom';
 
 import {
   Image,
@@ -45,6 +47,17 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
     sessionStorage.setItem("userName", ""); // username of the person who is logged in
     console.log(profiles);
   };
+
+  redirect = () => {
+    let {profiles} = this.props;
+    let uName = profiles.filter(profile => profile.loggedIn == true);
+    return (
+    <>
+    <Link to="" component={EditProfilePage} />
+    <Redirect to={`/edit-profile/${uName}`} />
+    </>
+    );
+  }
 
   public render() {
     let { profiles } = this.props;
@@ -143,6 +156,7 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
         <h2>Welcome {who}!</h2>
         <h3>About Me: {uName[0].aboutMe}</h3>
         <button onClick={this.loggedOut}>Log Out</button>
+        <button onClick={this.redirect}>Edit Profile</button>
       </Segment>
     );
   }
