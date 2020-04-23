@@ -2,11 +2,16 @@ import * as React from 'react';
 import { RootState } from '../store';
 import { connect } from 'react-redux';
 import {Profile} from '../store/types/types'
+import { Image } from 'semantic-ui-react'
 
 export interface IProfilePageProps {
   match: any,
   profiles: Profile[]
 }
+
+// const ImageExampleCircular = () => (
+//   <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='tiny' circular />
+// )
 
 export class ProfilePage extends React.Component<IProfilePageProps> {
   public render() {

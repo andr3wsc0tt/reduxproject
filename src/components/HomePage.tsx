@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Divider,Button, Form, Grid, Header, Segment, Container,Input} from 'semantic-ui-react'
+import { Divider, Button, Form, Grid, Header, Segment, Container,Input} from 'semantic-ui-react'
 import {checkPass} from '../store/actions/actions'
 import {ProfileActionTypes, Profile} from '../store/types/types'
 import { RootState } from '../store';
@@ -66,7 +66,8 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
       <Grid columns='equal'>
       <Grid.Row >
         <Grid.Column></Grid.Column>
-        <Grid.Column></Grid.Column>
+        <Grid.Column>
+        </Grid.Column>
         <Grid.Column floated='right'> 
             <Input fluid icon='user' iconPosition='left' placeholder='Username'  value={this.state.userName} onChange={this.handleUserChange} />
             </Grid.Column >
