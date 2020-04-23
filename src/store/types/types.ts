@@ -13,6 +13,7 @@ export interface ProfileState {
 
 export const ADD_PROFILE = "ADD_PROFILE";
 export const CHECK_PASS = "CHECK_PASS";
+export const LOG_OUT = "LOG_OUT";
 
 interface addProfile {
     type: typeof ADD_PROFILE,
@@ -23,4 +24,9 @@ interface checkPass {
     payload: string[]
 }
 
-export type ProfileActionTypes = addProfile | checkPass;
+interface logOut {
+    type: typeof LOG_OUT,
+    payload: Profile
+}
+
+export type ProfileActionTypes = addProfile | checkPass | logOut;

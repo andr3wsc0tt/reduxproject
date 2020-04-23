@@ -65,8 +65,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     let {profiles, addProfile, loggedIn} = this.props;
 
     addProfile( {id: 2, name: signUpUser, password: signUpPass, aboutMe: "", loggedIn: true});
-    sessionStorage.setItem('profiles', JSON.stringify({profiles:profiles, loggedIn:loggedIn}));
-
     this.setState({signUpUser: "", signUpPass: ""});
   }
   public render() {
@@ -74,6 +72,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 
 
     if (loggedIn === true || sessionStorage.getItem('loggedIn') == 'true'){
+      sessionStorage.setItem('profiles', JSON.stringify({profiles:profiles, loggedIn:loggedIn}));
       let userName = sessionStorage.getItem('userName');
       let uName = profiles.filter(profile => profile.loggedIn == true);
 
@@ -81,14 +80,13 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 
       if (loggedIn == true){
         sessionStorage.setItem('userName', uName[0].name);
+        sessionStorage.setItem('loggedIn', 'true');
         destString = uName[0].name;
       }
       else if (userName != undefined){
         sessionStorage.setItem('userName', userName);
         destString = userName;
       }
-
-      sessionStorage.setItem('loggedIn', 'true');
     
       return (
         <>

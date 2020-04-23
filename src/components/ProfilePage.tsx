@@ -3,6 +3,7 @@ import { RootState } from '../store';
 import { connect } from 'react-redux';
 import NavBar from '../components/subcomponents/NavBar';
 import {Profile} from '../store/types/types'
+import {logOut} from '../store/actions/actions'
 
 import { Image, Segment, Grid, Dropdown, Container, Header, Radio, Form, TextArea, Button } from 'semantic-ui-react';
 import Calendar from 'react-calendar';
@@ -10,15 +11,32 @@ import 'react-calendar/dist/Calendar.css';
 
 export interface IProfilePageProps {
   match: any,
-  profiles: Profile[]
+  profiles: Profile[],
+  logOut: typeof logOut
 }
 
 export class ProfilePage extends React.Component<IProfilePageProps> {
+  
+  constructor(props: IProfilePageProps){
+    super(props);
+    this.state = {userName: "", passWord: "", signUpPass: "", signUpUser: ""};
+
+  }
+  loggedOut = () =>{
+    let {logOut, profiles} = this.props;
+
+    let uName = profiles.filter(profile => profile.loggedIn == true);
+
+    logOut(uName[0]);
+    sessionStorage.setItem('profiles', JSON.stringify({profiles:profiles, loggedin:'false'}));
+    sessionStorage.setItem('loggedIn', 'false');
+    console.log(profiles);
+  }
+  
   public render() {
     let {match, profiles} = this.props;
     let who = profiles[0].name;
     let about = profiles[0].aboutMe;
-
 
     return (
 
@@ -83,7 +101,7 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
   </Grid>
         <h2>Welcome {who}!</h2>
         <h3>About Me: {about}</h3>
-        <button onClick={() => sessionStorage.clear()}>Log Out</button>
+        <button onClick={this.loggedOut}>Log Out</button>
   </Segment>
 
     );
@@ -92,10 +110,12 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
 
 const mapStateToProps = (state: RootState, ownProps : IProfilePageProps) => {
   return {
-    profiles: state.profile.profiles
+    profiles: state.profile.profiles,
+    loggedIn: state.profile.loggedIn
   }
 }
 
 export default connect(
   mapStateToProps,
+  {logOut},
 )(ProfilePage);

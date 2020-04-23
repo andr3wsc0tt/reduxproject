@@ -48,11 +48,8 @@ export class App extends React.Component<IAppProps> {
   return (
     <>
     <Router>
-      <NavBar />
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route exact path="/ProfilePage" component={ProfilePage}/>
-          <Route component={About}/>
           <Route component={ErrorPage}/>
         </Switch>
 
