@@ -30,6 +30,7 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
     logOut(uName[0]);
     sessionStorage.setItem('profiles', JSON.stringify({profiles:profiles, loggedin:'false'}));
     sessionStorage.setItem('loggedIn', 'false');
+    sessionStorage.setItem('userName', "");
     console.log(profiles);
   }
   
