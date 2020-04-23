@@ -9,10 +9,6 @@ export interface IProfilePageProps {
   profiles: Profile[]
 }
 
-// const ImageExampleCircular = () => (
-//   <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='tiny' circular />
-// )
-
 export class ProfilePage extends React.Component<IProfilePageProps> {
   public render() {
     let {match, profiles} = this.props;
