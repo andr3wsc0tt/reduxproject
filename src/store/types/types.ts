@@ -8,7 +8,8 @@ export interface Profile {
 
 export interface ProfileState {
     profiles: Profile[],
-    loggedIn: boolean
+    loggedIn: boolean,
+    numUsers: number
 }
 
 export const ADD_PROFILE = "ADD_PROFILE";

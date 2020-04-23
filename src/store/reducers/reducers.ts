@@ -22,7 +22,8 @@ let initialState : ProfileState = {
             loggedIn: false
         }
     ],
-    loggedIn: false
+    loggedIn: false,
+    numUsers: 3
 
 }
 let update = sessionStorage.getItem('profiles');
@@ -35,10 +36,12 @@ if (update !== null){
 export function profileReducer(state = initialState, action: ProfileActionTypes) : ProfileState {
     switch(action.type){
         case ADD_PROFILE:
+            action.payload.id = state.numUsers;
             return{
                 ...state,
                 loggedIn: true,
-                profiles: [...state.profiles, action.payload]
+                profiles: [...state.profiles, action.payload],
+                numUsers: ++state.numUsers
             }
         case CHECK_PASS:
             let cred = state.loggedIn;
