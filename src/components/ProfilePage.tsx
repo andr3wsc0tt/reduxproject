@@ -30,6 +30,7 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
     super(props);
     this.state = { userName: "", passWord: "", signUpPass: "", signUpUser: "" };
   }
+
   loggedOut = () => {
     let { logOut, profiles } = this.props;
 
@@ -41,14 +42,26 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
       JSON.stringify({ profiles: profiles, loggedin: "false" })
     );
     sessionStorage.setItem("loggedIn", "false");
-    sessionStorage.setItem("userName", "");
+    sessionStorage.setItem("userName", ""); // username of the person who is logged in
     console.log(profiles);
   };
 
   public render() {
     let { profiles } = this.props;
     let who = profiles[0].name;
-    let about = profiles[0].aboutMe;
+    console.log(profiles);
+
+    let uName = profiles.filter(
+      profile => profile.name === sessionStorage.getItem("userName"));
+
+    console.log(uName, "The User Profile Object");
+    console.log(uName[0].aboutMe, "The User About Me string");
+
+    let {aboutMe, name, password, id, loggedIn} = uName[0];
+
+    // for each profile in profiles:
+    // check profile.name == sessionStorage.getItem("userName");
+    // let who = matched_profile.name;
 
     return (
       <Segment>
@@ -128,7 +141,7 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
           </Grid.Row>
         </Grid>
         <h2>Welcome {who}!</h2>
-        <h3>About Me: {about}</h3>
+        <h3>About Me: {uName[0].aboutMe}</h3>
         <button onClick={this.loggedOut}>Log Out</button>
       </Segment>
     );
