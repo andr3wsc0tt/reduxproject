@@ -67,12 +67,18 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
   }
   public render() {
     let {loggedIn, profiles } = this.props;
+
     console.log(loggedIn);
     if (loggedIn === true || sessionStorage.getItem('loggedIn') == 'true'){
-      const uName = profiles.filter(profile => profile.name == sessionStorage.getItem('userName'));
+      let userName = sessionStorage.getItem('userName');
+      let uName = profiles.filter(profile => profile.name == userName);
       console.log(profiles);
+      if (loggedIn == true)
+        sessionStorage.setItem('userName', uName[0].name);
+      else if (userName != undefined)
+        sessionStorage.setItem('userName', userName);
       sessionStorage.setItem('loggedIn', 'true');
-      sessionStorage.setItem('userName', uName[0].name);
+      
       return (
         <>
         <Router>
