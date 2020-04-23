@@ -9,6 +9,8 @@ import {RootState} from './store';
 import {addProfile} from './store/actions/actions';
 import {connect} from 'react-redux';
 import NavBar from './components/subcomponents/NavBar';
+import About from './components/EditProfilePage';
+import LogOut from './components/subcomponents/LogOut';
 
 export interface IAppProps{
   loggedIn: boolean,
@@ -30,10 +32,17 @@ export class App extends React.Component<IAppProps> {
             <Router>            
               <Switch>
                 <Route path='/profile'>
-                <Link to="" component={ProfilePage}/>
-                <Redirect to={`/profile/${uName}`}/>
+                  <Link to="" component={ProfilePage}/>
+                  <Redirect to={`/profile/${uName}`}/>
                 </Route>
-                <Route path="/edit-profile/" component={EditProfilePage}/>
+                <Route path="/EditrProfilePage/" component={EditProfilePage}/>
+                <Route path="/LogOut/" component={LogOut}/>
+                  {/*<Link to="" component={Home}/>
+
+                 <Redirect path="/HomePage/" component={Home}/>
+                 <Route path='/EditProfilePage'>
+                 <Link to="" component={EditProfilePage}/>
+                </Route>*/}
               </Switch>
           </Router>
           </>
@@ -48,6 +57,8 @@ export class App extends React.Component<IAppProps> {
       <NavBar />
         <Switch>
           <Route exact path="/" component={Home}/>
+          <Route exact path="/ProfilePage" component={ProfilePage}/>
+          <Route component={About}/>
           <Route component={ErrorPage}/>
         </Switch>
 

@@ -11,7 +11,7 @@ export default class NavBar extends React.Component<INavBarProps> {
             <Menu>
                 <Menu.Item
                     as={Link}
-                    to={`/`}
+                    to={`/`} /*Will be home the profile page? */
                     name='home'
                 >
                     Home
@@ -20,16 +20,16 @@ export default class NavBar extends React.Component<INavBarProps> {
 
                 <Menu.Item
                     as={Link}
-                    to={`/page2`}
-                    name='otherpage'
+                    to={`/EditProfilePage`}
+                    name='EditProfilePage'
                 >
                    Edit Profile
                 </Menu.Item>
 
                 <Menu.Item
                     as={Link}
-                    to={`/page3`}
-                    name='otherpage'
+                    to={`/LogOut`}
+                    name='LogOut'
                 >
                     Logout
                 </Menu.Item>
