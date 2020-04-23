@@ -3,12 +3,7 @@ import { RootState } from "../store";
 import { connect } from "react-redux";
 import { Profile } from "../store/types/types";
 import { logOut } from "../store/actions/actions";
-<<<<<<< HEAD
-import EditProfilePage from '../components/EditProfilePage'
-import {Link, Redirect, Route} from 'react-router-dom';
-=======
 import EditProfilePage from './EditProfilePage';
->>>>>>> e880408ec1eca3a0ccea3000ff67bac052a24123
 
 import {
   Image,
@@ -59,18 +54,6 @@ redirect = () => {
     setTimeout(()=>window.location.reload(), 5);
   }
 
-
-  redirect = () => {
-    let {profiles} = this.props;
-    let uName = profiles.filter(profile => profile.loggedIn == true);
-    return (
-      <Route path="/profile">
-      <Link to="" component={ProfilePage} />
-      <Redirect to={`/profile/${uName}`} />
-    </Route>
-    );
-  }
-
   public render() {
     let { profiles } = this.props;
     let who = profiles[0].name;
@@ -119,7 +102,7 @@ redirect = () => {
           <Grid.Row columns={3}>
           
             <Grid.Column>
-            <h3>About Me: {about}</h3>
+            <h3>About Me: {aboutMe}</h3>
               <Container fluid><br></br>
                 <Header as="h4"> Explore </Header>
 
@@ -167,21 +150,15 @@ redirect = () => {
               <Calendar /><br></br>
               
               {/* <Link to={`/edit-profile/${who}`} component={EditProfilePage}>Edit</Link> */}
-              <Link to="/edit-profile/Mo" onClick={() => setTimeout(()=>window.location.reload(), 5)}><Button>Edit profile</Button></Link>
+              <Link to={`/edit-profile/${who}`} onClick={() => setTimeout(()=>window.location.reload(), 5)}><Button>Edit profile</Button></Link>
 
        
         <Button color='red' onClick={this.loggedOut}>Log Out</Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>
-<<<<<<< HEAD
-        <h2>Welcome {who}!</h2>
-        <h3>About Me: {uName[0].aboutMe}</h3>
-        <button onClick={this.loggedOut}>Log Out</button>
-=======
         
        
->>>>>>> e880408ec1eca3a0ccea3000ff67bac052a24123
       </Segment>
     );
   }
