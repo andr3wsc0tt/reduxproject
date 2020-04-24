@@ -58,6 +58,7 @@ export function profileReducer(
         profiles: [...state.profiles, action.payload],
         numUsers: ++state.numUsers
       };
+
     case CHECK_PASS:
       let cred = state.loggedIn;
       let index = 0;
@@ -85,6 +86,7 @@ export function profileReducer(
           ...state.profiles.slice(index + 1)
         ]
       };
+
     case LOG_OUT:
       let uNameLog = state.profiles.filter(
         profile => profile.name === action.payload.name
@@ -127,7 +129,7 @@ export function profileReducer(
                     aboutMe: action.payload[5] },
                 ...state.profiles.slice(indexUpdate + 1)
               ]
-        }
+        };
     default:
       return state;
   }

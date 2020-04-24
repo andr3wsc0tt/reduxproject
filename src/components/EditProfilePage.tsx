@@ -69,16 +69,17 @@ export class EditProfile extends React.Component<IEditProfileProps, IEditProfile
 
     console.log(profiles);
 
-    sessionStorage.setItem(
-      "profiles",
-      JSON.stringify({ profiles:profiles, loggedin: "true" })
-    );
-
     this.setState({city: ""});
 
   }
 
   public render() {
+    let {profiles} = this.props;
+
+    sessionStorage.setItem(
+      "profiles",
+      JSON.stringify({ profiles:profiles, loggedin: "true" })
+    );
     return (
       <Grid columns="equal">
         <Grid.Row>

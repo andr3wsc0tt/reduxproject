@@ -48,6 +48,7 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
     console.log(profiles);
   };
 
+
   public render() {
     let { profiles } = this.props;
     let who = profiles[0].name;
