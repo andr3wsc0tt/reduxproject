@@ -145,7 +145,7 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
               <Calendar /><br></br>
 
               <Link to={`/edit-profile/${who}`} onClick={() => setTimeout(()=>window.location.reload(), 5)}><Button>Edit profile</Button></Link>
-               <Button color='green'>Edit profile</Button></Link>
+               <Button color='green'>Edit profile</Button>
 
 
        
