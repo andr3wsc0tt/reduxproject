@@ -3,6 +3,13 @@ import {Profile} from '../store/types/types'
 import { RootState } from "../store";
 import {updateProfile}  from "../store/actions/actions";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { logOut } from "../store/actions/actions";
+import { Profile } from "../store/types/types";
+import { RootState } from "../store";
+import ProfilePage, { IProfilePageProps } from "./ProfilePage";
+import { connect } from "react-redux";
+import { ProfileActionTypes } from "../store/types/types";
 
 import {
   Card,
@@ -16,14 +23,9 @@ import {
   Form,
   Segment,
   TextArea,
-  Button
+  Button,
+  List
 } from "semantic-ui-react";
-import { ProfileActionTypes } from "../store/types/types";
-
-export interface IEditProfileProps {
-  profiles: Profile[],
-  updateProfile: typeof updateProfile
-}
 
 export interface IEditProfileState{
   city: string,
@@ -32,9 +34,16 @@ export interface IEditProfileState{
   programming: string,
   aboutMe: string
 }
-export class EditProfile extends React.Component<IEditProfileProps, IEditProfileState> {
 
-  constructor(props: IEditProfileProps) {
+export interface IEditProfilePageProps {
+  match: any;
+  profiles: Profile[];
+  logOut: typeof logOut;
+  updateProfile: typeof updateProfile
+}
+
+export  class EditProfilePage extends React.Component<IEditProfilePageProps, IEditProfileState> {
+    constructor(props: IEditProfileProps) {
     super(props);
     this.state = { city: "", cohort: "", spoken: "", programming: "", aboutMe: "" };
   }
@@ -70,8 +79,21 @@ export class EditProfile extends React.Component<IEditProfileProps, IEditProfile
     console.log(profiles);
 
     this.setState({city: ""});
+    
+  loggedOut = () => {
+    let { logOut, profiles } = this.props;
 
-  }
+    let uName = profiles.filter(profile => profile.loggedIn == true);
+
+    logOut(uName[0]);
+    sessionStorage.setItem(
+      "profiles",
+      JSON.stringify({ profiles: profiles, loggedin: "false" })
+    );
+    sessionStorage.setItem("loggedIn", "false");
+    sessionStorage.setItem("userName", "");
+    console.log(profiles);
+  };
 
   public render() {
     let {profiles} = this.props;
@@ -188,7 +210,12 @@ export class EditProfile extends React.Component<IEditProfileProps, IEditProfile
                 />
                 <Button onClick={this.handleClick} color="green">Save Changes</Button>
               </Segment>
-            </Form>
+              
+              <Button color='green' as={Link} to="/profile/Mo">ProfilePage</Button>
+
+              <Button color='red' onClick={this.loggedOut}>Log Out</Button>
+
+             </Form>
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -196,11 +223,11 @@ export class EditProfile extends React.Component<IEditProfileProps, IEditProfile
   }
 }
 
-const mapStateToProps = (state: RootState, ownProps: IEditProfileProps) => {
+const mapStateToProps = (state: RootState, ownProps: IEditProfilePageProps) => {
   return {
     profiles: state.profile.profiles,
     loggedIn: state.profile.loggedIn
   };
 };
 
-export default connect(mapStateToProps, { updateProfile })(EditProfile);
+export default connect(mapStateToProps, { updateProfile, logOut })(EditProfilePage);
