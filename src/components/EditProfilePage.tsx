@@ -1,4 +1,15 @@
 import * as React from "react";
+import {Profile} from '../store/types/types'
+import { RootState } from "../store";
+import {updateProfile}  from "../store/actions/actions";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { logOut } from "../store/actions/actions";
+import { Profile } from "../store/types/types";
+import { RootState } from "../store";
+import ProfilePage, { IProfilePageProps } from "./ProfilePage";
+import { connect } from "react-redux";
+import { ProfileActionTypes } from "../store/types/types";
 
 import {
   Card,
@@ -15,20 +26,60 @@ import {
   Button,
   List
 } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import { logOut } from "../store/actions/actions";
-import { Profile } from "../store/types/types";
-import { RootState } from "../store";
-import ProfilePage, { IProfilePageProps } from "./ProfilePage";
-import { connect } from "react-redux";
+
+export interface IEditProfileState{
+  city: string,
+  cohort: string,
+  spoken: string,
+  programming: string,
+  aboutMe: string
+}
 
 export interface IEditProfilePageProps {
   match: any;
   profiles: Profile[];
   logOut: typeof logOut;
+  updateProfile: typeof updateProfile
 }
 
-export  class EditProfilePage extends React.Component<IEditProfilePageProps> {
+export  class EditProfilePage extends React.Component<IEditProfilePageProps, IEditProfileState> {
+    constructor(props: IEditProfileProps) {
+    super(props);
+    this.state = { city: "", cohort: "", spoken: "", programming: "", aboutMe: "" };
+  }
+
+  handleCityChange = (e: React.FormEvent<HTMLInputElement>) => {
+    this.setState({ city: e.currentTarget.value });
+  };
+  handleCohortChange = (e: React.FormEvent<HTMLInputElement>) => {
+    this.setState({ cohort: e.currentTarget.value });
+  };
+  handleSpokenChange = (e: React.FormEvent<HTMLInputElement>) => {
+    this.setState({ spoken: e.currentTarget.value });
+  };
+  handleProgrammingChange = (e: React.FormEvent<HTMLInputElement>) => {
+    this.setState({ programming: e.currentTarget.value });
+  };
+  handleAboutMeChange = (e: React.FormEvent<HTMLInputElement>) => {
+    this.setState({ aboutMe: e.currentTarget.value });
+  };
+
+  handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+
+    let { city, cohort, spoken, programming, aboutMe} = this.state;
+    let {updateProfile, profiles} = this.props;
+    let userName = sessionStorage.getItem('userName');
+
+    if (userName != null){
+      let update : string[] = [userName, city, cohort, spoken, programming, aboutMe];
+      updateProfile(update);
+    }
+
+    console.log(profiles);
+
+    this.setState({city: ""});
+    
   loggedOut = () => {
     let { logOut, profiles } = this.props;
 
@@ -45,6 +96,12 @@ export  class EditProfilePage extends React.Component<IEditProfilePageProps> {
   };
 
   public render() {
+    let {profiles} = this.props;
+
+    sessionStorage.setItem(
+      "profiles",
+      JSON.stringify({ profiles:profiles, loggedin: "true" })
+    );
     return (
       <Grid columns="equal">
         <Grid.Row>
@@ -113,6 +170,9 @@ export  class EditProfilePage extends React.Component<IEditProfilePageProps> {
                   icon="home"
                   iconPosition="left"
                   placeholder="Current City"
+                  value={this.state.city}
+                  onChange={this.handleCityChange}
+
                 />
                 <Form.Input
                   fluid
@@ -120,6 +180,8 @@ export  class EditProfilePage extends React.Component<IEditProfilePageProps> {
                   iconPosition="left"
                   placeholder="Cohort"
                   type="text"
+                  value={this.state.cohort}
+                  onChange={this.handleCohortChange}
                 />
                 <Form.Input
                   fluid
@@ -127,6 +189,8 @@ export  class EditProfilePage extends React.Component<IEditProfilePageProps> {
                   iconPosition="left"
                   placeholder="Spoken Languages"
                   type="text"
+                  value={this.state.spoken}
+                  onChange={this.handleSpokenChange}
                 />
                 <Form.Input
                   fluid
@@ -134,13 +198,17 @@ export  class EditProfilePage extends React.Component<IEditProfilePageProps> {
                   iconPosition="left"
                   placeholder="Programming Languages"
                   type="text"
+                  value={this.state.programming}
+                  onChange={this.handleProgrammingChange}
                 />
                 <Form.Field
                   control={TextArea}
                   label="About"
                   placeholder="Tell us more about you..."
+                  value={this.state.aboutMe}
+                  onChange={this.handleAboutMeChange}
                 />
-                <Button color="green">Save Changes</Button>
+                <Button onClick={this.handleClick} color="green">Save Changes</Button>
               </Segment>
               
               <Button color='green' as={Link} to="/profile/Mo">ProfilePage</Button>
@@ -154,6 +222,7 @@ export  class EditProfilePage extends React.Component<IEditProfilePageProps> {
     );
   }
 }
+
 const mapStateToProps = (state: RootState, ownProps: IEditProfilePageProps) => {
   return {
     profiles: state.profile.profiles,
@@ -161,4 +230,4 @@ const mapStateToProps = (state: RootState, ownProps: IEditProfilePageProps) => {
   };
 };
 
-export default connect(mapStateToProps, { logOut })(EditProfilePage);
+export default connect(mapStateToProps, { updateProfile, logOut })(EditProfilePage);

@@ -3,7 +3,8 @@ import {
   ADD_PROFILE,
   Profile,
   CHECK_PASS,
-  LOG_OUT
+  LOG_OUT,
+  UPDATE_PROFILE
 } from "../types/types";
 
 export function addProfile(profile: Profile): ProfileActionTypes {
@@ -25,4 +26,11 @@ export function logOut(profile: Profile): ProfileActionTypes {
     type: LOG_OUT,
     payload: profile
   };
+}
+
+export function updateProfile(fields: string[]) : ProfileActionTypes {
+    return {
+        type: UPDATE_PROFILE,
+        payload: fields
+    }
 }

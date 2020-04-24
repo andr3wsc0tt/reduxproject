@@ -32,6 +32,7 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
     super(props);
     this.state = { userName: "", passWord: "", signUpPass: "", signUpUser: "" };
   }
+
   loggedOut = () => {
     let { logOut, profiles } = this.props;
 
@@ -43,21 +44,27 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
       JSON.stringify({ profiles: profiles, loggedin: "false" })
     );
     sessionStorage.setItem("loggedIn", "false");
-    sessionStorage.setItem("userName", "");
+    sessionStorage.setItem("userName", ""); // username of the person who is logged in
     console.log(profiles);
   };
- 
-redirect = () => {
-    let {profiles} = this.props;
-    let uName = profiles.filter(profile => profile.loggedIn == true);
-    setTimeout(()=>window.location.reload(), 5);
-  }
 
 
   public render() {
     let { profiles } = this.props;
     let who = profiles[0].name;
-    let about = profiles[0].aboutMe;
+    console.log(profiles);
+
+    let uName = profiles.filter(
+      profile => profile.name === sessionStorage.getItem("userName"));
+
+    console.log(uName, "The User Profile Object");
+    console.log(uName[0].aboutMe, "The User About Me string");
+
+    let {aboutMe, name, password, id, loggedIn} = uName[0];
+
+    // for each profile in profiles:
+    // check profile.name == sessionStorage.getItem("userName");
+    // let who = matched_profile.name;
 
     return (
       <Segment>
@@ -90,7 +97,7 @@ redirect = () => {
           <Grid.Row columns={3}>
           
             <Grid.Column>
-            <h3>About Me: {about}</h3>
+            <h3>About Me: {aboutMe}</h3>
               <Container fluid><br></br>
                 <Header as="h4"> Explore </Header>
 
@@ -136,10 +143,10 @@ redirect = () => {
             </Grid.Column>
             <Grid.Column>
               <Calendar /><br></br>
-              
-              {/* <Link to={`/edit-profile/${who}`} component={EditProfilePage}>Edit</Link> */}
-              <Link to="/edit-profile/Mo" onClick={() => setTimeout(()=>window.location.reload(), 5)}>
-                <Button color='green'>Edit profile</Button></Link>
+
+              <Link to={`/edit-profile/${who}`} onClick={() => setTimeout(()=>window.location.reload(), 5)}><Button>Edit profile</Button></Link>
+               <Button color='green'>Edit profile</Button></Link>
+
 
        
         <Button color='red' onClick={this.loggedOut}>Log Out</Button>
