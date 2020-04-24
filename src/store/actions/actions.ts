@@ -7,6 +7,8 @@ import {
   UPDATE_PROFILE
 } from "../types/types";
 
+
+// The 4 different action definitions we have. These are DEFINED in types.ts
 export function addProfile(profile: Profile): ProfileActionTypes {
   return {
     type: ADD_PROFILE,
