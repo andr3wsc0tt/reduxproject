@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import '../../src/App.css';
 import {
   Divider,
   Button,
@@ -8,7 +8,9 @@ import {
   Header,
   Segment,
   Container,
-  Input
+  Input,
+  Icon,
+  Image
 } from "semantic-ui-react";
 import { checkPass, addProfile } from "../store/actions/actions";
 
@@ -130,11 +132,16 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     }
     return (
       <Segment>
+   
       <Grid columns="equal">
         <Grid.Row>
+        <div>
+    <Image src='Logo.png'  height='150' width='250' circular/>
+    <span></span>
+  </div>
           <Grid.Column></Grid.Column>
           <Grid.Column></Grid.Column>
-          <Grid.Column floated="right">
+          <Grid.Column floated="right"><br></br><br></br>
             <Input
               fluid
               icon="user"
@@ -144,7 +151,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
               onChange={this.handleUserChange}
             />
           </Grid.Column>
-          <Grid.Column floated="right">
+          <Grid.Column floated="right"><br></br><br></br>
             <Input
               fluid
               icon="lock"
@@ -155,7 +162,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
               onChange={this.handlePassChange}
             />
           </Grid.Column>
-          <Grid.Column floated="right">
+          <Grid.Column floated="right"><br></br><br></br>
             <Button
               color="yellow"
               fluid
@@ -170,13 +177,16 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         <Grid.Row>
           <Grid.Column>
             <Container fluid>
-              <Header as="h2">TECHCareers Hive</Header>
+              <Header as="h2">TECHCareers Hive</Header><br></br>
               <p>Connect with classmates and techcareers alumni.</p>
+              <p>Join groups of your interest.</p>
+              <p>Check networking events.</p>
+              <p>AND More!!!!!!!.</p>
             </Container>
           </Grid.Column>
           <Grid.Column>
             {" "}
-            <Divider vertical>Or</Divider>
+            <Divider vertical>  <Icon loading name='forumbee' size='massive' color='yellow' /> </Divider>
           </Grid.Column>
           <Grid.Column>
             <Header as="h2" color="green" textAlign="center">
@@ -220,9 +230,13 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
               </Segment>
             </Form>
           </Grid.Column>
+         
         </Grid.Row>
+   
       </Grid>
+     
       </Segment>
+      
     );
   }
 }
