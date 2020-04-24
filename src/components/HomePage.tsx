@@ -63,6 +63,8 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 
     let cred: Array<string> = [userName, passWord];
     checkPass(cred);
+
+    console.log(profiles);
     this.setState({ userName: "", passWord: "" });
   };
 

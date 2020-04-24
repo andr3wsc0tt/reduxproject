@@ -62,15 +62,21 @@ export function profileReducer(
     case CHECK_PASS:
       let cred = state.loggedIn;
       let index = 0;
+      console.log(state.profiles);
       let uName = state.profiles.filter(
         profile => profile.name === action.payload[0]
       );
-      console.log(uName);
-      state.profiles.forEach((profile, i) => {
-        if (profile.name === uName[0].name) {
-          index = i;
+      if (uName[0] != undefined){
+        state.profiles.forEach((profile, i) => {
+          if (profile.name === uName[0].name) {
+            index = i;
+          }
+        });
+      }
+      else
+        return{
+          ...state,
         }
-      });
 
       if (uName.length) {
         if (uName[0].password === action.payload[1]) {

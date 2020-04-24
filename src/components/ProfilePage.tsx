@@ -75,10 +75,6 @@ export class ProfilePage extends React.Component<IProfilePageProps, IProfilePage
 
     let {aboutMe, name, password, id, loggedIn} = uName[0];
 
-    // for each profile in profiles:
-    // check profile.name == sessionStorage.getItem("userName");
-    // let who = matched_profile.name;
-
     if (this.state.redirect === true) {
       return (
       <Router>
