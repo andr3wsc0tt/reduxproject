@@ -113,7 +113,7 @@ export class EditProfilePage extends React.Component<
     sessionStorage.setItem("loggedIn", "false"); // log us out of our sessionStorage. This is still cheating a bit!
     // sessionStorage.setItem("userName", "");
   };
-
+  
   public render() {
     let { profiles } = this.props;
 

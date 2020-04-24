@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import '../../src/App.css';
 import {
   Divider,
   Button,
@@ -8,7 +8,9 @@ import {
   Header,
   Segment,
   Container,
-  Input
+  Input,
+  Icon,
+  Image
 } from "semantic-ui-react";
 import { checkPass, addProfile } from "../store/actions/actions";
 
@@ -132,99 +134,111 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     }
     return ( // If the user isn't logged in, render the HomePage
       <Segment>
-        <Grid columns="equal">
-          <Grid.Row>
-            <Grid.Column></Grid.Column>
-            <Grid.Column></Grid.Column>
-            <Grid.Column floated="right">
-              <Input
-                fluid
-                icon="user"
-                iconPosition="left"
-                placeholder="Username"
-                value={this.state.userName}
-                onChange={this.handleUserChange}
-              />
-            </Grid.Column>
-            <Grid.Column floated="right">
-              <Input
-                fluid
-                icon="lock"
-                iconPosition="left"
-                placeholder="Password"
-                type="password"
-                value={this.state.passWord}
-                onChange={this.handlePassChange}
-              />
-            </Grid.Column>
-            <Grid.Column floated="right">
-              <Button
-                color="yellow"
-                fluid
-                size="large"
-                onClick={this.handleOnClick}
-              >
-                Login
-              </Button>
-            </Grid.Column>
-          </Grid.Row>
-          <Divider horizontal>Techcareers hive</Divider>
-          <Grid.Row>
-            <Grid.Column>
-              <Container fluid>
-                <Header as="h2">TECHCareers Hive</Header>
-                <p>Connect with classmates and techcareers alumni.</p>
-              </Container>
-            </Grid.Column>
-            <Grid.Column>
-              {" "}
-              <Divider vertical>Or</Divider>
-            </Grid.Column>
-            <Grid.Column>
-              <Header as="h2" color="green" textAlign="center">
-                Sign -Up
-              </Header>
-              <Form size="large">
-                <Segment stacked>
-                  <Form.Input
-                    fluid
-                    icon="user"
-                    iconPosition="left"
-                    placeholder="username"
-                    value={this.state.signUpUser}
-                    onChange={this.handleSignUserChange}
-                  />
+  
+      <Grid columns="equal">
+        <Grid.Row>
+        <div>
+    <Image src='Logo.png'  height='150' width='250' circular/>
+    <span></span>
+  </div>
+          <Grid.Column></Grid.Column>
+          <Grid.Column></Grid.Column>
+          <Grid.Column floated="right"><br></br><br></br>
+            <Input
+              fluid
+              icon="user"
+              iconPosition="left"
+              placeholder="Username"
+              value={this.state.userName}
+              onChange={this.handleUserChange}
+            />
+          </Grid.Column>
+          <Grid.Column floated="right"><br></br><br></br>
+            <Input
+              fluid
+              icon="lock"
+              iconPosition="left"
+              placeholder="Password"
+              type="password"
+              value={this.state.passWord}
+              onChange={this.handlePassChange}
+            />
+          </Grid.Column>
+          <Grid.Column floated="right"><br></br><br></br>
+            <Button
+              color="yellow"
+              fluid
+              size="large"
+              onClick={this.handleOnClick}
+            >
+              Login
+            </Button>
+          </Grid.Column>
+        </Grid.Row>
+        <Divider horizontal>Techcareers hive</Divider>
+        <Grid.Row>
+          <Grid.Column>
+            <Container fluid>
+              <Header as="h2">TECHCareers Hive</Header><br></br>
+              <p>Connect with classmates and techcareers alumni.</p>
+              <p>Join groups of your interest.</p>
+              <p>Check networking events.</p>
+              <p>AND More!!!!!!!.</p>
+            </Container>
+          </Grid.Column>
+          <Grid.Column>
+            {" "}
+            <Divider vertical>  <Icon loading name='forumbee' size='massive' color='yellow' /> </Divider>
+          </Grid.Column>
+          <Grid.Column>
+            <Header as="h2" color="green" textAlign="center">
+              Sign -Up
+            </Header>
+            <Form size="large">
+              <Segment stacked>
+                <Form.Input
+                  fluid
+                  icon="user"
+                  iconPosition="left"
+                  placeholder="username"
+                  value={this.state.signUpUser}
+                  onChange={this.handleSignUserChange}
+                />
 
-                  <Form.Input
-                    fluid
-                    icon="lock"
-                    iconPosition="left"
-                    placeholder="Password"
-                    type="password"
-                  />
-                  <Form.Input
-                    fluid
-                    icon="lock"
-                    iconPosition="left"
-                    placeholder="confirm-Password"
-                    type="password"
-                    value={this.state.signUpPass}
-                    onChange={this.handleSignPassChange}
-                  />
-                  <Button
-                    color="green"
-                    fluid
-                    size="large"
-                    onClick={this.handleSignUp}
-                  >
-                    SignUp
-                  </Button>
-                </Segment>
-              </Form>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+                <Form.Input
+                  fluid
+                  icon="lock"
+                  iconPosition="left"
+                  placeholder="Password"
+                  type="password"
+                />
+                <Form.Input
+                  fluid
+                  icon="lock"
+                  iconPosition="left"
+                  placeholder="confirm-Password"
+                  type="password"
+                  value={this.state.signUpPass}
+                  onChange={this.handleSignPassChange}
+                />
+                <Button
+                  color="green"
+                  fluid
+                  size="large"
+                  onClick={this.handleSignUp}
+                >
+                  SignUp
+                </Button>
+              </Segment>
+            </Form>
+          </Grid.Column>
+         
+        </Grid.Row>
+   
+      </Grid>
+     
       </Segment>
+      
     );
   }
 }
