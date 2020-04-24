@@ -150,7 +150,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
             </Button>
           </Grid.Column>
         </Grid.Row>
-        <Divider horizontal>-</Divider>
+        <Divider horizontal>Techcareers hive</Divider>
         <Grid.Row>
           <Grid.Column>
             <Container fluid>
@@ -172,7 +172,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                   fluid
                   icon="user"
                   iconPosition="left"
-                  placeholder="E-mail address"
+                  placeholder="username"
                   value={this.state.signUpUser}
                   onChange={this.handleSignUserChange}
                 />
