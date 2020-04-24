@@ -43,7 +43,7 @@ let log = sessionStorage.getItem('loggedIn');
 let updateState: Profile[];
 if (update !== null) {
   updateState = JSON.parse(update);
-  initialState = {profiles: updateState, loggedIn: Boolean(log), numUsers: 1};
+  initialState = {profiles: updateState, loggedIn: Boolean(log), numUsers: updateState.length+1};
 }
 
 export function profileReducer(

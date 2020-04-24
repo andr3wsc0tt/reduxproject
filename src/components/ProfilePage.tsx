@@ -3,7 +3,7 @@ import { RootState } from "../store";
 import { connect } from "react-redux";
 import { Profile } from "../store/types/types";
 import { logOut } from "../store/actions/actions";
-import EditProfilePage from './EditProfilePage';
+import EditProfilePage from "./EditProfilePage";
 import {
   BrowserRouter as Router,
   Route,
@@ -27,68 +27,68 @@ import {
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
-
-export interface IProfilePageProps {
+export interface IProfilePageProps { // Variables passed in from the store state
   match: any;
   profiles: Profile[];
   logOut: typeof logOut;
 }
 
-export interface IProfilePageState {
-  redirect : boolean
+export interface IProfilePageState { // our local state variables
+  redirect: boolean;
 }
 
-export class ProfilePage extends React.Component<IProfilePageProps, IProfilePageState> {
+export class ProfilePage extends React.Component<
+  IProfilePageProps,
+  IProfilePageState
+> {
   constructor(props: IProfilePageProps) {
     super(props);
     this.state = { redirect: false };
   }
 
-  loggedOut = () => {
-    let { logOut, profiles } = this.props;
+  loggedOut = () => { // The function that calls our logOut REDUCER!
+    let { logOut, profiles } = this.props; // The store states logOut REDUCER and profiles array
 
-    let uName = profiles.filter(profile => profile.loggedIn == true);
+    let uName = profiles.filter(profile => profile.loggedIn == true); // filter through the profiles array and return any profile that has it's loggedIn field set to true.
 
-    logOut(uName[0]);
-    sessionStorage.setItem(
-      "profiles",
-      JSON.stringify( profiles)
-    );
+    logOut(uName[0]); // Pass the profile to the logOut REDUCER! It takes in a Profile[] as it's payload.
+
+    // When we log out we want to save our global state (This might not be necessary anymore)
+    sessionStorage.setItem("profiles", JSON.stringify(profiles));
     sessionStorage.setItem("loggedIn", "false");
     sessionStorage.setItem("userName", ""); // username of the person who is logged in
-    console.log(profiles);
   };
 
-
-  handleRedirect = () =>{
-    this.setState({redirect: true});
-  }
+  handleRedirect = () => { // This sets our local state variable that determines if we go to the Edit Profile Page
+    this.setState({ redirect: true }); 
+  };
 
   public render() {
-    let { profiles } = this.props;
+    let { profiles } = this.props; // load in the profiles from the store state
 
     let uName = profiles.filter(
-      profile => profile.name === sessionStorage.getItem("userName"));
+      profile => profile.name === sessionStorage.getItem("userName") // filter through all of the store profiles and return any that matches the sessionStorage username (this can be changed to match the user who is loggedIn)
+    );
 
-    console.log(uName, "The User Profile Object");
-    console.log(uName[0].aboutMe, "The User About Me string");
+    let { aboutMe, name, password, id, loggedIn } = uName[0]; // Deconstructing the current user's store profile fields
 
-    let {aboutMe, name, password, id, loggedIn} = uName[0];
-
-    if (this.state.redirect === true) {
+    if (this.state.redirect === true) { // If we are wanting to redirect to the Edit Profile Page
       return (
-      <Router>
-        <Link to="" component={EditProfilePage} />
-        <Redirect to={`/edit-profile/${name}`} />
-      </Router>
-      )
+        <Router> 
+          {/* Render the EditProfilePage */}
+          <Link to="" component={EditProfilePage} />
+          
+          {/* Redirect the URL to /edit-profile/**name of the Logged in User** */}
+          <Redirect to={`/edit-profile/${name}`} />
+        </Router>
+      );
     }
 
-    return (
+    return ( // If there is no redirect request. Render the Profile Page
       <Segment>
         <Grid divided="vertically">
-        <h2>Welcome {name}!</h2>
-           <Grid.Row columns={5}>
+          <h2>Welcome {name}!</h2>
+          <Grid.Row columns={5}>
             <Grid.Column></Grid.Column>
             <Grid.Column floated="right">
               <Dropdown text="Groups">
@@ -113,10 +113,10 @@ export class ProfilePage extends React.Component<IProfilePageProps, IProfilePage
           </Grid.Row>
 
           <Grid.Row columns={3}>
-          
             <Grid.Column>
-            <h3>About Me: {aboutMe}</h3>
-              <Container fluid><br></br>
+              <h3>About Me: {aboutMe}</h3>
+              <Container fluid>
+                <br></br>
                 <Header as="h4"> Explore </Header>
 
                 <Radio as="h2" label="Networking Events" defaultChecked />
@@ -160,26 +160,29 @@ export class ProfilePage extends React.Component<IProfilePageProps, IProfilePage
               </Form>
             </Grid.Column>
             <Grid.Column>
-              <Calendar /><br></br>
+              <Calendar />
+              <br></br>
 
-              <Button color='green' onClick={this.handleRedirect}>Edit Profile</Button>
+              <Button color="green" onClick={this.handleRedirect}>
+                Edit Profile
+              </Button>
 
-        <Button color='red' onClick={this.loggedOut}>Log Out</Button>
+              <Button color="red" onClick={this.loggedOut}>
+                Log Out
+              </Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        
-       
       </Segment>
     );
   }
 }
 
-const mapStateToProps = (state: RootState, ownProps: IProfilePageProps) => {
+const mapStateToProps = (state: RootState, ownProps: IProfilePageProps) => { // mapStateToProps connects the store's initial state variables with ProfilePage component
   return {
     profiles: state.profile.profiles,
     loggedIn: state.profile.loggedIn
   };
 };
 
-export default connect(mapStateToProps, { logOut })(ProfilePage);
+export default connect(mapStateToProps, { logOut })(ProfilePage); // connect imports the logOut REDUCER from our store and returns our connected our ProfilePage component 
