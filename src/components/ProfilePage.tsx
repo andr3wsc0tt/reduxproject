@@ -3,6 +3,7 @@ import { RootState } from "../store";
 import { connect } from "react-redux";
 import { Profile } from "../store/types/types";
 import { logOut } from "../store/actions/actions";
+import idGenerator from "react-id-generator";
 
 import {
   Image,
@@ -43,28 +44,174 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
             userName: "",
             passWord: "", 
             signUpPass: "", 
-            signUpUser: ""
+            signUpUser: "",
+            About: "",
+            id: 0
          }
        ] 
      }
    }
-
-public render() {
-  let { users } = this.state;
+   
+   componentDidMount() {
+    
+    this.setState({
+      users: users.map(e => {
+        return {
+          userName: e.userName,
+          userLastName: e.userName,
+          passWord: e.passWord,
+          signUpPass:e.signUpPass,
+          About: e.About,
+          id: idGenerator()
+        };
+      })
+    });
+  }
   
-  return(
-    <React.Fragment>
-      ProfilesPages
-      {users.map (individualUser => (
-        ProfilePage user= {individualUser}/>
-        
-       ))
+
+  handleChange = e => {
+    const userName = e.target.userName;
+    this.setState({ [userName]: e.target.value });
+  };
+
+  handleCreateUser = () => {
+    if (this.state.users) {
+      this.setState({
+        users: [
+          ...this.state.users,
+          {
+            userName: this.state.userName,
+            userLastName: this.state.,
+            id: idGenerator()
+          }
+        ]
+      });
+    } else {
+      this.setState({
+        users: [
+          {
+            firstname: this.state.userName,
+            userLastName: this.state.userLastName,
+            id: idGenerator()
+          }
+        ]
+      });
+    }
+    this.setState({ userName: "", LastName: "" });
+  };
+
+  handleEdit = e => {
+    const employee = this.state.users.find(function(user) {
+      if (user.id === e.target.id) {
+        return user;
       }
-    </React.Fragment>
-  )
-}
+    });
 
+    this.setState({
+      userName: user.userName,
+      userLastName: user.userLastName,
+      id: user.id,
+      create: false
+    });
+  };
+  handleDelete = e => {
+    this.setState({
+      users: this.state.users.filter(function(user) {
+        if (user.id !== e.target.id) return user;
+      })
+    });
+  };
+  handleUpdateEmployee = () => {
+    const user = {
+      userName: this.state.userName,
+      userLastName: this.state.userLastName,
+      id: this.state.id
+    };
+    const usersUpdated = this.state.users.map(user => {
+      if (user.id === this.state.id) {
+        return user;
+      } else return user;
+    });
 
+    this.setState((prevStae, props) => ({
+      user: userUpdated,
+      create: true,
+      userName: "",
+      userLastName: ""
+    }));
+  };
+
+   /* render() {
+      const create = this.state.create ? "Save" : "Update";
+      const { users } = this.state;
+      const inputIsEmpty =
+        this.state.userName === "" || this.state.userLastName === "" ? true : false;
+      return (
+        <div>
+          <input
+            style={{ width: 120 }}
+            type="text"
+            placeholder="Enter username"
+            onChange={this.handleChange}
+            name="Username"
+            value={this.state.userName}
+          />
+          <input
+            style={{ width: 120 }}
+            type="text"
+            placeholder="Enter Firstname"
+            onChange={this.handleChange}
+            name="User Lastname"
+            value={this.state.userLastName}
+          />
+
+          <button
+            style={{ width: 150 }}
+            disabled={inputIsEmpty}
+            onClick={
+              this.state.create
+                ? this.handleCreateUser
+                : this.handleUpdateEmployee
+            }
+          >
+            {create}
+            
+          </button>
+          <br />
+          <table border="1" style={{ width: 400, paddingTop: 5 }}>
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user, i) => {
+                return (
+                  <tr key={i}>
+                    <td>{user.userName}</td>
+                    <td>{user.userLastName}</td>
+                    <td>
+                      <button onClick={this.handleEdit} id={user.id}>
+                        Edit
+                      </button>
+                    </td>
+                    <td>
+                      <button onClick={this.handleDelete} id={user.id}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+  }*/
 
   loggedOut = () => {
     let { logOut, profiles } = this.props;
@@ -97,6 +244,8 @@ public render() {
     // for each profile in profiles:
     // check profile.name == sessionStorage.getItem("userName");
     // let who = matched_profile.name;
+
+   
 
     return (
       <Segment>

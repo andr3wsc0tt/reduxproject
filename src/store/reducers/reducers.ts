@@ -8,7 +8,7 @@ import {
 
 import { identifier } from "@babel/types";
 
-let initialState: ProfileState = {
+export let initialState: ProfileState = {
   profiles: [
     {
       id: 1,
@@ -59,7 +59,7 @@ export function profileReducer(
         profiles: [...state.profiles, action.payload],
         numUsers: ++state.numUsers
       };
-      
+
     case CHECK_PASS:
       let cred = state.loggedIn;
       let index = 0;
