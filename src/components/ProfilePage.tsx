@@ -138,7 +138,8 @@ redirect = () => {
               <Calendar /><br></br>
               
               {/* <Link to={`/edit-profile/${who}`} component={EditProfilePage}>Edit</Link> */}
-              <Link to="/edit-profile/Mo" onClick={() => setTimeout(()=>window.location.reload(), 5)}><Button>Edit profile</Button></Link>
+              <Link to="/edit-profile/Mo" onClick={() => setTimeout(()=>window.location.reload(), 5)}>
+                <Button color='green'>Edit profile</Button></Link>
 
        
         <Button color='red' onClick={this.loggedOut}>Log Out</Button>

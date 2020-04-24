@@ -12,14 +12,38 @@ import {
   Form,
   Segment,
   TextArea,
-  Button
+  Button,
+  List
 } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import { logOut } from "../store/actions/actions";
+import { Profile } from "../store/types/types";
+import { RootState } from "../store";
+import ProfilePage, { IProfilePageProps } from "./ProfilePage";
+import { connect } from "react-redux";
 
-export interface IAboutProps {
+export interface IEditProfilePageProps {
   match: any;
+  profiles: Profile[];
+  logOut: typeof logOut;
 }
 
-export default class About extends React.Component<IAboutProps> {
+export  class EditProfilePage extends React.Component<IEditProfilePageProps> {
+  loggedOut = () => {
+    let { logOut, profiles } = this.props;
+
+    let uName = profiles.filter(profile => profile.loggedIn == true);
+
+    logOut(uName[0]);
+    sessionStorage.setItem(
+      "profiles",
+      JSON.stringify({ profiles: profiles, loggedin: "false" })
+    );
+    sessionStorage.setItem("loggedIn", "false");
+    sessionStorage.setItem("userName", "");
+    console.log(profiles);
+  };
+
   public render() {
     return (
       <Grid columns="equal">
@@ -118,10 +142,23 @@ export default class About extends React.Component<IAboutProps> {
                 />
                 <Button color="green">Save Changes</Button>
               </Segment>
-            </Form>
+              
+              <Button color='green' as={Link} to="/profile/Mo">ProfilePage</Button>
+
+              <Button color='red' onClick={this.loggedOut}>Log Out</Button>
+
+             </Form>
           </Grid.Column>
         </Grid.Row>
       </Grid>
     );
   }
 }
+const mapStateToProps = (state: RootState, ownProps: IEditProfilePageProps) => {
+  return {
+    profiles: state.profile.profiles,
+    loggedIn: state.profile.loggedIn
+  };
+};
+
+export default connect(mapStateToProps, { logOut })(EditProfilePage);
