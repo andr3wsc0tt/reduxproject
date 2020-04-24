@@ -1,8 +1,5 @@
 import * as React from "react";
-import {Profile} from '../store/types/types'
-import { RootState } from "../store";
 import {updateProfile}  from "../store/actions/actions";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logOut } from "../store/actions/actions";
 import { Profile } from "../store/types/types";
@@ -43,7 +40,7 @@ export interface IEditProfilePageProps {
 }
 
 export  class EditProfilePage extends React.Component<IEditProfilePageProps, IEditProfileState> {
-    constructor(props: IEditProfileProps) {
+    constructor(props: IEditProfilePageProps) {
     super(props);
     this.state = { city: "", cohort: "", spoken: "", programming: "", aboutMe: "" };
   }
@@ -79,7 +76,7 @@ export  class EditProfilePage extends React.Component<IEditProfilePageProps, IEd
     console.log(profiles);
 
     this.setState({city: ""});
-    
+  }
   loggedOut = () => {
     let { logOut, profiles } = this.props;
 
