@@ -91,7 +91,7 @@ export  class EditProfilePage extends React.Component<IEditProfilePageProps, IEd
     sessionStorage.setItem("userName", "");
     console.log(profiles);
   };
-  };
+  
   public render() {
     let {profiles} = this.props;
 
