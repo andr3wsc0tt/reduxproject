@@ -4,7 +4,8 @@ import {
   ProfileActionTypes,
   CHECK_PASS,
   LOG_OUT,
-  UPDATE_PROFILE
+  UPDATE_PROFILE,
+  Profile
 } from "../types/types";
 
 import { identifier } from "@babel/types";
@@ -38,10 +39,10 @@ let initialState: ProfileState = {
   numUsers: 3
 };
 let update = sessionStorage.getItem("profiles");
-let updateState: ProfileState;
+let updateState: Profile[];
 if (update !== null) {
   updateState = JSON.parse(update);
-  initialState = updateState;
+  initialState = {profiles: updateState, loggedIn: true, numUsers: 1};
 }
 
 export function profileReducer(
@@ -62,7 +63,7 @@ export function profileReducer(
     case CHECK_PASS:
       let cred = state.loggedIn;
       let index = 0;
-      console.log(state.profiles);
+      console.log(initialState);
       let uName = state.profiles.filter(
         profile => profile.name === action.payload[0]
       );
