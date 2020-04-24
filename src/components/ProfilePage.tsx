@@ -4,6 +4,13 @@ import { connect } from "react-redux";
 import { Profile } from "../store/types/types";
 import { logOut } from "../store/actions/actions";
 import EditProfilePage from './EditProfilePage';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect
+} from "react-router-dom";
 
 import {
   Image,
@@ -19,7 +26,7 @@ import {
 } from "semantic-ui-react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { Link } from "react-router-dom";
+
 
 export interface IProfilePageProps {
   match: any;
@@ -27,10 +34,14 @@ export interface IProfilePageProps {
   logOut: typeof logOut;
 }
 
-export class ProfilePage extends React.Component<IProfilePageProps> {
+export interface IProfilePageState {
+  redirect : boolean
+}
+
+export class ProfilePage extends React.Component<IProfilePageProps, IProfilePageState> {
   constructor(props: IProfilePageProps) {
     super(props);
-    this.state = { userName: "", passWord: "", signUpPass: "", signUpUser: "" };
+    this.state = { redirect: false };
   }
 
   loggedOut = () => {
@@ -41,7 +52,7 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
     logOut(uName[0]);
     sessionStorage.setItem(
       "profiles",
-      JSON.stringify({ profiles: profiles, loggedin: "false" })
+      JSON.stringify( profiles)
     );
     sessionStorage.setItem("loggedIn", "false");
     sessionStorage.setItem("userName", ""); // username of the person who is logged in
@@ -49,10 +60,12 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
   };
 
 
+  handleRedirect = () =>{
+    this.setState({redirect: true});
+  }
+
   public render() {
     let { profiles } = this.props;
-    let who = profiles[0].name;
-    console.log(profiles);
 
     let uName = profiles.filter(
       profile => profile.name === sessionStorage.getItem("userName"));
@@ -66,10 +79,19 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
     // check profile.name == sessionStorage.getItem("userName");
     // let who = matched_profile.name;
 
+    if (this.state.redirect === true) {
+      return (
+      <Router>
+        <Link to="" component={EditProfilePage} />
+        <Redirect to={`/edit-profile/${name}`} />
+      </Router>
+      )
+    }
+
     return (
       <Segment>
         <Grid divided="vertically">
-        <h2>Welcome {who}!</h2>
+        <h2>Welcome {name}!</h2>
            <Grid.Row columns={5}>
             <Grid.Column></Grid.Column>
             <Grid.Column floated="right">
@@ -144,7 +166,7 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
             <Grid.Column>
               <Calendar /><br></br>
 
-              <Link to={`/edit-profile/${who}`} onClick={() => setTimeout(()=>window.location.reload(), 5)}><Button color='green'>Edit profile</Button></Link>
+              <Button color='green' onClick={this.handleRedirect}>Edit Profile</Button>
 
         <Button color='red' onClick={this.loggedOut}>Log Out</Button>
             </Grid.Column>

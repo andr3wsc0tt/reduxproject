@@ -1,6 +1,6 @@
 import * as React from "react";
 import {updateProfile}  from "../store/actions/actions";
-import { Link } from "react-router-dom";
+import { Link, BrowserRouter as Router, Redirect } from "react-router-dom";
 import { logOut } from "../store/actions/actions";
 import { Profile } from "../store/types/types";
 import { RootState } from "../store";
@@ -29,7 +29,8 @@ export interface IEditProfileState{
   cohort: string,
   spoken: string,
   programming: string,
-  aboutMe: string
+  aboutMe: string,
+  redirect: boolean
 }
 
 export interface IEditProfilePageProps {
@@ -42,7 +43,7 @@ export interface IEditProfilePageProps {
 export  class EditProfilePage extends React.Component<IEditProfilePageProps, IEditProfileState> {
     constructor(props: IEditProfilePageProps) {
     super(props);
-    this.state = { city: "", cohort: "", spoken: "", programming: "", aboutMe: "" };
+    this.state = { city: "", cohort: "", spoken: "", programming: "", aboutMe: "", redirect: false };
   }
 
   handleCityChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -77,6 +78,11 @@ export  class EditProfilePage extends React.Component<IEditProfilePageProps, IEd
 
     this.setState({city: ""});
   }
+
+  handleRedirect = () =>{
+    this.setState({redirect: true});
+  }
+
   loggedOut = () => {
     let { logOut, profiles } = this.props;
 
@@ -85,20 +91,29 @@ export  class EditProfilePage extends React.Component<IEditProfilePageProps, IEd
     logOut(uName[0]);
     sessionStorage.setItem(
       "profiles",
-      JSON.stringify({ profiles: profiles, loggedin: "false" })
+      JSON.stringify( profiles)
     );
     sessionStorage.setItem("loggedIn", "false");
-    sessionStorage.setItem("userName", "");
+    // sessionStorage.setItem("userName", "");
     console.log(profiles);
   };
 
   public render() {
     let {profiles} = this.props;
 
-    sessionStorage.setItem(
-      "profiles",
-      JSON.stringify({ profiles:profiles, loggedin: "true" })
-    );
+    let uName = profiles.filter(
+      profile => profile.name === sessionStorage.getItem("userName"));
+    let {aboutMe, name, password, id, loggedIn} = uName[0];
+    
+    if (this.state.redirect === true) {
+      return (
+      <Router>
+        <Link to="" component={ProfilePage} />
+        <Redirect to={`/profile/${name}`} />
+      </Router>
+      )
+    }
+
     return (
       <Grid columns="equal">
         <Grid.Row>
@@ -208,7 +223,7 @@ export  class EditProfilePage extends React.Component<IEditProfilePageProps, IEd
                 <Button onClick={this.handleClick} color="green">Save Changes</Button>
               </Segment>
               
-              <Button color='green' as={Link} to="/profile/Mo">ProfilePage</Button>
+              <Button color='green' onClick={this.handleRedirect}>Profile</Button>
 
               <Button color='red' onClick={this.loggedOut}>Log Out</Button>
 

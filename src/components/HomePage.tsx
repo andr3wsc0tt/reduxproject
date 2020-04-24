@@ -103,7 +103,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     if (loggedIn === true || sessionStorage.getItem("loggedIn") == "true") {
       sessionStorage.setItem(
         "profiles",
-        JSON.stringify({ profiles: profiles, loggedIn: loggedIn })
+        JSON.stringify(profiles)
       );
       let userName = sessionStorage.getItem("userName");
       let uName = profiles.filter(profile => profile.loggedIn == true);
