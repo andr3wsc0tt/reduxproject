@@ -224,7 +224,6 @@ export  class EditProfilePage extends React.Component<IEditProfilePageProps, IEd
               </Segment>
               
               <Button color='green' onClick={this.handleRedirect}>Profile</Button>
-
               <Button color='red' onClick={this.loggedOut}>Log Out</Button>
 
              </Form>

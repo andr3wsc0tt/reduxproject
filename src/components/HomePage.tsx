@@ -32,12 +32,13 @@ export interface IHomeState {
   passWord: string;
   signUpUser: string;
   signUpPass: string;
+  duplicated: boolean;
 }
 
 export class Home extends React.Component<IHomeProps, IHomeState> {
   constructor(props: IHomeProps) {
     super(props);
-    this.state = { userName: "", passWord: "", signUpPass: "", signUpUser: "" };
+    this.state = { userName: "", passWord: "", signUpPass: "", signUpUser: "", duplicated: false };
   }
 
   handleUserChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -74,22 +75,21 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 
     profiles.forEach((profile, i) => {
       if (profile.name === signUpUser) {
-        // display an error message
-      }
-      else {
-        addProfile({ // reducer/action 
-          id: 2,
-          name: signUpUser,
-          password: signUpPass,
-          aboutMe: "",
-          loggedIn: true,
-          city: "",
-          cohort: "",
-          programming: "",
-          spoken: ""
-        });
+        this.setState({duplicated: true})
       }
     });
+    if( this.state.duplicated === false)
+      addProfile({ // reducer/action 
+        id: 2,
+        name: signUpUser,
+        password: signUpPass,
+        aboutMe: "",
+        loggedIn: true,
+        city: "",
+        cohort: "",
+        programming: "",
+        spoken: ""
+      });
 
     
 
