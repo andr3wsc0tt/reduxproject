@@ -8,7 +8,8 @@ import {
   Header,
   Segment,
   Container,
-  Input
+  Input,
+  Icon
 } from "semantic-ui-react";
 import { checkPass, addProfile } from "../store/actions/actions";
 
@@ -170,13 +171,16 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         <Grid.Row>
           <Grid.Column>
             <Container fluid>
-              <Header as="h2">TECHCareers Hive</Header>
+              <Header as="h2">TECHCareers Hive</Header><br></br>
               <p>Connect with classmates and techcareers alumni.</p>
+              <p>Join groups of your interest.</p>
+              <p>Check networking events.</p>
+              <p>AND More!!!!!!!.</p>
             </Container>
           </Grid.Column>
           <Grid.Column>
             {" "}
-            <Divider vertical>Or</Divider>
+            <Divider vertical>  <Icon loading name='forumbee' size='massive' color='yellow' /> </Divider>
           </Grid.Column>
           <Grid.Column>
             <Header as="h2" color="green" textAlign="center">
