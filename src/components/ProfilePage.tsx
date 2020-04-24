@@ -18,6 +18,9 @@ import {
 } from "semantic-ui-react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import {IUser} from "../models/IUser";
+import About from "./EditProfilePage";
+
 
 export interface IProfilePageProps {
   match: any;
@@ -25,11 +28,43 @@ export interface IProfilePageProps {
   logOut: typeof logOut;
 }
 
+export interface IProfilePageState {
+  users: IUser[]
+}
+
+
 export class ProfilePage extends React.Component<IProfilePageProps> {
   constructor(props: IProfilePageProps) {
     super(props);
-    this.state = { userName: "", passWord: "", signUpPass: "", signUpUser: "" };
-  }
+
+      this.state = {
+        users: [ 
+          {
+            userName: "",
+            passWord: "", 
+            signUpPass: "", 
+            signUpUser: ""
+         }
+       ] 
+     }
+   }
+
+public render() {
+  let { users } = this.state;
+  
+  return(
+    <React.Fragment>
+      ProfilesPages
+      {users.map (individualUser => (
+        ProfilePage user= {individualUser}/>
+        
+       ))
+      }
+    </React.Fragment>
+  )
+}
+
+
 
   loggedOut = () => {
     let { logOut, profiles } = this.props;

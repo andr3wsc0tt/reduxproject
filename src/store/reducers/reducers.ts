@@ -33,12 +33,14 @@ let initialState: ProfileState = {
         loggedIn: false
       }
   ],
-  
+
   loggedIn: false,
   numUsers: 3
 };
+
 let update = sessionStorage.getItem("profiles");
 let updateState: ProfileState;
+
 if (update !== null) {
   updateState = JSON.parse(update);
   initialState = updateState;
@@ -57,6 +59,7 @@ export function profileReducer(
         profiles: [...state.profiles, action.payload],
         numUsers: ++state.numUsers
       };
+      
     case CHECK_PASS:
       let cred = state.loggedIn;
       let index = 0;
