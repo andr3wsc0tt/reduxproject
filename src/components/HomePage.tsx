@@ -32,13 +32,12 @@ export interface IHomeState {
   passWord: string;
   signUpUser: string;
   signUpPass: string;
-  duplicated: boolean;
 }
 
 export class Home extends React.Component<IHomeProps, IHomeState> {
   constructor(props: IHomeProps) {
     super(props);
-    this.state = { userName: "", passWord: "", signUpPass: "", signUpUser: "", duplicated: false };
+    this.state = { userName: "", passWord: "", signUpPass: "", signUpUser: "" };
   }
 
   handleUserChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -72,13 +71,16 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 
     let { signUpPass, signUpUser } = this.state; // info put into form
     let { addProfile, profiles } = this.props;
-
+    let duplicated : boolean = false;
+    
     profiles.forEach((profile, i) => {
-      if (profile.name === signUpUser) {
-        this.setState({duplicated: true})
+      if (profile.name == signUpUser) {
+        duplicated = true;
       }
     });
-    if( this.state.duplicated === false)
+
+    if(duplicated == false){
+      console.log("WRONG MATCH");
       addProfile({ // reducer/action 
         id: 2,
         name: signUpUser,
@@ -90,10 +92,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         programming: "",
         spoken: ""
       });
-
-    
-
-
+    }
 
     this.setState({ signUpUser: "", signUpPass: "" });
   };
