@@ -12,7 +12,6 @@ import ProfilePage from "./components/ProfilePage";
 import ErrorPage from "./components/ErrorPage";
 import { Profile } from "./store/types/types";
 import { RootState } from "./store";
-import { addProfile } from "./store/actions/actions";
 import { connect } from "react-redux";
 
 
@@ -45,7 +44,7 @@ export class App extends React.Component<IAppProps> {
       );
     }
 
-    return (
+    return ( // If you're not logged in you're be routed to the Home page ('/') or to the error page if you try to access any other URL other than '/'
       <>
         <Router>
           <Switch>
@@ -65,4 +64,4 @@ const mapStateToProps = (state: RootState) => {
   };
 };
 
-export default connect(mapStateToProps, { addProfile })(App);
+export default connect(mapStateToProps)(App);
