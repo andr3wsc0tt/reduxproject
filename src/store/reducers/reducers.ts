@@ -3,7 +3,8 @@ import {
   ADD_PROFILE,
   ProfileActionTypes,
   CHECK_PASS,
-  LOG_OUT
+  LOG_OUT,
+  UPDATE_PROFILE
 } from "../types/types";
 
 import { identifier } from "@babel/types";
@@ -15,14 +16,22 @@ let initialState: ProfileState = {
       name: "Andrew",
       aboutMe: "I'm Andrew",
       password: "password",
-      loggedIn: false
+      loggedIn: false,
+      city:"",
+      cohort: "",
+      programming:"",
+      spoken: ""
     },
     {
       id: 2,
       name: "Mo",
       aboutMe: "I'm Mo",
       password: "pass",
-      loggedIn: false
+      loggedIn: false,
+      city:"",
+      cohort: "",
+      programming:"",
+      spoken: ""
     }
   ],
   loggedIn: false,
@@ -42,6 +51,7 @@ export function profileReducer(
   switch (action.type) {
     case ADD_PROFILE:
       action.payload.id = state.numUsers;
+
       return {
         ...state,
         loggedIn: true,
@@ -94,6 +104,30 @@ export function profileReducer(
           ...state.profiles.slice(indexLog + 1)
         ]
       };
+
+    case UPDATE_PROFILE:
+        let name  = state.profiles.filter(
+            profile => profile.name === action.payload[0]
+          );
+          let indexUpdate = 0;
+          state.profiles.forEach((profile, i) => {
+            if (profile.name === name[0].name) {
+                indexUpdate = i;
+            }
+          });
+        return {
+            ...state,
+            profiles: [
+                ...state.profiles.slice(0, indexUpdate),
+                { ...state.profiles[indexUpdate], 
+                    city: action.payload[1],
+                    cohort: action.payload[2],
+                    programming: action.payload[3],
+                    spoken: action.payload[4],
+                    aboutMe: action.payload[5] },
+                ...state.profiles.slice(indexUpdate + 1)
+              ]
+        }
     default:
       return state;
   }

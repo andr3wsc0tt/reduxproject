@@ -82,7 +82,11 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
           name: signUpUser,
           password: signUpPass,
           aboutMe: "",
-          loggedIn: true
+          loggedIn: true,
+          city: "",
+          cohort: "",
+          programming: "",
+          spoken: ""
         });
       }
     });

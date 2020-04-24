@@ -47,12 +47,6 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
     sessionStorage.setItem("userName", ""); // username of the person who is logged in
     console.log(profiles);
   };
- 
-redirect = () => {
-    let {profiles} = this.props;
-    let uName = profiles.filter(profile => profile.loggedIn == true);
-    setTimeout(()=>window.location.reload(), 5);
-  }
 
   public render() {
     let { profiles } = this.props;
