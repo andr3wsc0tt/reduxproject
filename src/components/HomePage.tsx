@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import '../../src/App.css';
 import {
   Divider,
   Button,
@@ -9,7 +9,8 @@ import {
   Segment,
   Container,
   Input,
-  Icon
+  Icon,
+  Image
 } from "semantic-ui-react";
 import { checkPass, addProfile } from "../store/actions/actions";
 
@@ -131,11 +132,16 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     }
     return (
       <Segment>
+   
       <Grid columns="equal">
         <Grid.Row>
+        <div>
+    <Image src='Logo.png'  height='150' width='250' circular/>
+    <span></span>
+  </div>
           <Grid.Column></Grid.Column>
           <Grid.Column></Grid.Column>
-          <Grid.Column floated="right">
+          <Grid.Column floated="right"><br></br><br></br>
             <Input
               fluid
               icon="user"
@@ -145,7 +151,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
               onChange={this.handleUserChange}
             />
           </Grid.Column>
-          <Grid.Column floated="right">
+          <Grid.Column floated="right"><br></br><br></br>
             <Input
               fluid
               icon="lock"
@@ -156,7 +162,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
               onChange={this.handlePassChange}
             />
           </Grid.Column>
-          <Grid.Column floated="right">
+          <Grid.Column floated="right"><br></br><br></br>
             <Button
               color="yellow"
               fluid
@@ -224,9 +230,13 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
               </Segment>
             </Form>
           </Grid.Column>
+         
         </Grid.Row>
+   
       </Grid>
+     
       </Segment>
+      
     );
   }
 }
