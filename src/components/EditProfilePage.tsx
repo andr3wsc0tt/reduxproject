@@ -82,6 +82,7 @@ export class EditProfilePage extends React.Component<
 
     if (userName != null) {
       let update: string[] = [
+        userName,
         city,
         cohort,
         spoken,
@@ -140,11 +141,11 @@ export class EditProfilePage extends React.Component<
           <Grid.Column width={5}></Grid.Column>
           <Grid.Column></Grid.Column>
           <Grid.Column color="yellow">
-           {/* <Input./
+            <Input
               action="Search"
               placeholder="Search TechCareers Hive"
               size="huge"
-            />*/}
+            />
           </Grid.Column>
         </Grid.Row>
         <Divider horizontal>techcareers hive </Divider>
@@ -158,12 +159,12 @@ export class EditProfilePage extends React.Component<
                   ui={false}
                 />
                 <Card.Content>
-                 {/*<Card.Header>{this.state.name}</Card.Header>*/}
+                 {/*<Card.Header>Andrew Scott</Card.Header>*/}
                   <Card.Meta>
                     <span className="date">{this.state.cohort}</span>
                   </Card.Meta>
                   <Card.Description>
-                    {this.state.aboutMe}
+                  {this.state.aboutMe}
                   </Card.Description>
                 </Card.Content>
                 <Card.Content extra>

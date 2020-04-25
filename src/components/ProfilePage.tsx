@@ -121,8 +121,8 @@ export class ProfilePage extends React.Component<
             <Grid.Column>
                 <h3>Current city:{city}</h3>
                 <h3>Cohort:{cohort}</h3>
-                <h3>Spoken Languages:{spoken}</h3>
-                <h3>Programming Languages interested in:{programming}</h3>
+                <h3>Spoken languages:{spoken}</h3>
+                <h3>Programming languages interested in:{programming}</h3>
                 <h3>About Me: {aboutMe}</h3>
               <Container fluid>
                 
