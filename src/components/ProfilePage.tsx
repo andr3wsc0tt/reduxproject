@@ -188,7 +188,7 @@ export class ProfilePage extends React.Component<
       Edit Profile
     </Button>
      <Icon name='forumbee' loading color="brown"/> 
-    <Button circular color="yellow" onClick={this.loggedOut}>
+    <Button circular color="red" onClick={this.loggedOut}>
       Log Out
       </Button>
               

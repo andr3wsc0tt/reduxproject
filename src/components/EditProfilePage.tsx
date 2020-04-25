@@ -256,10 +256,10 @@ export class EditProfilePage extends React.Component<
 
               
     <Button circular color="green" onClick={this.handleRedirect}>
-      Edit Profile
+      Profile
     </Button>
-     <Icon name='forumbee' loading color="brown"/> 
-    <Button circular color="yellow" onClick={this.loggedOut}>
+     <Icon name='forumbee' loading color='olive'/> 
+    <Button circular color="red" onClick={this.loggedOut}>
       Log Out
       </Button>
  
