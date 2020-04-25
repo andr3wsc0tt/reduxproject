@@ -125,6 +125,7 @@ export class EditProfilePage extends React.Component<
   public render() {
     let { profiles } = this.props;
 
+
     let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
 
     let { aboutMe, name, password, id, loggedIn, cohort, programming, spoken } = uName[0]; // These are our users profile fields, these are the variables that we will put into the JSX.
@@ -166,12 +167,13 @@ export class EditProfilePage extends React.Component<
                   ui={false}
                 />
                 <Card.Content>
-                  <Card.Header>{name}</Card.Header>
+
+                 <Card.Header>{name}</Card.Header>
                   <Card.Meta>
-                    <span className="date">Joined in 2020</span>
+                    <span className="date">{cohort}</span>
                   </Card.Meta>
                   <Card.Description>
-                    {aboutMe}
+                  {aboutMe}
                   </Card.Description>
                 </Card.Content>
                 <Card.Content extra>

@@ -34,10 +34,23 @@ let initialState: ProfileState = {
       cohort: "",
       programming: "",
       spoken: ""
+    },
+
+    {
+      id: 3,
+      name: "Cailenys",
+      aboutMe: "I'm Cailenys",
+      password: "12345",
+      loggedIn: false,
+      city: "",
+      cohort: "",
+      programming: "",
+      spoken: ""
     }
+
   ],
   loggedIn: false,
-  numUsers: 3
+  numUsers: 4
 };
 
 // The following 6 lines keep our state in a global sessionStorage just in case someone refreshes a page, or manually enters a URL
@@ -146,6 +159,7 @@ export function profileReducer(
           ...state.profiles.slice(0, indexUpdate), // unpack the states before the chosen user's profile index
           {
             ...state.profiles[indexUpdate], // Update all the changable fields for the user (This can have more functionality where you don't change ones that are empty!)
+
             city: action.payload[1] === "" ? state.profiles[indexUpdate].city : action.payload[1],
             cohort: action.payload[2] === "" ? state.profiles[indexUpdate].cohort : action.payload[2],
             programming: action.payload[3] === "" ? state.profiles[indexUpdate].programming : action.payload[3],
