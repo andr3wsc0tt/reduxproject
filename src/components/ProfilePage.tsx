@@ -3,7 +3,14 @@ import { RootState } from "../store";
 import { connect } from "react-redux";
 import { Profile } from "../store/types/types";
 import { logOut } from "../store/actions/actions";
-import idGenerator from "react-id-generator";
+import EditProfilePage from "./EditProfilePage";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect
+} from "react-router-dom";
 
 import {
   Image,
@@ -23,233 +30,69 @@ import {IUser} from "../models/IUser";
 import About from "./EditProfilePage";
 
 
-export interface IProfilePageProps {
+export interface IProfilePageProps { // Variables passed in from the store state
   match: any;
   profiles: Profile[];
   logOut: typeof logOut;
 }
 
-export interface IProfilePageState {
-  users: IUser[]
+export interface IProfilePageState { // our local state variables
+  redirect: boolean;
 }
 
-
-export class ProfilePage extends React.Component<IProfilePageProps> {
+export class ProfilePage extends React.Component<
+  IProfilePageProps,
+  IProfilePageState
+> {
   constructor(props: IProfilePageProps) {
     super(props);
-
-      this.state = {
-        users: [ 
-          {
-            userName: "",
-            passWord: "", 
-            signUpPass: "", 
-            signUpUser: "",
-            About: "",
-            id: 0
-         }
-       ] 
-     }
-   }
-   
-   componentDidMount() {
-    
-    this.setState({
-      users: users.map(e => {
-        return {
-          userName: e.userName,
-          userLastName: e.userName,
-          passWord: e.passWord,
-          signUpPass:e.signUpPass,
-          About: e.About,
-          id: idGenerator()
-        };
-      })
-    });
+    this.state = { redirect: false };
   }
   
 
-  handleChange = e => {
-    const userName = e.target.userName;
-    this.setState({ [userName]: e.target.value });
-  };
+  
+  loggedOut = () => { // The function that calls our logOut REDUCER!
+    let { logOut, profiles } = this.props; // The store states logOut REDUCER and profiles array
 
-  handleCreateUser = () => {
-    if (this.state.users) {
-      this.setState({
-        users: [
-          ...this.state.users,
-          {
-            userName: this.state.userName,
-            userLastName: this.state.,
-            id: idGenerator()
-          }
-        ]
-      });
-    } else {
-      this.setState({
-        users: [
-          {
-            firstname: this.state.userName,
-            userLastName: this.state.userLastName,
-            id: idGenerator()
-          }
-        ]
-      });
-    }
-    this.setState({ userName: "", LastName: "" });
-  };
+    let uName = profiles.filter(profile => profile.loggedIn == true); // filter through the profiles array and return any profile that has it's loggedIn field set to true.
 
-  handleEdit = e => {
-    const employee = this.state.users.find(function(user) {
-      if (user.id === e.target.id) {
-        return user;
-      }
-    });
+    logOut(uName[0]); // Pass the profile to the logOut REDUCER! It takes in a Profile[] as it's payload.
 
-    this.setState({
-      userName: user.userName,
-      userLastName: user.userLastName,
-      id: user.id,
-      create: false
-    });
-  };
-  handleDelete = e => {
-    this.setState({
-      users: this.state.users.filter(function(user) {
-        if (user.id !== e.target.id) return user;
-      })
-    });
-  };
-  handleUpdateEmployee = () => {
-    const user = {
-      userName: this.state.userName,
-      userLastName: this.state.userLastName,
-      id: this.state.id
-    };
-    const usersUpdated = this.state.users.map(user => {
-      if (user.id === this.state.id) {
-        return user;
-      } else return user;
-    });
-
-    this.setState((prevStae, props) => ({
-      user: userUpdated,
-      create: true,
-      userName: "",
-      userLastName: ""
-    }));
-  };
-
-   /* render() {
-      const create = this.state.create ? "Save" : "Update";
-      const { users } = this.state;
-      const inputIsEmpty =
-        this.state.userName === "" || this.state.userLastName === "" ? true : false;
-      return (
-        <div>
-          <input
-            style={{ width: 120 }}
-            type="text"
-            placeholder="Enter username"
-            onChange={this.handleChange}
-            name="Username"
-            value={this.state.userName}
-          />
-          <input
-            style={{ width: 120 }}
-            type="text"
-            placeholder="Enter Firstname"
-            onChange={this.handleChange}
-            name="User Lastname"
-            value={this.state.userLastName}
-          />
-
-          <button
-            style={{ width: 150 }}
-            disabled={inputIsEmpty}
-            onClick={
-              this.state.create
-                ? this.handleCreateUser
-                : this.handleUpdateEmployee
-            }
-          >
-            {create}
-            
-          </button>
-          <br />
-          <table border="1" style={{ width: 400, paddingTop: 5 }}>
-            <thead>
-              <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user, i) => {
-                return (
-                  <tr key={i}>
-                    <td>{user.userName}</td>
-                    <td>{user.userLastName}</td>
-                    <td>
-                      <button onClick={this.handleEdit} id={user.id}>
-                        Edit
-                      </button>
-                    </td>
-                    <td>
-                      <button onClick={this.handleDelete} id={user.id}>
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      );
-    }
-  }*/
-
-  loggedOut = () => {
-    let { logOut, profiles } = this.props;
-
-    let uName = profiles.filter(profile => profile.loggedIn == true);
-
-    logOut(uName[0]);
-    sessionStorage.setItem(
-      "profiles",
-      JSON.stringify({ profiles: profiles, loggedin: "false" })
-    );
+    // When we log out we want to save our global state (This might not be necessary anymore)
+    sessionStorage.setItem("profiles", JSON.stringify(profiles));
     sessionStorage.setItem("loggedIn", "false");
     sessionStorage.setItem("userName", ""); // username of the person who is logged in
-    console.log(profiles);
+  };
+
+  handleRedirect = () => { // This sets our local state variable that determines if we go to the Edit Profile Page
+    this.setState({ redirect: true }); 
   };
 
   public render() {
-    let { profiles } = this.props;
-    let who = profiles[0].name;
-    console.log(profiles);
+    let { profiles } = this.props; // load in the profiles from the store state
 
     let uName = profiles.filter(
-      profile => profile.name === sessionStorage.getItem("userName"));
+      profile => profile.name === sessionStorage.getItem("userName") // filter through all of the store profiles and return any that matches the sessionStorage username (this can be changed to match the user who is loggedIn)
+    );
 
-    console.log(uName, "The User Profile Object");
-    console.log(uName[0].aboutMe, "The User About Me string");
+    let { aboutMe, name, password, id, loggedIn } = uName[0]; // Deconstructing the current user's store profile fields
 
-    let {aboutMe, name, password, id, loggedIn} = uName[0];
+    if (this.state.redirect === true) { // If we are wanting to redirect to the Edit Profile Page
+      return (
+        <Router> 
+          {/* Render the EditProfilePage */}
+          <Link to="" component={EditProfilePage} />
+          
+          {/* Redirect the URL to /edit-profile/**name of the Logged in User** */}
+          <Redirect to={`/edit-profile/${name}`} />
+        </Router>
+      );
+    }
 
-    // for each profile in profiles:
-    // check profile.name == sessionStorage.getItem("userName");
-    // let who = matched_profile.name;
-
-   
-
-    return (
+    return ( // If there is no redirect request. Render the Profile Page
       <Segment>
         <Grid divided="vertically">
+          <h2>Welcome {name}!</h2>
           <Grid.Row columns={5}>
             <Grid.Column></Grid.Column>
             <Grid.Column floated="right">
@@ -276,8 +119,10 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
 
           <Grid.Row columns={3}>
             <Grid.Column>
+              <h3>About Me: {aboutMe}</h3>
               <Container fluid>
-                <Header as="h1"> Explore </Header>
+                <br></br>
+                <Header as="h4"> Explore </Header>
 
                 <Radio as="h2" label="Networking Events" defaultChecked />
                 <br></br>
@@ -321,22 +166,28 @@ export class ProfilePage extends React.Component<IProfilePageProps> {
             </Grid.Column>
             <Grid.Column>
               <Calendar />
+              <br></br>
+
+              <Button color="green" onClick={this.handleRedirect}>
+                Edit Profile
+              </Button>
+
+              <Button color="red" onClick={this.loggedOut}>
+                Log Out
+              </Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        <h2>Welcome {who}!</h2>
-        <h3>About Me: {uName[0].aboutMe}</h3>
-        <button onClick={this.loggedOut}>Log Out</button>
       </Segment>
     );
   }
 }
 
-const mapStateToProps = (state: RootState, ownProps: IProfilePageProps) => {
+const mapStateToProps = (state: RootState, ownProps: IProfilePageProps) => { // mapStateToProps connects the store's initial state variables with ProfilePage component
   return {
     profiles: state.profile.profiles,
     loggedIn: state.profile.loggedIn
   };
 };
 
-export default connect(mapStateToProps, { logOut })(ProfilePage);
+export default connect(mapStateToProps, { logOut })(ProfilePage); // connect imports the logOut REDUCER from our store and returns our connected our ProfilePage component 
