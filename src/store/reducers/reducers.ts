@@ -43,12 +43,13 @@ let initialState: ProfileState = {
 // The following 6 lines keep our state in a global sessionStorage just in case someone refreshes a page, or manually enters a URL
 let update = sessionStorage.getItem("profiles");
 let log = sessionStorage.getItem("loggedIn");
+
 let updateState: Profile[];
 if (update !== null) {
   updateState = JSON.parse(update);
   initialState = {
     profiles: updateState,
-    loggedIn: Boolean(log),
+    loggedIn: (log === 'true'),
     numUsers: updateState.length + 1
   };
 }
