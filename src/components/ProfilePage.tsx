@@ -219,7 +219,9 @@ export class ProfilePage extends React.Component<
               </Form>
             </Grid.Column>
             <Grid.Column>
+            <Responsive as={Card} minWidth={768}>
               <Calendar />
+              </Responsive>
               <br></br>
               <br></br>
               <Container align="center">
