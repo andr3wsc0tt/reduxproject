@@ -189,7 +189,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
           </Grid.Column>
           <Grid.Column>
             {" "}
-            <Divider vertical>  <Icon loading name='forumbee' size='massive'  inverted color='yellow' /> </Divider>
+            <Divider vertical>  <Icon loading name='forumbee' size='massive' color='yellow' /> </Divider>
           </Grid.Column>
           <Grid.Column>
             <Header as="h2" color="green" textAlign="center">

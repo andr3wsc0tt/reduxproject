@@ -50,7 +50,7 @@ export class ProfilePage extends React.Component<
   loggedOut = () => { // The function that calls our logOut REDUCER!
     let { logOut, profiles } = this.props; // The store states logOut REDUCER and profiles array
 
-    let uName = profiles.filter(profile => profile.loggedIn == true); // filter through the profiles array and return any profile that has it's loggedIn field set to true.
+    let uName = profiles.filter(profile => profile.loggedIn === true); // filter through the profiles array and return any profile that has it's loggedIn field set to true.
 
     logOut(uName[0]); // Pass the profile to the logOut REDUCER! It takes in a Profile[] as it's payload.
 
@@ -118,7 +118,7 @@ export class ProfilePage extends React.Component<
               <h3>About Me: {aboutMe}</h3>
               <Container fluid>
                 <br></br>
-                <Header as="h4"> Explore </Header>
+                <Header as="h3"> Explore </Header>
 
                 <Radio as="h2" label="Networking Events" defaultChecked />
                 <br></br>
@@ -161,7 +161,7 @@ export class ProfilePage extends React.Component<
                   <Segment>
                     {" "}
                     <Button icon>
-                    <Icon name = "computer" color="green" />Screen Shot
+                    <Icon name = "image outline" color="green" />Screen Shot
                      </Button>
                      <Button icon>
                     <Icon name = "file code outline" color="green" />Group
