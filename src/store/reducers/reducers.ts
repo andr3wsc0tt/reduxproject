@@ -93,7 +93,7 @@ export function profileReducer(
         profile => profile.name === action.payload[0]
       );
 
-      if (uName[0] != undefined) { // if there was a match
+      if (uName[0] !== undefined) { // if there was a match
         state.profiles.forEach((profile, i) => { // iterate through each profile
           if (profile.name === uName[0].name) { // until we find the name of that user
             index = i; // and store the index of that profile
