@@ -132,6 +132,9 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         </>
       );
     }
+    else{
+      sessionStorage.setItem("profiles", JSON.stringify(profiles)); // save the sessionStorage profiles (not sure if this is necessary)
+    }
     return ( // If the user isn't logged in, render the HomePage
       <Segment>
   

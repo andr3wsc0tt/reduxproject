@@ -78,11 +78,11 @@ export class EditProfilePage extends React.Component<
 
     let { city, cohort, spoken, programming, aboutMe } = this.state; // these are the fields that can be updated on our edit profile page
     let { updateProfile, profiles } = this.props; // updateProfile is the function imported from actions and profiles in our array of saved profiles
-    let userName = sessionStorage.getItem("userName"); // cheating way of getting who is logged in!
+    let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
 
-    if (userName != null) {
+    if (uName != null) {
       let update: string[] = [
-        userName,
+        uName[0].name,
         city,
         cohort,
         spoken,
@@ -104,23 +104,29 @@ export class EditProfilePage extends React.Component<
 
     let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
 
+    console.log(uName);
+
     logOut(uName[0]); // log that user out - logOut is a reducer and uName[0] is the username of the logged in user
-    sessionStorage.setItem(
-      // after changes to our store, we want to save them in our sessionStorage
-      "profiles",
-      JSON.stringify(profiles)
-    );
     sessionStorage.setItem("loggedIn", "false"); // log us out of our sessionStorage. This is still cheating a bit!
-    // sessionStorage.setItem("userName", "");
+    sessionStorage.setItem("userName", "");
+    window.location.href = "/";
   };
   
+  // componentDidMount(){
+  //   let { profiles } = this.props;
+  //   sessionStorage.setItem(
+  //     // after changes to our store, we want to save them in our sessionStorage
+  //     "profiles",
+  //     JSON.stringify(profiles)
+  //   );
+  // }
+
   public render() {
     let { profiles } = this.props;
 
-    let uName = profiles.filter(
-      profile => profile.name === sessionStorage.getItem("userName")
-    );
-    let { aboutMe, name, password, id, loggedIn } = uName[0]; // These are our users profile fields, these are the variables that we will put into the JSX.
+    let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
+
+    let { aboutMe, name, password, id, loggedIn, cohort, programming, spoken } = uName[0]; // These are our users profile fields, these are the variables that we will put into the JSX.
 
     if (this.state.redirect === true) {
       // in handleRedirect we set this state variable if we want to go to Profile Page
@@ -159,12 +165,12 @@ export class EditProfilePage extends React.Component<
                   ui={false}
                 />
                 <Card.Content>
-                  <Card.Header>Andrew Scott</Card.Header>
+                  <Card.Header>{name}</Card.Header>
                   <Card.Meta>
                     <span className="date">Joined in 2020</span>
                   </Card.Meta>
                   <Card.Description>
-                    Andrew is a great guy :-).
+                    {aboutMe}
                   </Card.Description>
                 </Card.Content>
                 <Card.Content extra>

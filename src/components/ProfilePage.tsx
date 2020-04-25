@@ -54,9 +54,9 @@ export class ProfilePage extends React.Component<
     logOut(uName[0]); // Pass the profile to the logOut REDUCER! It takes in a Profile[] as it's payload.
 
     // When we log out we want to save our global state (This might not be necessary anymore)
-    sessionStorage.setItem("profiles", JSON.stringify(profiles));
     sessionStorage.setItem("loggedIn", "false");
     sessionStorage.setItem("userName", ""); // username of the person who is logged in
+    window.location.href = "/";
   };
 
   handleRedirect = () => { // This sets our local state variable that determines if we go to the Edit Profile Page
@@ -66,10 +66,7 @@ export class ProfilePage extends React.Component<
   public render() {
     let { profiles } = this.props; // load in the profiles from the store state
 
-    let uName = profiles.filter(
-      profile => profile.name === sessionStorage.getItem("userName") // filter through all of the store profiles and return any that matches the sessionStorage username (this can be changed to match the user who is loggedIn)
-    );
-
+    let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
     let { aboutMe, name, password, id, loggedIn } = uName[0]; // Deconstructing the current user's store profile fields
 
     if (this.state.redirect === true) { // If we are wanting to redirect to the Edit Profile Page

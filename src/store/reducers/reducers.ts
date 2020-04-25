@@ -43,12 +43,13 @@ let initialState: ProfileState = {
 // The following 6 lines keep our state in a global sessionStorage just in case someone refreshes a page, or manually enters a URL
 let update = sessionStorage.getItem("profiles");
 let log = sessionStorage.getItem("loggedIn");
+
 let updateState: Profile[];
 if (update !== null) {
   updateState = JSON.parse(update);
   initialState = {
     profiles: updateState,
-    loggedIn: Boolean(log),
+    loggedIn: (log === 'true'),
     numUsers: updateState.length + 1
   };
 }
@@ -138,17 +139,18 @@ export function profileReducer(
           indexUpdate = i;
         }
       });
+      console.log(action.payload);
       return {
         ...state,
         profiles: [
           ...state.profiles.slice(0, indexUpdate), // unpack the states before the chosen user's profile index
           {
             ...state.profiles[indexUpdate], // Update all the changable fields for the user (This can have more functionality where you don't change ones that are empty!)
-            city: action.payload[1],
-            cohort: action.payload[2],
-            programming: action.payload[3],
-            spoken: action.payload[4],
-            aboutMe: action.payload[5]
+            city: action.payload[1] === "" ? state.profiles[indexUpdate].city : action.payload[1],
+            cohort: action.payload[2] === "" ? state.profiles[indexUpdate].cohort : action.payload[2],
+            programming: action.payload[3] === "" ? state.profiles[indexUpdate].programming : action.payload[3],
+            spoken: action.payload[4] === "" ? state.profiles[indexUpdate].spoken : action.payload[4],
+            aboutMe: action.payload[5] === "" ? state.profiles[indexUpdate].aboutMe : action.payload[5],
           },
           ...state.profiles.slice(indexUpdate + 1)
         ]
