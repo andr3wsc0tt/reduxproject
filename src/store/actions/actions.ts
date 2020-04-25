@@ -3,9 +3,12 @@ import {
   ADD_PROFILE,
   Profile,
   CHECK_PASS,
-  LOG_OUT
+  LOG_OUT,
+  UPDATE_PROFILE
 } from "../types/types";
 
+
+// The 4 different action definitions we have. These are DEFINED in types.ts
 export function addProfile(profile: Profile): ProfileActionTypes {
   return {
     type: ADD_PROFILE,
@@ -25,4 +28,11 @@ export function logOut(profile: Profile): ProfileActionTypes {
     type: LOG_OUT,
     payload: profile
   };
+}
+
+export function updateProfile(fields: string[]) : ProfileActionTypes {
+    return {
+        type: UPDATE_PROFILE,
+        payload: fields
+    }
 }
