@@ -22,6 +22,7 @@ import {
   Radio,
   Form,
   TextArea,
+  Icon,
   Button
 } from "semantic-ui-react";
 import Calendar from "react-calendar";
@@ -140,8 +141,13 @@ export class ProfilePage extends React.Component<
                   />
                   <Segment>
                     {" "}
-                    <Button content="Photos" />
-                    <Button content="tag a classmate" />
+                    <Button icon>
+                    <Icon name = "photo" color="green" />Photo
+                     </Button>
+
+                    <Button icon>
+                    <Icon name="user outline" color="green"/>Tag a Class Mate
+                     </Button> 
                   </Segment>
                 </Segment>
               </Form>{" "}
@@ -154,8 +160,12 @@ export class ProfilePage extends React.Component<
                   />
                   <Segment>
                     {" "}
-                    <Button content="Screen Snippet" />
-                    <Button content="Group" />
+                    <Button icon>
+                    <Icon name = "computer" color="green" />Screen Shot
+                     </Button>
+                     <Button icon>
+                    <Icon name = "file code outline" color="green" />Group
+                     </Button>
                   </Segment>
                 </Segment>
               </Form>
