@@ -111,15 +111,14 @@ export class EditProfilePage extends React.Component<
     sessionStorage.setItem("userName", "");
   };
   
-  componentDidMount(){
-    let { profiles } = this.props;
-    console.log(profiles);
-    sessionStorage.setItem(
-      // after changes to our store, we want to save them in our sessionStorage
-      "profiles",
-      JSON.stringify(profiles)
-    );
-  }
+  // componentDidMount(){
+  //   let { profiles } = this.props;
+  //   sessionStorage.setItem(
+  //     // after changes to our store, we want to save them in our sessionStorage
+  //     "profiles",
+  //     JSON.stringify(profiles)
+  //   );
+  // }
 
   public render() {
     let { profiles } = this.props;

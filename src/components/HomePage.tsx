@@ -105,8 +105,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
   public render() {
     let { loggedIn, profiles } = this.props; // Get the store's initial state's loggedIn variable and profile array
 
-    console.log(profiles);
-
     if (loggedIn === true || sessionStorage.getItem("loggedIn") == "true") { // if the store's loggedIn variable is set, or the sessionState loggedIn variable is set then we can set up our Router for moving to the appropriate page
       sessionStorage.setItem("profiles", JSON.stringify(profiles)); // save the sessionStorage profiles (not sure if this is necessary)
       let userName = sessionStorage.getItem("userName"); // save the sessionStorage username 
@@ -115,11 +113,11 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
       let destString = ""; // intialize null string for the Redirect Route
 
       if (loggedIn == true) { // If a user is logged in through the store state
-        // sessionStorage.setItem("userName", uName[0].name); // save to global
-        // sessionStorage.setItem("loggedIn", "true"); // save to global
+        sessionStorage.setItem("userName", uName[0].name); // save to global
+        sessionStorage.setItem("loggedIn", "true"); // save to global
         destString = uName[0].name; // set the destination for Redirect Route to the name of the logged in User
       } else if (userName != undefined) { // if the global username is set
-        // sessionStorage.setItem("userName", userName); // I dont think this is necessary
+        sessionStorage.setItem("userName", userName); // I dont think this is necessary
         destString = userName; // set the destination for Redirect Route to the name of the sessionStorage username
       }
 
