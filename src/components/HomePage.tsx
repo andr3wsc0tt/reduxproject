@@ -12,6 +12,7 @@ import {
   Icon,
   Image
 } from "semantic-ui-react";
+
 import { checkPass, addProfile } from "../store/actions/actions";
 
 import { ProfileActionTypes, Profile } from "../store/types/types";
@@ -132,6 +133,9 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
           </Router>
         </>
       );
+    }
+    else{
+      sessionStorage.setItem("profiles", JSON.stringify(profiles)); // save the sessionStorage profiles (not sure if this is necessary)
     }
     return ( // If the user isn't logged in, render the HomePage
       <Segment>

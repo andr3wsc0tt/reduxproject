@@ -27,6 +27,9 @@ import {
 } from "semantic-ui-react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import {IUser} from "../models/IUser";
+import About from "./EditProfilePage";
+
 
 export interface IProfilePageProps { // Variables passed in from the store state
   match: any;
@@ -46,7 +49,9 @@ export class ProfilePage extends React.Component<
     super(props);
     this.state = { redirect: false };
   }
+  
 
+  
   loggedOut = () => { // The function that calls our logOut REDUCER!
     let { logOut, profiles } = this.props; // The store states logOut REDUCER and profiles array
 
@@ -55,9 +60,9 @@ export class ProfilePage extends React.Component<
     logOut(uName[0]); // Pass the profile to the logOut REDUCER! It takes in a Profile[] as it's payload.
 
     // When we log out we want to save our global state (This might not be necessary anymore)
-    sessionStorage.setItem("profiles", JSON.stringify(profiles));
     sessionStorage.setItem("loggedIn", "false");
     sessionStorage.setItem("userName", ""); // username of the person who is logged in
+    window.location.href = "/";
   };
 
   handleRedirect = () => { // This sets our local state variable that determines if we go to the Edit Profile Page
@@ -67,11 +72,10 @@ export class ProfilePage extends React.Component<
   public render() {
     let { profiles } = this.props; // load in the profiles from the store state
 
-    let uName = profiles.filter(
-      profile => profile.name === sessionStorage.getItem("userName") // filter through all of the store profiles and return any that matches the sessionStorage username (this can be changed to match the user who is loggedIn)
-    );
 
+    let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
     let { aboutMe, name, password, id, loggedIn } = uName[0]; // Deconstructing the current user's store profile fields
+
 
     if (this.state.redirect === true) { // If we are wanting to redirect to the Edit Profile Page
       return (
@@ -115,10 +119,16 @@ export class ProfilePage extends React.Component<
 
           <Grid.Row columns={3}>
             <Grid.Column>
-              <h3>About Me: {aboutMe}</h3>
+                <h3>Current city:{city}</h3>
+                <h3>Cohort:{cohort}</h3>
+                <h3>Spoken languages:{spoken}</h3>
+                <h3>Programming languages interested in:{programming}</h3>
+                <h3>About Me: {aboutMe}</h3>
               <Container fluid>
+
                 <br></br>
                 <Header as="h3"> Explore </Header>
+
 
                 <Radio as="h2" label="Networking Events" defaultChecked />
                 <br></br>
