@@ -56,6 +56,7 @@ export class ProfilePage extends React.Component<
     // When we log out we want to save our global state (This might not be necessary anymore)
     sessionStorage.setItem("loggedIn", "false");
     sessionStorage.setItem("userName", ""); // username of the person who is logged in
+    window.location.href = "/";
   };
 
   handleRedirect = () => { // This sets our local state variable that determines if we go to the Edit Profile Page

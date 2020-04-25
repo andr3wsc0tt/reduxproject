@@ -109,6 +109,7 @@ export class EditProfilePage extends React.Component<
     logOut(uName[0]); // log that user out - logOut is a reducer and uName[0] is the username of the logged in user
     sessionStorage.setItem("loggedIn", "false"); // log us out of our sessionStorage. This is still cheating a bit!
     sessionStorage.setItem("userName", "");
+    window.location.href = "/";
   };
   
   // componentDidMount(){

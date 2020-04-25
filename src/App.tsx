@@ -50,8 +50,10 @@ export class App extends React.Component<IAppProps> {
       <>
         <Router>
           <Switch>
-            <Route exact path="/" component={Home}/>
-            <Redirect from="/*" to="/"/>
+            <Route>
+              <Redirect from="/*" to="/"/>
+              <Route exact path="/" component={Home}/>
+            </Route>
             <Route component={ErrorPage} />
           </Switch>
         </Router>
