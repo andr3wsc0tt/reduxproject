@@ -120,7 +120,7 @@ export class EditProfilePage extends React.Component<
     let uName = profiles.filter(
       profile => profile.name === sessionStorage.getItem("userName")
     );
-    let { aboutMe, name, password, id, loggedIn } = uName[0]; // These are our users profile fields, these are the variables that we will put into the JSX.
+    let { aboutMe, name, password, id, loggedIn, cohort } = uName[0]; // These are our users profile fields, these are the variables that we will put into the JSX.
 
     if (this.state.redirect === true) {
       // in handleRedirect we set this state variable if we want to go to Profile Page
@@ -159,12 +159,12 @@ export class EditProfilePage extends React.Component<
                   ui={false}
                 />
                 <Card.Content>
-                 {/*<Card.Header>Andrew Scott</Card.Header>*/}
+                 <Card.Header>{name}</Card.Header>
                   <Card.Meta>
-                    <span className="date">{this.state.cohort}</span>
+                    <span className="date">{cohort}</span>
                   </Card.Meta>
                   <Card.Description>
-                  {this.state.aboutMe}
+                  {aboutMe}
                   </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
