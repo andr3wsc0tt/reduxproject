@@ -75,7 +75,7 @@ export class ProfilePage extends React.Component<
       profile => profile.name === sessionStorage.getItem("userName") // filter through all of the store profiles and return any that matches the sessionStorage username (this can be changed to match the user who is loggedIn)
     );
 
-    let { aboutMe, name, password, id, loggedIn } = uName[0]; // Deconstructing the current user's store profile fields
+    let { aboutMe, name, password, id, loggedIn, city, cohort, programming, spoken  } = uName[0]; // Deconstructing the current user's store profile fields
 
     if (this.state.redirect === true) { // If we are wanting to redirect to the Edit Profile Page
       return (
@@ -119,9 +119,13 @@ export class ProfilePage extends React.Component<
 
           <Grid.Row columns={3}>
             <Grid.Column>
-              <h3>About Me: {aboutMe}</h3>
+                <h3>Current city:{city}</h3>
+                <h3>Cohort:{cohort}</h3>
+                <h3>Spoken Languages:{spoken}</h3>
+                <h3>Programming Languages interested in:{programming}</h3>
+                <h3>About Me: {aboutMe}</h3>
               <Container fluid>
-                <br></br>
+                
                 <Header as="h4"> Explore </Header>
 
                 <Radio as="h2" label="Networking Events" defaultChecked />

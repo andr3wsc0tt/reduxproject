@@ -34,11 +34,23 @@ let initialState: ProfileState = {
       cohort: "",
       programming: "",
       spoken: ""
-    }
+    },
+
+    {
+        id: 3,
+        name: "Cailenys",
+        aboutMe: "I'm Cailenys",
+        password: "12345",
+        loggedIn: false,
+        city: "",
+        cohort: "",
+        programming: "",
+        spoken: ""
+      }
   ],
 
   loggedIn: false,
-  numUsers: 3
+  numUsers: 4
 };
 
 // The following 6 lines keep our state in a global sessionStorage just in case someone refreshes a page, or manually enters a URL
