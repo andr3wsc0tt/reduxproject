@@ -21,7 +21,8 @@ import {
   Segment,
   TextArea,
   Button,
-  List
+  List,
+  Icon
 } from "semantic-ui-react";
 
 export interface IEditProfileState { // This holds the states of the current component that AREN'T passed as global variables. They are limited to only affecting this page.
@@ -189,7 +190,7 @@ export class EditProfilePage extends React.Component<
           </Grid.Column>
           <Grid.Column>
             {" "}
-            <Divider vertical></Divider>
+            <Divider vertical><Icon loading name='forumbee' size='massive' color='yellow' /></Divider>
           </Grid.Column>
 
           <Grid.Column>
