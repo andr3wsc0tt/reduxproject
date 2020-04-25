@@ -8,8 +8,9 @@ export interface Profile { // Template for our Profile type
   loggedIn: boolean;
   city: string;
   cohort:string;
-  programming: string;
-  spoken: string
+  spoken: string;
+  programming: string
+ 
 }
 
 export interface ProfileState { // Template for our Profile State

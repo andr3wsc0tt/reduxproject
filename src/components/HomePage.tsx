@@ -12,6 +12,7 @@ import {
   Icon,
   Image
 } from "semantic-ui-react";
+
 import { checkPass, addProfile } from "../store/actions/actions";
 
 import { ProfileActionTypes, Profile } from "../store/types/types";
@@ -103,6 +104,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     this.setState({ signUpUser: "", signUpPass: "" }); // Reset the local state variables
   }; 
   public render() {
+    
     let { loggedIn, profiles } = this.props; // Get the store's initial state's loggedIn variable and profile array
 
     if (loggedIn === true || sessionStorage.getItem("loggedIn") === "true") { // if the store's loggedIn variable is set, or the sessionState loggedIn variable is set then we can set up our Router for moving to the appropriate page
@@ -131,6 +133,9 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
           </Router>
         </>
       );
+    }
+    else{
+      sessionStorage.setItem("profiles", JSON.stringify(profiles)); // save the sessionStorage profiles (not sure if this is necessary)
     }
     return ( // If the user isn't logged in, render the HomePage
       <Segment>
