@@ -22,6 +22,7 @@ import {
   Radio,
   Form,
   TextArea,
+  Icon,
   Button
 } from "semantic-ui-react";
 import Calendar from "react-calendar";
@@ -54,7 +55,7 @@ export class ProfilePage extends React.Component<
   loggedOut = () => { // The function that calls our logOut REDUCER!
     let { logOut, profiles } = this.props; // The store states logOut REDUCER and profiles array
 
-    let uName = profiles.filter(profile => profile.loggedIn == true); // filter through the profiles array and return any profile that has it's loggedIn field set to true.
+    let uName = profiles.filter(profile => profile.loggedIn === true); // filter through the profiles array and return any profile that has it's loggedIn field set to true.
 
     logOut(uName[0]); // Pass the profile to the logOut REDUCER! It takes in a Profile[] as it's payload.
 
@@ -91,7 +92,7 @@ export class ProfilePage extends React.Component<
     return ( // If there is no redirect request. Render the Profile Page
       <Segment>
         <Grid divided="vertically">
-          <h2>Welcome {name}!</h2>
+          
           <Grid.Row columns={5}>
             <Grid.Column></Grid.Column>
             <Grid.Column floated="right">
@@ -124,8 +125,10 @@ export class ProfilePage extends React.Component<
                 <h3>Programming languages interested in:{programming}</h3>
                 <h3>About Me: {aboutMe}</h3>
               <Container fluid>
-                
-                <Header as="h4"> Explore </Header>
+
+                <br></br>
+                <Header as="h3"> Explore </Header>
+
 
                 <Radio as="h2" label="Networking Events" defaultChecked />
                 <br></br>
@@ -139,6 +142,7 @@ export class ProfilePage extends React.Component<
               </Container>
             </Grid.Column>
             <Grid.Column>
+            <h2>Welcome {name}!</h2>
               <Form>
                 <Segment>
                   <TextArea
@@ -147,8 +151,13 @@ export class ProfilePage extends React.Component<
                   />
                   <Segment>
                     {" "}
-                    <Button content="Photos" />
-                    <Button content="tag a classmate" />
+                    <Button icon>
+                    <Icon name = "photo" color="green" />Photo
+                     </Button>
+
+                    <Button icon>
+                    <Icon name="user outline" color="green"/>Tag a Class Mate
+                     </Button> 
                   </Segment>
                 </Segment>
               </Form>{" "}
@@ -161,8 +170,12 @@ export class ProfilePage extends React.Component<
                   />
                   <Segment>
                     {" "}
-                    <Button content="Screen Snippet" />
-                    <Button content="Group" />
+                    <Button icon>
+                    <Icon name = "image outline" color="green" />Screen Shot
+                     </Button>
+                     <Button icon>
+                    <Icon name = "file code outline" color="green" />Group
+                     </Button>
                   </Segment>
                 </Segment>
               </Form>
@@ -170,14 +183,17 @@ export class ProfilePage extends React.Component<
             <Grid.Column>
               <Calendar />
               <br></br>
-
-              <Button color="green" onClick={this.handleRedirect}>
-                Edit Profile
-              </Button>
-
-              <Button color="red" onClick={this.loggedOut}>
-                Log Out
-              </Button>
+              <br></br>
+              <Button.Group>
+    <Button color="green" onClick={this.handleRedirect}>
+      Edit Profile
+    </Button>
+    <Button.Or/>
+    <Button color="yellow" onClick={this.loggedOut}>
+      Save
+      </Button>
+  </Button.Group>
+              
             </Grid.Column>
           </Grid.Row>
         </Grid>
