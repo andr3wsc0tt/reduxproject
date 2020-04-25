@@ -128,7 +128,7 @@ export class EditProfilePage extends React.Component<
 
     let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
 
-    let { aboutMe, name, password, id, loggedIn, cohort, programming, spoken } = uName[0]; // These are our users profile fields, these are the variables that we will put into the JSX.
+    let { aboutMe, name, password, id, loggedIn, cohort, programming, spoken, city } = uName[0]; // These are our users profile fields, these are the variables that we will put into the JSX.
 
     if (this.state.redirect === true) {
       // in handleRedirect we set this state variable if we want to go to Profile Page
@@ -158,49 +158,14 @@ export class EditProfilePage extends React.Component<
         </Grid.Row>
         <Divider horizontal>techcareers hive </Divider>
         <Grid.Row>
+            
           <Grid.Column>
-            <Container fluid>
-              <Card>
-                <Image
-                  src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
-                  wrapped
-                  ui={false}
-                />
-                <Card.Content>
-
-                 <Card.Header>{name}</Card.Header>
-                  <Card.Meta>
-                    <span className="date">{cohort}</span>
-                  </Card.Meta>
-                  <Card.Description>
-                  {aboutMe}
-                  </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                  {/* <a>
-              <Icon name='user' />
-              22 Friends
-            </a> */}
-                </Card.Content>
-              </Card>
-              {/* <Header as='h1'> <i className="user circle icon"></i></Header> */}
-              <Radio as="h3" label="Education" defaultChecked />
-              <br></br>
-              <Radio label="Events" defaultChecked />
-              <br></br>
-              <Radio label="Photos" defaultChecked />
-              <br></br>
-              <br></br>
-              <br></br>
-              Groups<br></br>
-              <Radio label="JavaScript" defaultChecked />
-            </Container>
-          </Grid.Column>
-          <Grid.Column>
-            {" "}
-            <Divider vertical><Icon loading name='forumbee' size='massive' color='yellow' /></Divider>
-          </Grid.Column>
-
+              <h3>Current city:{city}</h3>
+              <h3>Cohort:{cohort}</h3>
+              <h3>Spoken languages:{spoken}</h3>
+              <h3>Programming languages interested in:{programming}</h3>
+              <h3>About Me: {aboutMe}</h3>
+          </Grid.Column> 
           <Grid.Column>
             <Header as="h2" color="green" textAlign="center">
               Edit profile
@@ -255,16 +220,17 @@ export class EditProfilePage extends React.Component<
               </Segment>
 
               <Button.Group>
-    <Button color="green" onClick={this.handleRedirect}>
-      Edit Profile
-    </Button>
-    <Button.Or/>
-    <Button color="yellow" onClick={this.loggedOut}>
-      Log Out
-      </Button>
-  </Button.Group>
+                <Button color="green" onClick={this.handleRedirect}>
+                  Profile
+                </Button>
+                <Button.Or/>
+                <Button color="yellow" onClick={this.loggedOut}>
+                  Log Out
+                  </Button>
+              </Button.Group>
             </Form>
           </Grid.Column>
+          <Grid.Column></Grid.Column>
         </Grid.Row>
       </Grid>
     );

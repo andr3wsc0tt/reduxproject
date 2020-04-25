@@ -13,6 +13,7 @@ import {
 } from "react-router-dom";
 
 import {
+  Card,
   Image,
   Segment,
   Grid,
@@ -119,17 +120,51 @@ export class ProfilePage extends React.Component<
 
           <Grid.Row columns={3}>
             <Grid.Column>
-                <h3>Current city:{city}</h3>
-                <h3>Cohort:{cohort}</h3>
-                <h3>Spoken languages:{spoken}</h3>
-                <h3>Programming languages interested in:{programming}</h3>
-                <h3>About Me: {aboutMe}</h3>
+            <Container fluid>
+              <Card>
+                <Image
+                  src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
+                  wrapped
+                  ui={false}
+                />
+                <Card.Content>
+
+                 <Card.Header>{name}</Card.Header>
+                  <Card.Meta>
+                    <span className="date"><h3>Cohort:{cohort}</h3></span>
+                  </Card.Meta>
+                  <br></br>
+                  <Card.Description>
+                  <h3>Current city:{city}</h3>
+                  <h3>Spoken languages:{spoken}</h3>
+                  <h3>Programming languages interested in:{programming}</h3>
+                  <h3>About Me: {aboutMe}</h3>
+                  </Card.Description>
+                </Card.Content>
+                <Card.Content extra>
+                  {/* <a>
+              <Icon name='user' />
+              22 Friends
+             </a> */}
+                </Card.Content>
+              </Card>
+              {/* <Header as='h1'> <i className="user circle icon"></i></Header> */}
+              <Radio as="h3" label="Education" defaultChecked />
+              <br></br>
+              <Radio label="Events" defaultChecked />
+              <br></br>
+              <Radio label="Photos" defaultChecked />
+              <br></br>
+              <br></br>
+              <br></br>
+              Groups<br></br>
+              <Radio label="JavaScript" defaultChecked />
+            </Container>
+               
               <Container fluid>
 
                 <br></br>
                 <Header as="h3"> Explore </Header>
-
-
                 <Radio as="h2" label="Networking Events" defaultChecked />
                 <br></br>
                 <Radio as="h2" label="Previous Cohorts" defaultChecked />
