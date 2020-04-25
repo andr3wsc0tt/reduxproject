@@ -87,7 +87,7 @@ export class ProfilePage extends React.Component<
     return ( // If there is no redirect request. Render the Profile Page
       <Segment>
         <Grid divided="vertically">
-          <h2>Welcome {name}!</h2>
+          
           <Grid.Row columns={5}>
             <Grid.Column></Grid.Column>
             <Grid.Column floated="right">
@@ -131,6 +131,7 @@ export class ProfilePage extends React.Component<
               </Container>
             </Grid.Column>
             <Grid.Column>
+            <h2>Welcome {name}!</h2>
               <Form>
                 <Segment>
                   <TextArea
@@ -162,14 +163,16 @@ export class ProfilePage extends React.Component<
             <Grid.Column>
               <Calendar />
               <br></br>
-
-              <Button color="green" onClick={this.handleRedirect}>
-                Edit Profile
-              </Button>
-
-              <Button color="red" onClick={this.loggedOut}>
-                Log Out
-              </Button>
+              <Button.Group>
+    <Button color="green" onClick={this.handleRedirect}>
+      Edit Profile
+    </Button>
+    <Button.Or/>
+    <Button color="yellow" onClick={this.loggedOut}>
+      Save
+      </Button>
+  </Button.Group>
+              
             </Grid.Column>
           </Grid.Row>
         </Grid>
