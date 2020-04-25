@@ -173,6 +173,7 @@ export class ProfilePage extends React.Component<
             <Grid.Column>
               <Calendar />
               <br></br>
+              <br></br>
               <Button.Group>
     <Button color="green" onClick={this.handleRedirect}>
       Edit Profile
