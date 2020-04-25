@@ -254,15 +254,15 @@ export class EditProfilePage extends React.Component<
                 </Button>
               </Segment>
 
-              <Button.Group>
-    <Button color="green" onClick={this.handleRedirect}>
+              
+    <Button circular color="green" onClick={this.handleRedirect}>
       Edit Profile
     </Button>
-    <Button.Or/>
-    <Button color="yellow" onClick={this.loggedOut}>
+     <Icon name='forumbee' loading color="brown"/> 
+    <Button circular color="yellow" onClick={this.loggedOut}>
       Log Out
       </Button>
-  </Button.Group>
+ 
             </Form>
           </Grid.Column>
         </Grid.Row>

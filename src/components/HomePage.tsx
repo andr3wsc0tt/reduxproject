@@ -1,5 +1,5 @@
 import * as React from "react";
-import '../../src/App.css';
+import './main.css';
 import {
   Divider,
   Button,
