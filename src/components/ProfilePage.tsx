@@ -74,7 +74,7 @@ export class ProfilePage extends React.Component<
 
 
     let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
-    let { aboutMe, name, password, id, loggedIn, city, cohort, programming, spoken } = uName[0]; // Deconstructing the current user's store profile fields
+    let { aboutMe, name, password, id, loggedIn, cohort, programming, city, spoken } = uName[0]; // Deconstructing the current user's store profile fields
 
 
     if (this.state.redirect === true) { // If we are wanting to redirect to the Edit Profile Page

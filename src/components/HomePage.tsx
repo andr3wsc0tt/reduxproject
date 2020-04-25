@@ -21,6 +21,8 @@ import { connect } from "react-redux";
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import ProfilePage from "./ProfilePage";
 import NavBar from "./subcomponents/NavBar";
+import LOGO from '../../src/Logo.png';
+
 
 export interface IHomeProps { // our store state variables
   checkPass: typeof checkPass; // reducer
@@ -143,7 +145,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
       <Grid columns="equal">
         <Grid.Row>
         <div>
-    <Image src='Logo.png'  height='150' width='250' circular/>
+    <Image src={LOGO}  height='150' width='250' circular/>
     <span></span>
   </div>
           <Grid.Column></Grid.Column>
