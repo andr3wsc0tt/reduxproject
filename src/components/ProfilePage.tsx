@@ -7,13 +7,12 @@ import { logOut } from "../store/actions/actions";
 import EditProfilePage from "./EditProfilePage";
 import {
   BrowserRouter as Router,
-  Route,
   Link,
-  Switch,
-  Redirect,
+  Redirect
 } from "react-router-dom";
 
 import {
+  Card,
   Image,
   Card,
   Segment,
@@ -33,6 +32,8 @@ import "react-calendar/dist/Calendar.css";
 import { IUser } from "../models/IUser";
 import About from "./EditProfilePage";
 import LOGO from "./Logo.png";
+import NavBar from "./subcomponents/NavBar";
+
 
 export interface IProfilePageProps {
   // Variables passed in from the store state
@@ -55,8 +56,7 @@ export class ProfilePage extends React.Component<
     this.state = { redirect: false };
   }
 
-  loggedOut = () => {
-    // The function that calls our logOut REDUCER!
+ loggedOut = () => { // The function that calls our logOut REDUCER!
     let { logOut, profiles } = this.props; // The store states logOut REDUCER and profiles array
 
     let uName = profiles.filter((profile) => profile.loggedIn === true); // filter through the profiles array and return any profile that has it's loggedIn field set to true.
@@ -90,8 +90,11 @@ export class ProfilePage extends React.Component<
       spoken,
     } = uName[0]; // Deconstructing the current user's store profile fields
 
-    if (this.state.redirect === true) {
-      // If we are wanting to redirect to the Edit Profile Page
+
+    let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
+    let { aboutMe, name, cohort, programming, city, spoken } = uName[0]; // Deconstructing the current user's store profile fields
+
+    if (this.state.redirect === true) { // If we are wanting to redirect to the Edit Profile Page
       return (
         <Router>
           {/* Render the EditProfilePage */}
@@ -105,7 +108,8 @@ export class ProfilePage extends React.Component<
 
     return (
       // If there is no redirect request. Render the Profile Page
-
+        <Segment>
+        <NavBar redirect = {this.handleRedirect} goto= "Edit Profile"/>
         <Grid divided="vertically">
           <Grid.Row columns={8}>
             <Grid.Column>
@@ -156,18 +160,24 @@ export class ProfilePage extends React.Component<
                   ui={false}
                 />
                 <Card.Content>
-                  <Card.Header>Andrew Scott</Card.Header>
+
+                 <Card.Header>{name}</Card.Header>
                   <Card.Meta>
-                    <span className="date">Joined in 2020</span>
+                    <span className="date"><h3>Cohort:{cohort}</h3></span>
                   </Card.Meta>
+                  <br></br>
                   <Card.Description>
-                    Andrew is a great guy :-).
+                  <h3>Current city:{city}</h3>
+                  <h3>Spoken languages:{spoken}</h3>
+                  <h3>Programming languages interested in:{programming}</h3>
+                  <h3>About Me: {aboutMe}</h3>
                   </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
                   {/* <a>
               <Icon name='user' />
               22 Friends
+
             </a> */}
                 </Card.Content>
                 </Responsive>

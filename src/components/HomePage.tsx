@@ -1,5 +1,5 @@
 import * as React from "react";
-import '../../src/App.css';
+import './main.css';
 import {
   Divider,
   Button,
@@ -15,12 +15,11 @@ import {
 
 import { checkPass, addProfile } from "../store/actions/actions";
 
-import { ProfileActionTypes, Profile } from "../store/types/types";
+import { Profile } from "../store/types/types";
 import { RootState } from "../store";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import ProfilePage from "./ProfilePage";
-import NavBar from "./subcomponents/NavBar";
 import LOGO from '../../src/Logo.png';
 
 
@@ -67,7 +66,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
   handleOnClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     let { userName, passWord } = this.state; // our local state login and password
-    let { profiles, checkPass, loggedIn } = this.props; // our store variables and reducers that are passed from mapStateToProps and connect!
+    let { checkPass } = this.props; // our store variables and reducers that are passed from mapStateToProps and connect!
 
     let cred: Array<string> = [userName, passWord]; // Our reducer (checkPass) takes in a string[]...so a ['username', 'password'] array
     checkPass(cred); // a REDUCER!
@@ -83,12 +82,12 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     let duplicated: boolean = false;
 
     profiles.forEach((profile, i) => { // Go through each profile in the store's profiles
-      if (profile.name == signUpUser) { // Check if that profile has the same name as the text entered in the sign up field
+      if (profile.name === signUpUser) { // Check if that profile has the same name as the text entered in the sign up field
         duplicated = true; // if the text entered in the sign up field matches a name in the store's profile array, set duplicated to true (Tell the function that you found a user that already has that name)
       }
     });
 
-    if (duplicated == false) { // if you didn't find a user with the same name that was entered in the sign up input box
+    if (duplicated === false) { // if you didn't find a user with the same name that was entered in the sign up input box
       addProfile({ //add that user to the stores profile array using the addProfile REDUCER!
         // reducer/action
         id: 2,
@@ -109,14 +108,14 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     
     let { loggedIn, profiles } = this.props; // Get the store's initial state's loggedIn variable and profile array
 
-    if (loggedIn === true || sessionStorage.getItem("loggedIn") == "true") { // if the store's loggedIn variable is set, or the sessionState loggedIn variable is set then we can set up our Router for moving to the appropriate page
+    if (loggedIn === true || sessionStorage.getItem("loggedIn") === "true") { // if the store's loggedIn variable is set, or the sessionState loggedIn variable is set then we can set up our Router for moving to the appropriate page
       sessionStorage.setItem("profiles", JSON.stringify(profiles)); // save the sessionStorage profiles (not sure if this is necessary)
       let userName = sessionStorage.getItem("userName"); // save the sessionStorage username 
-      let uName = profiles.filter(profile => profile.loggedIn == true); // find the profile of the user that is logged in
+      let uName = profiles.filter(profile => profile.loggedIn === true); // find the profile of the user that is logged in
 
       let destString = ""; // intialize null string for the Redirect Route
 
-      if (loggedIn == true) { // If a user is logged in through the store state
+      if (loggedIn === true) { // If a user is logged in through the store state
         sessionStorage.setItem("userName", uName[0].name); // save to global
         sessionStorage.setItem("loggedIn", "true"); // save to global
         destString = uName[0].name; // set the destination for Redirect Route to the name of the logged in User
@@ -144,10 +143,18 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
   
       <Grid columns="equal">
         <Grid.Row>
-        <div>
-    <Image src={LOGO}  height='150' width='250' circular/>
+        <div className="thumb">
+	
+	<a href="#">
+		
+		<span>TechCareers Hive</span>
+	</a>
+</div>
+        {/* <div>
+    <Image src={LOGO}  height='150' width='150' circular/>
     <span></span>
-  </div>
+  </div> */}
+  
           <Grid.Column></Grid.Column>
           <Grid.Column></Grid.Column>
           <Grid.Column floated="right"><br></br><br></br>
@@ -182,7 +189,24 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
             </Button>
           </Grid.Column>
         </Grid.Row>
-        <Divider horizontal>Techcareers hive</Divider>
+        {/* <div id="animated_div">Techcareers HIVE</div> */}
+        <Divider horizontal> <div className="sk-wave">
+        <div className="sk-wave-rect">T</div>
+        <div className="sk-wave-rect">e</div>
+        <div className="sk-wave-rect">c</div>
+        <div className="sk-wave-rect">h</div>
+        <div className="sk-wave-rect">C</div>
+        <div className="sk-wave-rect">a</div>
+        <div className="sk-wave-rect">r</div>
+        <div className="sk-wave-rect">e</div>
+        <div className="sk-wave-rect">e</div>
+        <div className="sk-wave-rect">r</div>
+        <div className="sk-wave-rect">s</div>
+        <div className="sk-wave-rect">H</div>
+        <div className="sk-wave-rect">I</div>
+        <div className="sk-wave-rect">V</div>
+        <div className="sk-wave-rect">E</div>
+      </div></Divider>
         <Grid.Row>
           <Grid.Column>
             <Container fluid>

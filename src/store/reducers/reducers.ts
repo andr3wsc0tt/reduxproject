@@ -162,8 +162,8 @@ export function profileReducer(
 
             city: action.payload[1] === "" ? state.profiles[indexUpdate].city : action.payload[1],
             cohort: action.payload[2] === "" ? state.profiles[indexUpdate].cohort : action.payload[2],
-            programming: action.payload[3] === "" ? state.profiles[indexUpdate].programming : action.payload[3],
-            spoken: action.payload[4] === "" ? state.profiles[indexUpdate].spoken : action.payload[4],
+            spoken: action.payload[3] === "" ? state.profiles[indexUpdate].spoken : action.payload[3],
+            programming: action.payload[4] === "" ? state.profiles[indexUpdate].programming : action.payload[4],
             aboutMe: action.payload[5] === "" ? state.profiles[indexUpdate].aboutMe : action.payload[5],
           },
           ...state.profiles.slice(indexUpdate + 1)
