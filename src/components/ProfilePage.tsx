@@ -28,7 +28,6 @@ import {
 } from "semantic-ui-react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import {IUser} from "../models/IUser";
 import About from "./EditProfilePage";
 import NavBar from "./subcomponents/NavBar";
 
@@ -54,7 +53,7 @@ export class ProfilePage extends React.Component<
   
 
   
-  loggedOut = () => { // The function that calls our logOut REDUCER!
+ loggedOut = () => { // The function that calls our logOut REDUCER!
     let { logOut, profiles } = this.props; // The store states logOut REDUCER and profiles array
 
     let uName = profiles.filter(profile => profile.loggedIn === true); // filter through the profiles array and return any profile that has it's loggedIn field set to true.
@@ -74,10 +73,8 @@ export class ProfilePage extends React.Component<
   public render() {
     let { profiles } = this.props; // load in the profiles from the store state
 
-
     let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
     let { aboutMe, name, password, id, loggedIn, cohort, programming, city, spoken } = uName[0]; // Deconstructing the current user's store profile fields
-
 
     if (this.state.redirect === true) { // If we are wanting to redirect to the Edit Profile Page
       return (
@@ -91,33 +88,14 @@ export class ProfilePage extends React.Component<
       );
     }
 
+
     return ( // If there is no redirect request. Render the Profile Page
+     
       <Segment>
+         <NavBar redirect = {this.handleRedirect} goto= "Edit Profile"/>
+
         <Grid divided="vertically">
-          
-          <Grid.Row columns={5}>
-            <Grid.Column></Grid.Column>
-            <Grid.Column floated="right">
-              <Dropdown text="Groups">
-                <Dropdown.Menu>
-                  <Dropdown.Item text="Group 1" />
-                  <Dropdown.Item text="Group 2" />
-                  <Dropdown.Item text="Group 3" />
-                </Dropdown.Menu>
-              </Dropdown>
-            </Grid.Column>
-            <Grid.Column>
-              <Dropdown text="Class Mates">
-                <Dropdown.Menu>
-                  <Dropdown.Item text="Andrew" />
-                  <Dropdown.Item text="Charles" />
-                  <Dropdown.Item text="Cai" />
-                  <Dropdown.Item text="Trina" />
-                  <Dropdown.Item text="Mohammad" />
-                </Dropdown.Menu>
-              </Dropdown>
-            </Grid.Column>
-          </Grid.Row>
+
 
           <Grid.Row columns={3}>
             <Grid.Column>
@@ -219,15 +197,7 @@ export class ProfilePage extends React.Component<
               <Calendar />
               <br></br>
               <br></br>
-              <Button.Group>
-    <Button color="green" onClick={this.handleRedirect}>
-      Edit Profile
-    </Button>
-    <Button.Or/>
-    <Button color="yellow" onClick={this.loggedOut}>
-      Log Out
-      </Button>
-  </Button.Group>
+            
               
             </Grid.Column>
           </Grid.Row>
