@@ -13,6 +13,7 @@ import ErrorPage from "./components/ErrorPage";
 import { Profile } from "./store/types/types";
 import { RootState } from "./store";
 import { connect } from "react-redux";
+import NavBar from "./components/subcomponents/NavBar";
 
 
 export interface IAppProps {
@@ -29,16 +30,18 @@ export class App extends React.Component<IAppProps> {
       return ( // if you're logged in, switch through the paths in the order shown below. There should be a reroute to the profile page if you manually enter the homepage url.
         <>
           <Router>
-            <Switch>
-              <Route exact path="/" component={Home} />
-
-              <Route path="/profile">
-                <Link to="" component={ProfilePage} />
-                <Redirect to={`/profile/${uName}`} />
-              </Route>
-              <Route path={`/edit-profile/${uName}`} component={EditProfilePage} />
-              <Route component={ErrorPage} />
-            </Switch>
+            
+            <Fragment>  
+                  <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/profile" component={ProfilePage}/>
+                    <Route path="/edit-profile/" component={EditProfilePage} />
+                    <Route component={ErrorPage} />
+                  </Switch>
+            </Fragment>
+                               
+            
+           
           </Router>
         </>
       );

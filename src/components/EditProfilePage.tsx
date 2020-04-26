@@ -6,6 +6,8 @@ import { Profile } from "../store/types/types";
 import { RootState } from "../store";
 import ProfilePage from "./ProfilePage";
 import { connect } from "react-redux";
+import NavBar from "./subcomponents/NavBar";
+
 
 import {
   Card,
@@ -126,7 +128,7 @@ export class EditProfilePage extends React.Component<
 
     let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
 
-    let { aboutMe, name, cohort, programming, spoken } = uName[0]; // These are our users profile fields, these are the variables that we will put into the JSX.
+    let { aboutMe, name, cohort, programming, spoken, city } = uName[0]; // These are our users profile fields, these are the variables that we will put into the JSX.
 
     if (this.state.redirect === true) {
       // in handleRedirect we set this state variable if we want to go to Profile Page
@@ -142,132 +144,82 @@ export class EditProfilePage extends React.Component<
     }
 
     return (
-      <Grid columns="equal">
-        <Grid.Row>
-          <Grid.Column width={5}></Grid.Column>
-          <Grid.Column></Grid.Column>
-          <Grid.Column color="yellow">
-            <Input
-              action="Search"
-              placeholder="Search TechCareers Hive"
-              size="huge"
-            />
-          </Grid.Column>
-        </Grid.Row>
-        <Divider horizontal>techcareers hive </Divider>
-        <Grid.Row>
-          <Grid.Column>
-            <Container fluid>
-              <Card>
-                <Image
-                  src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
-                  wrapped
-                  ui={false}
-                />
-                <Card.Content>
-
-                 <Card.Header>{name}</Card.Header>
-                  <Card.Meta>
-                    <span className="date">{cohort}</span>
-                  </Card.Meta>
-                  <Card.Description>
-                  {aboutMe}
-                  </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                  {/* <a>
-              <Icon name='user' />
-              22 Friends
-            </a> */}
-                </Card.Content>
-              </Card>
-              {/* <Header as='h1'> <i className="user circle icon"></i></Header> */}
-              <Radio as="h3" label="Education" defaultChecked />
-              <br></br>
-              <Radio label="Events" defaultChecked />
-              <br></br>
-              <Radio label="Photos" defaultChecked />
-              <br></br>
-              <br></br>
-              <br></br>
-              Groups<br></br>
-              <Radio label="JavaScript" defaultChecked />
-            </Container>
-          </Grid.Column>
-          <Grid.Column>
-            {" "}
-            <Divider vertical><Icon loading name='forumbee' size='massive' color='yellow' /></Divider>
-          </Grid.Column>
-
-          <Grid.Column>
-            <Header as="h2" color="green" textAlign="center">
-              Edit Profile
-            </Header>
-            <Form size="large">
-              <Segment stacked>
-                <Form.Input
-                  fluid
-                  icon="home"
-                  iconPosition="left"
-                  placeholder="Current City"
-                  value={this.state.city}
-                  onChange={this.handleCityChange}
-                />
-                <Form.Input
-                  fluid
-                  icon="users"
-                  iconPosition="left"
-                  placeholder="Cohort"
-                  type="text"
-                  value={this.state.cohort}
-                  onChange={this.handleCohortChange}
-                />
-                <Form.Input
-                  fluid
-                  icon="language"
-                  iconPosition="left"
-                  placeholder="Spoken Languages"
-                  type="text"
-                  value={this.state.spoken}
-                  onChange={this.handleSpokenChange}
-                />
-                <Form.Input
-                  fluid
-                  icon="code"
-                  iconPosition="left"
-                  placeholder="Programming Languages"
-                  type="text"
-                  value={this.state.programming}
-                  onChange={this.handleProgrammingChange}
-                />
-                <Form.Field
-                  control={TextArea}
-                  label="About"
-                  placeholder="Tell us more about you..."
-                  value={this.state.aboutMe}
-                  onChange={this.handleAboutMeChange}
-                />
-                <Button onClick={this.handleClick} color="green">
-                  Save Changes
-                </Button>
-              </Segment>
-
-              <Button.Group>
-    <Button color="green" onClick={this.handleRedirect}>
-      Profile
-    </Button>
-    <Button.Or/>
-    <Button color="yellow" onClick={this.loggedOut}>
-      Log Out
-      </Button>
-  </Button.Group>
-            </Form>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    );
+      <Segment>
+       <NavBar redirect = {this.handleRedirect} goto= "Profile"/>
+       <Grid columns="equal">
+         
+       
+         <Grid.Row>
+         
+           <Grid.Column>
+               <h3>Current city:{city}</h3>
+               <h3>Cohort:{cohort}</h3>
+               <h3>Spoken languages:{spoken}</h3>
+               <h3>Programming languages interested in:{programming}</h3>
+               <h3>About Me: {aboutMe}</h3>
+           </Grid.Column> 
+     
+           <Grid.Column>
+             <Header as="h2" color="green" textAlign="center">
+               Edit profile
+             </Header>
+             <Form size="large">
+               <Segment stacked>
+                 <Form.Input
+                   fluid
+                   icon="home"
+                   iconPosition="left"
+                   placeholder="Current City"
+                   value={this.state.city}
+                   onChange={this.handleCityChange}
+                 />
+                 <Form.Input
+                   fluid
+                   icon="users"
+                   iconPosition="left"
+                   placeholder="Cohort"
+                   type="text"
+                   value={this.state.cohort}
+                   onChange={this.handleCohortChange}
+                 />
+                 <Form.Input
+                   fluid
+                   icon="language"
+                   iconPosition="left"
+                   placeholder="Spoken Languages"
+                   type="text"
+                   value={this.state.spoken}
+                   onChange={this.handleSpokenChange}
+                 />
+                 <Form.Input
+                   fluid
+                   icon="code"
+                   iconPosition="left"
+                   placeholder="Programming Languages"
+                   type="text"
+                   value={this.state.programming}
+                   onChange={this.handleProgrammingChange}
+                 />
+                 <Form.Field
+                   control={TextArea}
+                   label="About"
+                   placeholder="Tell us more about you..."
+                   value={this.state.aboutMe}
+                   onChange={this.handleAboutMeChange}
+                 />
+                 <Button onClick={this.handleClick} color="green">
+                   Save Changes
+                 </Button>
+               </Segment>
+ 
+             </Form>
+           </Grid.Column>
+           <Grid.Column></Grid.Column>
+         </Grid.Row>
+       </Grid>
+     </Segment>
+    );     
   }
-}
 
 const mapStateToProps = (state: RootState, ownProps: IEditProfilePageProps) => { // mapStateToProps brings the profile in from our initialState (defined and updated in the reducer)
   return {

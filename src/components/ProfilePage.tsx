@@ -11,6 +11,8 @@ import {
 } from "react-router-dom";
 
 import {
+  Card,
+  Image,
   Segment,
   Grid,
   Dropdown,
@@ -24,6 +26,8 @@ import {
 } from "semantic-ui-react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import NavBar from "./subcomponents/NavBar";
+
 
 
 export interface IProfilePageProps { // Variables passed in from the store state
@@ -47,7 +51,7 @@ export class ProfilePage extends React.Component<
   
 
   
-  loggedOut = () => { // The function that calls our logOut REDUCER!
+ loggedOut = () => { // The function that calls our logOut REDUCER!
     let { logOut, profiles } = this.props; // The store states logOut REDUCER and profiles array
 
     let uName = profiles.filter(profile => profile.loggedIn === true); // filter through the profiles array and return any profile that has it's loggedIn field set to true.
@@ -71,7 +75,6 @@ export class ProfilePage extends React.Component<
     let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
     let { aboutMe, name, cohort, programming, city, spoken } = uName[0]; // Deconstructing the current user's store profile fields
 
-
     if (this.state.redirect === true) { // If we are wanting to redirect to the Edit Profile Page
       return (
         <Router> 
@@ -84,47 +87,61 @@ export class ProfilePage extends React.Component<
       );
     }
 
+
     return ( // If there is no redirect request. Render the Profile Page
+     
       <Segment>
+         <NavBar redirect = {this.handleRedirect} goto= "Edit Profile"/>
+
         <Grid divided="vertically">
-          
-          <Grid.Row columns={5}>
-            <Grid.Column></Grid.Column>
-            <Grid.Column floated="right">
-              <Dropdown text="Groups">
-                <Dropdown.Menu>
-                  <Dropdown.Item text="Group 1" />
-                  <Dropdown.Item text="Group 2" />
-                  <Dropdown.Item text="Group 3" />
-                </Dropdown.Menu>
-              </Dropdown>
-            </Grid.Column>
-            <Grid.Column>
-              <Dropdown text="Class Mates">
-                <Dropdown.Menu>
-                  <Dropdown.Item text="Andrew" />
-                  <Dropdown.Item text="Charles" />
-                  <Dropdown.Item text="Cai" />
-                  <Dropdown.Item text="Trina" />
-                  <Dropdown.Item text="Mohammad" />
-                </Dropdown.Menu>
-              </Dropdown>
-            </Grid.Column>
-          </Grid.Row>
+
 
           <Grid.Row columns={3}>
             <Grid.Column>
-                <h3>Current city:{city}</h3>
-                <h3>Cohort:{cohort}</h3>
-                <h3>Spoken languages:{spoken}</h3>
-                <h3>Programming languages interested in:{programming}</h3>
-                <h3>About Me: {aboutMe}</h3>
+            <Container fluid>
+              <Card>
+                <Image
+                  src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
+                  wrapped
+                  ui={false}
+                />
+                <Card.Content>
+                 <Card.Header>{name}</Card.Header>
+                  <Card.Meta>
+                    <span className="date"><h3>Cohort:{cohort}</h3></span>
+                  </Card.Meta>
+                  <br></br>
+                  <Card.Description>
+                  <h3>Current city:{city}</h3>
+                  <h3>Spoken languages:{spoken}</h3>
+                  <h3>Programming languages interested in:{programming}</h3>
+                  <h3>About Me: {aboutMe}</h3>
+                  </Card.Description>
+                </Card.Content>
+                <Card.Content extra>
+                  {/* <a>
+              <Icon name='user' />
+              22 Friends
+             </a> */}
+                </Card.Content>
+              </Card>
+              {/* <Header as='h1'> <i className="user circle icon"></i></Header> */}
+              <Radio as="h3" label="Education" defaultChecked />
+              <br></br>
+              <Radio label="Events" defaultChecked />
+              <br></br>
+              <Radio label="Photos" defaultChecked />
+              <br></br>
+              <br></br>
+              <br></br>
+              Groups<br></br>
+              <Radio label="JavaScript" defaultChecked />
+            </Container>
+               
               <Container fluid>
 
                 <br></br>
                 <Header as="h3"> Explore </Header>
-
-
                 <Radio as="h2" label="Networking Events" defaultChecked />
                 <br></br>
                 <Radio as="h2" label="Previous Cohorts" defaultChecked />
@@ -179,15 +196,6 @@ export class ProfilePage extends React.Component<
               <Calendar />
               <br></br>
               <br></br>
-              <Button.Group>
-    <Button color="green" onClick={this.handleRedirect}>
-      Edit Profile
-    </Button>
-    <Button.Or/>
-    <Button color="yellow" onClick={this.loggedOut}>
-      Log Out
-      </Button>
-  </Button.Group>
               
             </Grid.Column>
           </Grid.Row>
