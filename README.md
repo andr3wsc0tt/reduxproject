@@ -11,6 +11,8 @@ AVAILABLE SCRIPTS
 
 •	npm install --save react-router-dom @types/react-router-dom
 
+•	npm install semantic-ui-react
+
 •	npm install react-calendar
 
 This project demonstrates the following:
