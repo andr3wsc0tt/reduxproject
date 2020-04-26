@@ -84,9 +84,9 @@ export class EditProfilePage extends React.Component<
 
     let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
 
-    if (userName != null) {
+    if (uName[0].name != null) {
       let update: string[] = [
-        userName,
+        uName[0].name,
         city,
         cohort,
         spoken,

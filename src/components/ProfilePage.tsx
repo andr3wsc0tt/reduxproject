@@ -14,7 +14,6 @@ import {
 import {
   Card,
   Image,
-  Card,
   Segment,
   Grid,
   Dropdown,
@@ -28,8 +27,7 @@ import {
   Responsive,
 } from "semantic-ui-react";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-import { IUser } from "../models/IUser";
+import "react-calendar/dist/Calendar.css";  
 import About from "./EditProfilePage";
 import LOGO from "./Logo.png";
 import NavBar from "./subcomponents/NavBar";
@@ -78,20 +76,7 @@ export class ProfilePage extends React.Component<
     let { profiles } = this.props; // load in the profiles from the store state
 
     let uName = profiles.filter((profile) => profile.loggedIn == true); // find out who user is logged in
-    let {
-      aboutMe,
-      name,
-      password,
-      id,
-      loggedIn,
-      cohort,
-      programming,
-      city,
-      spoken,
-    } = uName[0]; // Deconstructing the current user's store profile fields
 
-
-    let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
     let { aboutMe, name, cohort, programming, city, spoken } = uName[0]; // Deconstructing the current user's store profile fields
 
     if (this.state.redirect === true) { // If we are wanting to redirect to the Edit Profile Page
@@ -116,37 +101,6 @@ export class ProfilePage extends React.Component<
             <Container>
             <Image src={LOGO} size="large" circular centered/>
             </Container>
-            </Grid.Column>
-            <Grid.Column floated="right">
-              <Dropdown text="Groups">
-                <Dropdown.Menu>
-                  <Dropdown.Item text="Group 1" />
-                  <Dropdown.Item text="Group 2" />
-                  <Dropdown.Item text="Group 3" />
-                </Dropdown.Menu>
-              </Dropdown>
-            </Grid.Column>
-            <Grid.Column>
-              <Dropdown text="Class Mates">
-                <Dropdown.Menu>
-                  <Dropdown.Item text="Andrew" />
-                  <Dropdown.Item text="Charles" />
-                  <Dropdown.Item text="Cai" />
-                  <Dropdown.Item text="Trina" />
-                  <Dropdown.Item text="Mohammad" />
-                </Dropdown.Menu>
-              </Dropdown>
-            </Grid.Column>
-            <Grid.Column>
-              <Container align="center">
-                <Button circular color="green" onClick={this.handleRedirect}>
-                  Edit Profile
-                </Button>
-                <Icon name="forumbee" loading inverted color="black" />
-                <Button circular color="yellow" onClick={this.loggedOut}>
-                  Log Out
-                </Button>
-              </Container>
             </Grid.Column>
           </Grid.Row>
 
@@ -256,12 +210,13 @@ export class ProfilePage extends React.Component<
             </Grid.Column>
           </Grid.Row>
         </Grid>
+        </Segment>
 
     );
   }
 }
 
-const mapStateToProps = (state: RootState, ownProps: IProfilePageProps) => {
+const mapStateToProps = (state: RootState) => {
   // mapStateToProps connects the store's initial state variables with ProfilePage component
   return {
     profiles: state.profile.profiles,
