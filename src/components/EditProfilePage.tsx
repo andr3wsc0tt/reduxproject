@@ -4,10 +4,10 @@ import { Link, BrowserRouter as Router, Redirect } from "react-router-dom";
 import { logOut } from "../store/actions/actions";
 import { Profile } from "../store/types/types";
 import { RootState } from "../store";
-import ProfilePage, { IProfilePageProps } from "./ProfilePage";
+import ProfilePage from "./ProfilePage";
 import { connect } from "react-redux";
-import { ProfileActionTypes } from "../store/types/types";
 import NavBar from "./subcomponents/NavBar";
+
 
 import {
   Card,
@@ -22,7 +22,6 @@ import {
   Segment,
   TextArea,
   Button,
-  List,
   Icon
 } from "semantic-ui-react";
 
@@ -80,7 +79,7 @@ export class EditProfilePage extends React.Component<
 
     let { city, cohort, spoken, programming, aboutMe } = this.state; // these are the fields that can be updated on our edit profile page
     let { updateProfile, profiles } = this.props; // updateProfile is the function imported from actions and profiles in our array of saved profiles
-    let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
+    let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
 
     if (uName != null) {
       let update: string[] = [
@@ -104,7 +103,7 @@ export class EditProfilePage extends React.Component<
   loggedOut = () => {
     let { logOut, profiles } = this.props;
 
-    let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
+    let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
 
     console.log(uName);
 
@@ -129,7 +128,7 @@ export class EditProfilePage extends React.Component<
 
     let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
 
-    let { aboutMe, name, password, id, loggedIn, cohort, programming, spoken, city } = uName[0]; // These are our users profile fields, these are the variables that we will put into the JSX.
+    let { aboutMe, name, cohort, programming, spoken, city } = uName[0]; // These are our users profile fields, these are the variables that we will put into the JSX.
 
     if (this.state.redirect === true) {
       // in handleRedirect we set this state variable if we want to go to Profile Page
@@ -145,7 +144,6 @@ export class EditProfilePage extends React.Component<
     }
 
     return (
-
       <Segment>
        <NavBar redirect = {this.handleRedirect} goto= "Profile"/>
        <Grid columns="equal">

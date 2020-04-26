@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -23,8 +23,6 @@ export interface IAppProps {
 
 export class App extends React.Component<IAppProps> {
   public render() {
-
-    let {profiles, loggedIn} = this.props;
 
     if (sessionStorage.getItem("loggedIn") === 'true') { // check session Storage to see if the global logged in variable is set. This variable is changed in ProfilePage.tsx in loggedOut(), in HomePage.tsx within the render()  fucntion
       const uName = sessionStorage.getItem("userName"); // if the loggedIn global variable is set, then the global userName variable should be set

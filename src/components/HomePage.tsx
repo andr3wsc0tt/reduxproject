@@ -15,7 +15,7 @@ import {
 
 import { checkPass, addProfile } from "../store/actions/actions";
 
-import { ProfileActionTypes, Profile } from "../store/types/types";
+import { Profile } from "../store/types/types";
 import { RootState } from "../store";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
@@ -66,7 +66,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
   handleOnClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     let { userName, passWord } = this.state; // our local state login and password
-    let { profiles, checkPass, loggedIn } = this.props; // our store variables and reducers that are passed from mapStateToProps and connect!
+    let { checkPass } = this.props; // our store variables and reducers that are passed from mapStateToProps and connect!
 
     let cred: Array<string> = [userName, passWord]; // Our reducer (checkPass) takes in a string[]...so a ['username', 'password'] array
     checkPass(cred); // a REDUCER!
