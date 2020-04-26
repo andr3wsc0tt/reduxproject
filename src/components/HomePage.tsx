@@ -10,7 +10,6 @@ import {
   Container,
   Input,
   Icon,
-  Image
 } from "semantic-ui-react";
 
 import { checkPass, addProfile } from "../store/actions/actions";
@@ -20,8 +19,6 @@ import { RootState } from "../store";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import ProfilePage from "./ProfilePage";
-import LOGO from '../../src/Logo.png';
-
 
 export interface IHomeProps { // our store state variables
   checkPass: typeof checkPass; // reducer
