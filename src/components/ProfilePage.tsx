@@ -6,14 +6,11 @@ import { logOut } from "../store/actions/actions";
 import EditProfilePage from "./EditProfilePage";
 import {
   BrowserRouter as Router,
-  Route,
   Link,
-  Switch,
   Redirect
 } from "react-router-dom";
 
 import {
-  Image,
   Segment,
   Grid,
   Dropdown,
@@ -27,8 +24,6 @@ import {
 } from "semantic-ui-react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import {IUser} from "../models/IUser";
-import About from "./EditProfilePage";
 
 
 export interface IProfilePageProps { // Variables passed in from the store state
@@ -73,8 +68,8 @@ export class ProfilePage extends React.Component<
     let { profiles } = this.props; // load in the profiles from the store state
 
 
-    let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
-    let { aboutMe, name, password, id, loggedIn, cohort, programming, city, spoken } = uName[0]; // Deconstructing the current user's store profile fields
+    let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
+    let { aboutMe, name, cohort, programming, city, spoken } = uName[0]; // Deconstructing the current user's store profile fields
 
 
     if (this.state.redirect === true) { // If we are wanting to redirect to the Edit Profile Page
