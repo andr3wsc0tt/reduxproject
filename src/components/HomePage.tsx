@@ -1,5 +1,5 @@
 import * as React from "react";
-import '../../src/App.css';
+import './main.css';
 import {
   Divider,
   Button,
@@ -144,10 +144,18 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
   
       <Grid columns="equal">
         <Grid.Row>
-        <div>
-    <Image src={LOGO}  height='150' width='250' circular/>
+        <div className="thumb">
+	
+	<a href="#">
+		
+		<span>TechCareers Hive</span>
+	</a>
+</div>
+        {/* <div>
+    <Image src={LOGO}  height='150' width='150' circular/>
     <span></span>
-  </div>
+  </div> */}
+  
           <Grid.Column></Grid.Column>
           <Grid.Column></Grid.Column>
           <Grid.Column floated="right"><br></br><br></br>
@@ -182,7 +190,24 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
             </Button>
           </Grid.Column>
         </Grid.Row>
-        <Divider horizontal>Techcareers hive</Divider>
+        {/* <div id="animated_div">Techcareers HIVE</div> */}
+        <Divider horizontal> <div className="sk-wave">
+        <div className="sk-wave-rect">T</div>
+        <div className="sk-wave-rect">e</div>
+        <div className="sk-wave-rect">c</div>
+        <div className="sk-wave-rect">h</div>
+        <div className="sk-wave-rect">C</div>
+        <div className="sk-wave-rect">a</div>
+        <div className="sk-wave-rect">r</div>
+        <div className="sk-wave-rect">e</div>
+        <div className="sk-wave-rect">e</div>
+        <div className="sk-wave-rect">r</div>
+        <div className="sk-wave-rect">s</div>
+        <div className="sk-wave-rect">H</div>
+        <div className="sk-wave-rect">I</div>
+        <div className="sk-wave-rect">V</div>
+        <div className="sk-wave-rect">E</div>
+      </div></Divider>
         <Grid.Row>
           <Grid.Column>
             <Container fluid>
