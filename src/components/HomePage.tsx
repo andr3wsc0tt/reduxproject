@@ -83,12 +83,12 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     let duplicated: boolean = false;
 
     profiles.forEach((profile, i) => { // Go through each profile in the store's profiles
-      if (profile.name == signUpUser) { // Check if that profile has the same name as the text entered in the sign up field
+      if (profile.name === signUpUser) { // Check if that profile has the same name as the text entered in the sign up field
         duplicated = true; // if the text entered in the sign up field matches a name in the store's profile array, set duplicated to true (Tell the function that you found a user that already has that name)
       }
     });
 
-    if (duplicated == false) { // if you didn't find a user with the same name that was entered in the sign up input box
+    if (duplicated === false) { // if you didn't find a user with the same name that was entered in the sign up input box
       addProfile({ //add that user to the stores profile array using the addProfile REDUCER!
         // reducer/action
         id: 2,
@@ -109,14 +109,14 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     
     let { loggedIn, profiles } = this.props; // Get the store's initial state's loggedIn variable and profile array
 
-    if (loggedIn === true || sessionStorage.getItem("loggedIn") == "true") { // if the store's loggedIn variable is set, or the sessionState loggedIn variable is set then we can set up our Router for moving to the appropriate page
+    if (loggedIn === true || sessionStorage.getItem("loggedIn") === "true") { // if the store's loggedIn variable is set, or the sessionState loggedIn variable is set then we can set up our Router for moving to the appropriate page
       sessionStorage.setItem("profiles", JSON.stringify(profiles)); // save the sessionStorage profiles (not sure if this is necessary)
       let userName = sessionStorage.getItem("userName"); // save the sessionStorage username 
-      let uName = profiles.filter(profile => profile.loggedIn == true); // find the profile of the user that is logged in
+      let uName = profiles.filter(profile => profile.loggedIn === true); // find the profile of the user that is logged in
 
       let destString = ""; // intialize null string for the Redirect Route
 
-      if (loggedIn == true) { // If a user is logged in through the store state
+      if (loggedIn === true) { // If a user is logged in through the store state
         sessionStorage.setItem("userName", uName[0].name); // save to global
         sessionStorage.setItem("loggedIn", "true"); // save to global
         destString = uName[0].name; // set the destination for Redirect Route to the name of the logged in User
