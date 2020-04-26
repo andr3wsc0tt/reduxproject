@@ -184,15 +184,14 @@ export class ProfilePage extends React.Component<
               <Calendar />
               <br></br>
               <br></br>
-            <Button.Group>
-              <Button color="green" onClick={this.handleRedirect}>
-                Edit Profile
-              </Button>
-              <Button.Or/>
-              <Button color="yellow" onClick={this.loggedOut}>
-                Log Out
-                </Button>
-            </Button.Group>
+
+              <Button circular color="green" onClick={this.handleRedirect}>
+      Edit Profile
+    </Button>
+     <Icon name='forumbee' loading color="brown"/> 
+    <Button circular color="red" onClick={this.loggedOut}>
+      Log Out
+      </Button>
               
             </Grid.Column>
           </Grid.Row>
