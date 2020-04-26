@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -14,7 +14,6 @@ import { Profile } from "./store/types/types";
 import { RootState } from "./store";
 import { connect } from "react-redux";
 import NavBar from "./components/subcomponents/NavBar";
-
 
 export interface IAppProps {
   loggedIn: boolean;

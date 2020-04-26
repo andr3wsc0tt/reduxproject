@@ -220,6 +220,7 @@ export class EditProfilePage extends React.Component<
      </Segment>
     );     
   }
+}
 
 const mapStateToProps = (state: RootState, ownProps: IEditProfilePageProps) => { // mapStateToProps brings the profile in from our initialState (defined and updated in the reducer)
   return {
