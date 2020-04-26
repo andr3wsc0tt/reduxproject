@@ -20,7 +20,6 @@ import { RootState } from "../store";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import ProfilePage from "./ProfilePage";
-import NavBar from "./subcomponents/NavBar";
 import LOGO from '../../src/Logo.png';
 
 

@@ -1,39 +1,125 @@
 import * as React from 'react';
-import { Menu } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { RootState } from "../../store";
+import { connect } from "react-redux";
+import { Menu, Dropdown, Input, Button } from 'semantic-ui-react';
+import { Profile } from "../../store/types/types";
+import { logOut } from "../../store/actions/actions";
+import EditProfilePage from "../EditProfilePage";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect
+} from "react-router-dom";
+
 
 export interface INavBarProps {
+    goto:string;
+    profiles: Profile[];
+    logOut: typeof logOut;
+    redirect : () => void
 }
 
-export default class NavBar extends React.Component<INavBarProps> {
+export interface INavBarState { // our local state variables
+    page:string;
+  }
+  
+  
+
+export class NavBar extends React.Component<INavBarProps, INavBarState> {    
+    constructor (props:INavBarProps){
+        super(props);
+        this.state = {page:""}
+    }
+
+    componentDidMount(){
+        console.log(window.location.href)
+        
+
+    }
+
+    loggedOut = () => { // The function that calls our logOut REDUCER!
+        let { logOut, profiles } = this.props; // The store states logOut REDUCER and profiles array
+    
+        let uName = profiles.filter(profile => profile.loggedIn === true); // filter through the profiles array and return any profile that has it's loggedIn field set to true.
+    
+        logOut(uName[0]); // Pass the profile to the logOut REDUCER! It takes in a Profile[] as it's payload.
+    
+        // When we log out we want to save our global state (This might not be necessary anymore)
+        sessionStorage.setItem("loggedIn", "false");
+        sessionStorage.setItem("userName", ""); // username of the person who is logged in
+        window.location.href = "/";
+      };
+
+          
     public render() {
+        let {page} = this.state;
+       
+        let { profiles, goto } = this.props; // load in the profiles from the store state
+     
+
+        let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
+        let { aboutMe, name, password, id, loggedIn, cohort, programming, city, spoken } = uName[0]; // Deconstructing the current user's store profile fields
+    
+        
+      
         return (
             <Menu>
-                <Menu.Item
-                    as={Link}
-                    to={`/`} /*Will be home the profile page? */
-                    name='home'
-                >
-                    Home
+                               
+                <Menu.Item>
+                        
+                    <Dropdown text="Groups">
+                        <Dropdown.Menu>
+                        <Dropdown.Item text="Group 1" />
+                        <Dropdown.Item text="Group 2" />
+                        <Dropdown.Item text="Group 3" />
+                        </Dropdown.Menu>
+                    </Dropdown>
+         
                 </Menu.Item>
 
+              <Menu.Item>
+                <Dropdown text="Class Mates">
+                        <Dropdown.Menu>
+                        <Dropdown.Item text="Andrew" />
+                        <Dropdown.Item text="Charles" />
+                        <Dropdown.Item text="Cai" />
+                        <Dropdown.Item text="Trina" />
+                        <Dropdown.Item text="Mohammad" />
+                        </Dropdown.Menu>
+                </Dropdown>
+              </Menu.Item>
 
-                <Menu.Item
-                    as={Link}
-                    to={`/EditProfilePage`}
-                    name='EditProfilePage'
-                >
-                   Edit Profile
-                </Menu.Item>
+               <Menu.Item>
+                    <Input className='icon' icon='search' placeholder='Search...' />
+                </Menu.Item>  
 
-                <Menu.Item
-                    as={Link}
-                    to={`/LogOut`}
-                    name='LogOut'
-                >
-                    Logout
-                </Menu.Item>
+                <Menu.Item>
+                <Button.Group>
+                    <Button color="green" onClick={this.props.redirect}>
+                        {goto}
+                    </Button>
+
+                    <Button.Or/>
+                    <Button color="yellow" onClick={this.loggedOut}>
+                        Log Out
+                        </Button>
+                    </Button.Group>
+                </Menu.Item>           
             </Menu>
+            
         );
     }
 }
+
+
+
+const mapStateToProps = (state: RootState) => { // mapStateToProps connects the store's initial state variables with ProfilePage component
+  return {
+    profiles: state.profile.profiles,
+    loggedIn: state.profile.loggedIn
+  };
+};
+
+export default connect(mapStateToProps, { logOut })(NavBar); // connect imports the logOut REDUCER from our store and returns our connected our ProfilePage component 
