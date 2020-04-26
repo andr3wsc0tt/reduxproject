@@ -32,6 +32,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { IUser } from "../models/IUser";
 import About from "./EditProfilePage";
+import LOGO from "./Logo.png";
 
 export interface IProfilePageProps {
   // Variables passed in from the store state
@@ -104,10 +105,14 @@ export class ProfilePage extends React.Component<
 
     return (
       // If there is no redirect request. Render the Profile Page
-      <Segment>
+
         <Grid divided="vertically">
-          <Grid.Row columns={5}>
-            <Grid.Column></Grid.Column>
+          <Grid.Row columns={8}>
+            <Grid.Column>
+            <Container>
+            <Image src={LOGO} size="large" circular centered/>
+            </Container>
+            </Grid.Column>
             <Grid.Column floated="right">
               <Dropdown text="Groups">
                 <Dropdown.Menu>
@@ -127,6 +132,17 @@ export class ProfilePage extends React.Component<
                   <Dropdown.Item text="Mohammad" />
                 </Dropdown.Menu>
               </Dropdown>
+            </Grid.Column>
+            <Grid.Column>
+              <Container align="center">
+                <Button circular color="green" onClick={this.handleRedirect}>
+                  Edit Profile
+                </Button>
+                <Icon name="forumbee" loading inverted color="black" />
+                <Button circular color="yellow" onClick={this.loggedOut}>
+                  Log Out
+                </Button>
+              </Container>
             </Grid.Column>
           </Grid.Row>
 
@@ -219,24 +235,18 @@ export class ProfilePage extends React.Component<
               </Form>
             </Grid.Column>
             <Grid.Column>
-            <Responsive as={Card} minWidth={768}>
+              <Container>
+            <Responsive as={Container} minWidth={768}>
               <Calendar />
               </Responsive>
-              <br></br>
-              <br></br>
-              <Container align="center">
-                <Button circular color="green" onClick={this.handleRedirect}>
-                  Edit Profile
-                </Button>
-                <Icon name="forumbee" loading inverted color="black" />
-                <Button circular color="yellow" onClick={this.loggedOut}>
-                  Log Out
-                </Button>
               </Container>
+              <br></br>
+              <br></br>
+              
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </Segment>
+
     );
   }
 }

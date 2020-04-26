@@ -102,7 +102,7 @@ export class EditProfilePage extends React.Component<
   loggedOut = () => {
     let { logOut, profiles } = this.props;
 
-    let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
+    let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
 
     logOut(uName[0]); // log that user out - logOut is a reducer and uName[0] is the username of the logged in user
     sessionStorage.setItem(
