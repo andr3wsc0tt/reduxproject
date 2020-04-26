@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Dropdown, Input } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+
 
 export interface INavBarProps {
 }
@@ -26,14 +27,37 @@ export default class NavBar extends React.Component<INavBarProps> {
                    Edit Profile
                 </Menu.Item>
 
-                <Menu.Item
-                    as={Link}
-                    to={`/LogOut`}
-                    name='LogOut'
-                >
-                    Logout
+                <Menu.Item>
+                        
+                    <Dropdown text="Groups">
+                        <Dropdown.Menu>
+                        <Dropdown.Item text="Group 1" />
+                        <Dropdown.Item text="Group 2" />
+                        <Dropdown.Item text="Group 3" />
+                        </Dropdown.Menu>
+                    </Dropdown>
+         
                 </Menu.Item>
-            </Menu>
+
+              <Menu.Item>
+                <Dropdown text="Class Mates">
+                        <Dropdown.Menu>
+                        <Dropdown.Item text="Andrew" />
+                        <Dropdown.Item text="Charles" />
+                        <Dropdown.Item text="Cai" />
+                        <Dropdown.Item text="Trina" />
+                        <Dropdown.Item text="Mohammad" />
+                        </Dropdown.Menu>
+                </Dropdown>
+              </Menu.Item>
+
+               <Menu.Item>
+                    <Input className='icon' icon='search' placeholder='Search...' />
+                </Menu.Item>              
+              </Menu>
+            
         );
     }
 }
+
+

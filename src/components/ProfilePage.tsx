@@ -30,6 +30,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import {IUser} from "../models/IUser";
 import About from "./EditProfilePage";
+import NavBar from "./subcomponents/NavBar";
 
 
 export interface IProfilePageProps { // Variables passed in from the store state
@@ -128,7 +129,6 @@ export class ProfilePage extends React.Component<
                   ui={false}
                 />
                 <Card.Content>
-
                  <Card.Header>{name}</Card.Header>
                   <Card.Meta>
                     <span className="date"><h3>Cohort:{cohort}</h3></span>

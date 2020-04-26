@@ -7,6 +7,7 @@ import { RootState } from "../store";
 import ProfilePage, { IProfilePageProps } from "./ProfilePage";
 import { connect } from "react-redux";
 import { ProfileActionTypes } from "../store/types/types";
+import NavBar from "./subcomponents/NavBar";
 
 import {
   Card,
@@ -145,17 +146,7 @@ export class EditProfilePage extends React.Component<
 
     return (
       <Grid columns="equal">
-        <Grid.Row>
-          <Grid.Column width={5}></Grid.Column>
-          <Grid.Column></Grid.Column>
-          <Grid.Column color="yellow">
-            <Input
-              action="Search"
-              placeholder="Search TechCareers Hive"
-              size="huge"
-            />
-          </Grid.Column>
-        </Grid.Row>
+        
         <Divider horizontal>techcareers hive </Divider>
         <Grid.Row>
             

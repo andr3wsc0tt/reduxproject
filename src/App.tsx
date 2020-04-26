@@ -13,6 +13,7 @@ import ErrorPage from "./components/ErrorPage";
 import { Profile } from "./store/types/types";
 import { RootState } from "./store";
 import { connect } from "react-redux";
+import NavBar from "./components/subcomponents/NavBar";
 
 
 export interface IAppProps {
@@ -33,13 +34,19 @@ export class App extends React.Component<IAppProps> {
           <Router>
             <Switch>
               <Route exact path="/" component={Home} />
-
-              <Route path="/profile">
-                <Link to="" component={ProfilePage} />
-                <Redirect to={`/profile/${uName}`} />
-              </Route>
-              <Route path={`/edit-profile/${uName}`} component={EditProfilePage} />
-              <Route component={ErrorPage} />
+           
+                <NavBar />
+         
+                  <Switch>
+                    <Route path="/profile">
+                      <Link to="" component={ProfilePage} />
+                      <Redirect to={`/profile/${uName}`} />
+                    </Route>
+                      <Route path={`/edit-profile/${uName}`} component={EditProfilePage} />
+                      <Route component={ErrorPage} />
+                  </Switch>
+                  
+            
             </Switch>
           </Router>
         </>
