@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./main.css";
 import { RootState } from "../store";
 import { connect } from "react-redux";
 import { Profile } from "../store/types/types";
@@ -13,6 +14,7 @@ import {
 import {
   Card,
   Image,
+  Card,
   Segment,
   Grid,
   Dropdown,
@@ -22,21 +24,26 @@ import {
   Form,
   TextArea,
   Icon,
-  Button
+  Button,
+  Responsive,
 } from "semantic-ui-react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { IUser } from "../models/IUser";
+import About from "./EditProfilePage";
+import LOGO from "./Logo.png";
 import NavBar from "./subcomponents/NavBar";
 
 
-
-export interface IProfilePageProps { // Variables passed in from the store state
+export interface IProfilePageProps {
+  // Variables passed in from the store state
   match: any;
   profiles: Profile[];
   logOut: typeof logOut;
 }
 
-export interface IProfilePageState { // our local state variables
+export interface IProfilePageState {
+  // our local state variables
   redirect: boolean;
 }
 
@@ -48,13 +55,11 @@ export class ProfilePage extends React.Component<
     super(props);
     this.state = { redirect: false };
   }
-  
 
-  
  loggedOut = () => { // The function that calls our logOut REDUCER!
     let { logOut, profiles } = this.props; // The store states logOut REDUCER and profiles array
 
-    let uName = profiles.filter(profile => profile.loggedIn === true); // filter through the profiles array and return any profile that has it's loggedIn field set to true.
+    let uName = profiles.filter((profile) => profile.loggedIn === true); // filter through the profiles array and return any profile that has it's loggedIn field set to true.
 
     logOut(uName[0]); // Pass the profile to the logOut REDUCER! It takes in a Profile[] as it's payload.
 
@@ -64,12 +69,26 @@ export class ProfilePage extends React.Component<
     window.location.href = "/";
   };
 
-  handleRedirect = () => { // This sets our local state variable that determines if we go to the Edit Profile Page
-    this.setState({ redirect: true }); 
+  handleRedirect = () => {
+    // This sets our local state variable that determines if we go to the Edit Profile Page
+    this.setState({ redirect: true });
   };
 
   public render() {
     let { profiles } = this.props; // load in the profiles from the store state
+
+    let uName = profiles.filter((profile) => profile.loggedIn == true); // find out who user is logged in
+    let {
+      aboutMe,
+      name,
+      password,
+      id,
+      loggedIn,
+      cohort,
+      programming,
+      city,
+      spoken,
+    } = uName[0]; // Deconstructing the current user's store profile fields
 
 
     let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
@@ -77,35 +96,71 @@ export class ProfilePage extends React.Component<
 
     if (this.state.redirect === true) { // If we are wanting to redirect to the Edit Profile Page
       return (
-        <Router> 
+        <Router>
           {/* Render the EditProfilePage */}
           <Link to="" component={EditProfilePage} />
-          
+
           {/* Redirect the URL to /edit-profile/**name of the Logged in User** */}
           <Redirect to={`/edit-profile/${name}`} />
         </Router>
       );
     }
 
-
-    return ( // If there is no redirect request. Render the Profile Page
-     
-      <Segment>
-         <NavBar redirect = {this.handleRedirect} goto= "Edit Profile"/>
-
+    return (
+      // If there is no redirect request. Render the Profile Page
+        <Segment>
+        <NavBar redirect = {this.handleRedirect} goto= "Edit Profile"/>
         <Grid divided="vertically">
-
+          <Grid.Row columns={8}>
+            <Grid.Column>
+            <Container>
+            <Image src={LOGO} size="large" circular centered/>
+            </Container>
+            </Grid.Column>
+            <Grid.Column floated="right">
+              <Dropdown text="Groups">
+                <Dropdown.Menu>
+                  <Dropdown.Item text="Group 1" />
+                  <Dropdown.Item text="Group 2" />
+                  <Dropdown.Item text="Group 3" />
+                </Dropdown.Menu>
+              </Dropdown>
+            </Grid.Column>
+            <Grid.Column>
+              <Dropdown text="Class Mates">
+                <Dropdown.Menu>
+                  <Dropdown.Item text="Andrew" />
+                  <Dropdown.Item text="Charles" />
+                  <Dropdown.Item text="Cai" />
+                  <Dropdown.Item text="Trina" />
+                  <Dropdown.Item text="Mohammad" />
+                </Dropdown.Menu>
+              </Dropdown>
+            </Grid.Column>
+            <Grid.Column>
+              <Container align="center">
+                <Button circular color="green" onClick={this.handleRedirect}>
+                  Edit Profile
+                </Button>
+                <Icon name="forumbee" loading inverted color="black" />
+                <Button circular color="yellow" onClick={this.loggedOut}>
+                  Log Out
+                </Button>
+              </Container>
+            </Grid.Column>
+          </Grid.Row>
 
           <Grid.Row columns={3}>
             <Grid.Column>
-            <Container fluid>
               <Card>
+              <Responsive as={Card} minWidth={768}>
                 <Image
                   src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
                   wrapped
                   ui={false}
                 />
                 <Card.Content>
+
                  <Card.Header>{name}</Card.Header>
                   <Card.Meta>
                     <span className="date"><h3>Cohort:{cohort}</h3></span>
@@ -122,39 +177,33 @@ export class ProfilePage extends React.Component<
                   {/* <a>
               <Icon name='user' />
               22 Friends
-             </a> */}
-                </Card.Content>
-              </Card>
-              {/* <Header as='h1'> <i className="user circle icon"></i></Header> */}
-              <Radio as="h3" label="Education" defaultChecked />
-              <br></br>
-              <Radio label="Events" defaultChecked />
-              <br></br>
-              <Radio label="Photos" defaultChecked />
-              <br></br>
-              <br></br>
-              <br></br>
-              Groups<br></br>
-              <Radio label="JavaScript" defaultChecked />
-            </Container>
-               
-              <Container fluid>
 
-                <br></br>
-                <Header as="h3"> Explore </Header>
-                <Radio as="h2" label="Networking Events" defaultChecked />
-                <br></br>
-                <Radio as="h2" label="Previous Cohorts" defaultChecked />
-                <br></br>
-                <Radio as="h2" label="Groups" defaultChecked />
-                <br></br>
-                <Radio as="h2" label="Additional Resources" defaultChecked />
-                <br></br>
-                <Radio as="h2" label="Linkedin" defaultChecked />
-              </Container>
+            </a> */}
+                </Card.Content>
+                </Responsive>
+              </Card>
+              <Container>
+                  <Responsive as={Container} minWidth={768}>
+                    <Header as="h3"> Explore </Header>
+
+                    <Radio as="h4" label="Networking Events" defaultChecked />
+                    <br></br>
+                    <Radio as="h2" label="Previous Cohorts" defaultChecked />
+                    <br></br>
+                    <Radio as="h2" label="Groups" defaultChecked />
+                    <br></br>
+                    <Radio
+                      as="h2"
+                      label="Additional Resources"
+                      defaultChecked
+                    />
+                    <br></br>
+                    <Radio as="h2" label="Linkedin" defaultChecked />
+                  </Responsive>
+                </Container>
             </Grid.Column>
             <Grid.Column>
-            <h2>Welcome {name}!</h2>
+              <h2>Welcome {name}!</h2>
               <Form>
                 <Segment>
                   <TextArea
@@ -164,12 +213,13 @@ export class ProfilePage extends React.Component<
                   <Segment>
                     {" "}
                     <Button icon>
-                    <Icon name = "photo" color="green" />Photo
-                     </Button>
-
+                      <Icon name="photo" color="green" />
+                      Photo
+                    </Button>
                     <Button icon>
-                    <Icon name="user outline" color="green"/>Tag a Class Mate
-                     </Button> 
+                      <Icon name="user outline" color="green" />
+                      Tag a Class Mate
+                    </Button>
                   </Segment>
                 </Segment>
               </Form>{" "}
@@ -183,33 +233,40 @@ export class ProfilePage extends React.Component<
                   <Segment>
                     {" "}
                     <Button icon>
-                    <Icon name = "image outline" color="green" />Screen Shot
-                     </Button>
-                     <Button icon>
-                    <Icon name = "file code outline" color="green" />Group
-                     </Button>
+                      <Icon name="image outline" color="green" />
+                      Screen Shot
+                    </Button>
+                    <Button icon>
+                      <Icon name="file code outline" color="green" />
+                      Group
+                    </Button>
                   </Segment>
                 </Segment>
               </Form>
             </Grid.Column>
             <Grid.Column>
+              <Container>
+            <Responsive as={Container} minWidth={768}>
               <Calendar />
+              </Responsive>
+              </Container>
               <br></br>
               <br></br>
               
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </Segment>
+
     );
   }
 }
 
-const mapStateToProps = (state: RootState, ownProps: IProfilePageProps) => { // mapStateToProps connects the store's initial state variables with ProfilePage component
+const mapStateToProps = (state: RootState, ownProps: IProfilePageProps) => {
+  // mapStateToProps connects the store's initial state variables with ProfilePage component
   return {
     profiles: state.profile.profiles,
-    loggedIn: state.profile.loggedIn
+    loggedIn: state.profile.loggedIn,
   };
 };
 
-export default connect(mapStateToProps, { logOut })(ProfilePage); // connect imports the logOut REDUCER from our store and returns our connected our ProfilePage component 
+export default connect(mapStateToProps, { logOut })(ProfilePage); // connect imports the logOut REDUCER from our store and returns our connected our ProfilePage component

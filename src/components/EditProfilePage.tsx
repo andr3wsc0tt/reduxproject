@@ -22,7 +22,9 @@ import {
   Segment,
   TextArea,
   Button,
+  List,
   Icon
+
 } from "semantic-ui-react";
 
 export interface IEditProfileState { // This holds the states of the current component that AREN'T passed as global variables. They are limited to only affecting this page.
@@ -79,11 +81,12 @@ export class EditProfilePage extends React.Component<
 
     let { city, cohort, spoken, programming, aboutMe } = this.state; // these are the fields that can be updated on our edit profile page
     let { updateProfile, profiles } = this.props; // updateProfile is the function imported from actions and profiles in our array of saved profiles
+
     let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
 
-    if (uName != null) {
+    if (userName != null) {
       let update: string[] = [
-        uName[0].name,
+        userName,
         city,
         cohort,
         spoken,
@@ -105,23 +108,16 @@ export class EditProfilePage extends React.Component<
 
     let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
 
-    console.log(uName);
-
     logOut(uName[0]); // log that user out - logOut is a reducer and uName[0] is the username of the logged in user
+    sessionStorage.setItem(
+      // after changes to our store, we want to save them in our sessionStorage
+      "profiles",
+      JSON.stringify(profiles)
+    );
     sessionStorage.setItem("loggedIn", "false"); // log us out of our sessionStorage. This is still cheating a bit!
-    sessionStorage.setItem("userName", "");
-    window.location.href = "/";
+    // sessionStorage.setItem("userName", "");
   };
   
-  // componentDidMount(){
-  //   let { profiles } = this.props;
-  //   sessionStorage.setItem(
-  //     // after changes to our store, we want to save them in our sessionStorage
-  //     "profiles",
-  //     JSON.stringify(profiles)
-  //   );
-  // }
-
   public render() {
     let { profiles } = this.props;
 
@@ -144,6 +140,7 @@ export class EditProfilePage extends React.Component<
     }
 
     return (
+
       <Segment>
        <NavBar redirect = {this.handleRedirect} goto= "Profile"/>
        <Grid columns="equal">
