@@ -136,25 +136,7 @@ export class ProfilePage extends React.Component<
                 </Card.Content>
                 </Responsive>
               </Card>
-              <Container>
-                  <Responsive as={Container} minWidth={768}>
-                    <Header as="h3"> Explore </Header>
-
-                    <Radio as="h4" label="Networking Events" defaultChecked />
-                    <br></br>
-                    <Radio as="h2" label="Previous Cohorts" defaultChecked />
-                    <br></br>
-                    <Radio as="h2" label="Groups" defaultChecked />
-                    <br></br>
-                    <Radio
-                      as="h2"
-                      label="Additional Resources"
-                      defaultChecked
-                    />
-                    <br></br>
-                    <Radio as="h2" label="Linkedin" defaultChecked />
-                  </Responsive>
-                </Container>
+              
             </Grid.Column>
             <Grid.Column>
               <h2>Welcome {name}!</h2>
@@ -206,7 +188,25 @@ export class ProfilePage extends React.Component<
               </Container>
               <br></br>
               <br></br>
-              
+              <Container>
+                  <Responsive as={Container} minWidth={768}>
+                    <Header as="h3"> Explore </Header>
+
+                    <Radio as="h4" label="Networking Events" defaultChecked />
+                    <br></br>
+                    <Radio as="h2" label="Previous Cohorts" defaultChecked />
+                    <br></br>
+                    <Radio as="h2" label="Groups" defaultChecked />
+                    <br></br>
+                    <Radio
+                      as="h2"
+                      label="Additional Resources"
+                      defaultChecked
+                    />
+                    <br></br>
+                    <Radio as="h2" label="Linkedin" defaultChecked />
+                  </Responsive>
+                </Container>
             </Grid.Column>
           </Grid.Row>
         </Grid>
