@@ -74,6 +74,7 @@ export class ProfilePage extends React.Component<
     let { profiles } = this.props; // load in the profiles from the store state
 
     let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
+
     let { aboutMe, name, password, id, loggedIn, cohort, programming, city, spoken } = uName[0]; // Deconstructing the current user's store profile fields
 
     if (this.state.redirect === true) { // If we are wanting to redirect to the Edit Profile Page
@@ -197,7 +198,6 @@ export class ProfilePage extends React.Component<
               <Calendar />
               <br></br>
               <br></br>
-            
               
             </Grid.Column>
           </Grid.Row>

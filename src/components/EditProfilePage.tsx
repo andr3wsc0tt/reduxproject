@@ -127,7 +127,7 @@ export class EditProfilePage extends React.Component<
     let { profiles } = this.props;
 
 
-    let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
+    let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
 
     let { aboutMe, name, password, id, loggedIn, cohort, programming, spoken, city } = uName[0]; // These are our users profile fields, these are the variables that we will put into the JSX.
 
@@ -145,6 +145,7 @@ export class EditProfilePage extends React.Component<
     }
 
     return (
+
       <Segment>
        <NavBar redirect = {this.handleRedirect} goto= "Profile"/>
        <Grid columns="equal">
@@ -219,9 +220,8 @@ export class EditProfilePage extends React.Component<
          </Grid.Row>
        </Grid>
      </Segment>
-    );      
+    );     
   }
-}
 
 const mapStateToProps = (state: RootState, ownProps: IEditProfilePageProps) => { // mapStateToProps brings the profile in from our initialState (defined and updated in the reducer)
   return {
