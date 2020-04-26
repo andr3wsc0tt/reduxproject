@@ -145,7 +145,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
       <Grid columns="equal">
         <Grid.Row>
         <div>
-    <Image src={LOGO}  height='150' width='250' circular/>
+    <Image src={LOGO}  height='150' width='150' circular/>
     <span></span>
   </div>
           <Grid.Column></Grid.Column>
