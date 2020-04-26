@@ -126,7 +126,7 @@ export class EditProfilePage extends React.Component<
     let { profiles } = this.props;
 
 
-    let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
+    let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
 
     let { aboutMe, name, password, id, loggedIn, cohort, programming, spoken } = uName[0]; // These are our users profile fields, these are the variables that we will put into the JSX.
 
