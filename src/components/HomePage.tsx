@@ -144,10 +144,18 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
   
       <Grid columns="equal">
         <Grid.Row>
-        <div>
+        <div className="thumb">
+	
+	<a href="#">
+		
+		<span>TechCareers Hive</span>
+	</a>
+</div>
+        {/* <div>
     <Image src={LOGO}  height='150' width='150' circular/>
     <span></span>
-  </div>
+  </div> */}
+  
           <Grid.Column></Grid.Column>
           <Grid.Column></Grid.Column>
           <Grid.Column floated="right"><br></br><br></br>
