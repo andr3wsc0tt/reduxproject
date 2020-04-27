@@ -30,6 +30,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";  
 import About from "./EditProfilePage";
 import LOGO from "./Logo.png";
+import profilePic from './profile.gif'
 import NavBar from "./subcomponents/NavBar";
 
 
@@ -108,11 +109,7 @@ export class ProfilePage extends React.Component<
             <Grid.Column>
               <Card>
               <Responsive as={Card} minWidth={768}>
-                <Image
-                  src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
-                  wrapped
-                  ui={false}
-                />
+                <Image src={profilePic} wrapped ui={false}/>
                 <Card.Content>
 
                  <Card.Header>{name}</Card.Header>
@@ -136,25 +133,7 @@ export class ProfilePage extends React.Component<
                 </Card.Content>
                 </Responsive>
               </Card>
-              <Container>
-                  <Responsive as={Container} minWidth={768}>
-                    <Header as="h3"> Explore </Header>
-
-                    <Radio as="h4" label="Networking Events" defaultChecked />
-                    <br></br>
-                    <Radio as="h2" label="Previous Cohorts" defaultChecked />
-                    <br></br>
-                    <Radio as="h2" label="Groups" defaultChecked />
-                    <br></br>
-                    <Radio
-                      as="h2"
-                      label="Additional Resources"
-                      defaultChecked
-                    />
-                    <br></br>
-                    <Radio as="h2" label="Linkedin" defaultChecked />
-                  </Responsive>
-                </Container>
+              
             </Grid.Column>
             <Grid.Column>
               <h2>Welcome {name}!</h2>
@@ -206,12 +185,30 @@ export class ProfilePage extends React.Component<
               </Container>
               <br></br>
               <br></br>
-              
+              <Container>
+                  <Responsive as={Container} minWidth={768}>
+                    <Header as="h3"> Explore </Header>
+
+                    <Radio as="h4" label="Networking Events" defaultChecked />
+                    <br></br>
+                    <Radio as="h2" label="Previous Cohorts" defaultChecked />
+                    <br></br>
+                    <Radio as="h2" label="Groups" defaultChecked />
+                    <br></br>
+                    <Radio
+                      as="h2"
+                      label="Additional Resources"
+                      defaultChecked
+                    />
+                    <br></br>
+                    <Radio as="h2" label="Linkedin" defaultChecked />
+                  </Responsive>
+                </Container>
             </Grid.Column>
           </Grid.Row>
         </Grid>
         </Segment>
-
+      
     );
   }
 }
