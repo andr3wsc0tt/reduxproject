@@ -16,7 +16,6 @@ import {
   Image,
   Segment,
   Grid,
-  Dropdown,
   Container,
   Header,
   Radio,
@@ -28,8 +27,8 @@ import {
 } from "semantic-ui-react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";  
-import About from "./EditProfilePage";
 import LOGO from "./Logo.png";
+import profilePic from './profile.gif'
 import NavBar from "./subcomponents/NavBar";
 
 
@@ -93,6 +92,7 @@ export class ProfilePage extends React.Component<
 
     return (
       // If there is no redirect request. Render the Profile Page
+
         <Container>
            <Segment>
            <NavBar redirect = {this.handleRedirect} goto= "Edit Profile"/>
@@ -129,37 +129,12 @@ export class ProfilePage extends React.Component<
                     </Card.Description>
                   </Card.Content>
                   <Card.Content extra>
-                    {/* <a>
-                <Icon name='user' />
-                22 Friends
 
-              </a> */}
-                  </Card.Content>
-                  </Responsive>
-                </Card>
-                <Container>
-                    <Responsive as={Container} minWidth={768}>
-                      <Header as="h3"> Explore </Header>
-
-                      <Radio as="h4" label="Networking Events" defaultChecked />
-                      <br></br>
-                      <Radio as="h2" label="Previous Cohorts" defaultChecked />
-                      <br></br>
-                      <Radio as="h2" label="Groups" defaultChecked />
-                      <br></br>
-                      <Radio
-                        as="h2"
-                        label="Additional Resources"
-                        defaultChecked
-                      />
-                      <br></br>
-                      <Radio as="h2" label="Linkedin" defaultChecked />
-                    </Responsive>
-                  </Container>
               </Grid.Column>
               <Grid.Column>
                 <h2>Welcome {name}!</h2>
                 <Form>
+
                   <Segment>
                     <TextArea
                       placeholder="Create a Post"
@@ -197,23 +172,42 @@ export class ProfilePage extends React.Component<
                       </Button>
                     </Segment>
                   </Segment>
-                </Form>
-              </Grid.Column>
-              <Grid.Column>
-                <Container>
-              <Responsive as={Container} minWidth={768}>
-                <Calendar />
-                </Responsive>
-                </Container>
-                <br></br>
-                <br></br>
-                
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-           </Segment>
-        </Container>
 
+                </Segment>
+              </Form>
+            </Grid.Column>
+            <Grid.Column>
+              <Container>
+            <Responsive as={Container} minWidth={768}>
+              <Calendar />
+              </Responsive>
+              </Container>
+              <br></br>
+              <br></br>
+              <Container>
+                  <Responsive as={Container} minWidth={768}>
+                    <Header as="h3"> Explore </Header>
+
+                    <Radio as="h4" label="Networking Events" defaultChecked />
+                    <br></br>
+                    <Radio as="h2" label="Previous Cohorts" defaultChecked />
+                    <br></br>
+                    <Radio as="h2" label="Groups" defaultChecked />
+                    <br></br>
+                    <Radio
+                      as="h2"
+                      label="Additional Resources"
+                      defaultChecked
+                    />
+                    <br></br>
+                    <Radio as="h2" label="Linkedin" defaultChecked />
+                  </Responsive>
+                </Container>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+        </Segment>
+      
     );
   }
 }
