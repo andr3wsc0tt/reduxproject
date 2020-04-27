@@ -113,11 +113,16 @@ body {
 	transform: rotateX(0) translateZ(-60px) scale(0.85);
 }
 
-.item1 , .item2{ 
-	margin: 0 80px 0 80px;
-	text-align: center;
+.NavBar{
+	width: 100vw;
 }
 
-.edit-profile{
-	padding-left: 30px ;
-}
+@media only screen and (max-width: 767px) {
+	.right.floated.column.floated-dissapear{
+		padding-bottom: 0px;
+	}
+	.thumb{
+		margin-left: auto;
+		margin-bottom: 0px;
+	}
+  }
