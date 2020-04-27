@@ -30,6 +30,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";  
 import About from "./EditProfilePage";
 import LOGO from "./Logo.png";
+import profilePic from './profile.gif'
 import NavBar from "./subcomponents/NavBar";
 
 
@@ -108,11 +109,7 @@ export class ProfilePage extends React.Component<
             <Grid.Column>
               <Card>
               <Responsive as={Card} minWidth={768}>
-                <Image
-                  src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
-                  wrapped
-                  ui={false}
-                />
+                <Image src={profilePic} wrapped ui={false}/>
                 <Card.Content>
 
                  <Card.Header>{name}</Card.Header>
@@ -211,7 +208,7 @@ export class ProfilePage extends React.Component<
           </Grid.Row>
         </Grid>
         </Segment>
-
+      
     );
   }
 }
