@@ -39,7 +39,7 @@ export class NavBar extends React.Component<INavBarProps, INavBarState> {
         let { goto } = this.props; // load in the profiles from the store state
       
         return (
-            <Menu>
+            <Menu >
                                
                 <Menu.Item>
                         

@@ -42,12 +42,16 @@ export interface IHomeState {
   // Sign up form
   signUpUser: string;
   signUpPass: string;
+
+  // Warning messages
+  loginMessage: string
+  signupMessage: string
 }
 
 export class Home extends React.Component<IHomeProps, IHomeState> {
   constructor(props: IHomeProps) {
     super(props);
-    this.state = { userName: "", passWord: "", signUpPass: "", signUpUser: "" };
+    this.state = { userName: "", passWord: "", signUpPass: "", signUpUser: "" , loginMessage: "", signupMessage: ""};
   }
 
   // the 4 functions (methods) below update our form fields as the user inputs them
@@ -72,13 +76,24 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     event.preventDefault();
 
     // our local state login and password
-    let { userName, passWord } = this.state;
+    let { userName, passWord, loginMessage} = this.state;
     // our store variables and reducers that are passed from mapStateToProps and connect!
-    let { checkPass } = this.props;
+    let { checkPass, profiles } = this.props;
     // Our reducer (checkPass) takes in a string[]...so a ['username', 'password'] array
     let cred: Array<string> = [userName, passWord];
     // a REDUCER!
+
+    let uName = profiles.filter((profile) => profile.name === userName);
+
+    if (uName.length === 0)
+      this.setState({loginMessage : "Incorrect Username or Password"})
+
+    if (uName.length > 0 && uName[0].password !== passWord)
+      this.setState({loginMessage : "Incorrect Username or Password"})
+
+
     checkPass(cred);
+
     // Resets our local state username and password
     this.setState({ userName: "", passWord: "" });
   };
@@ -115,6 +130,9 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         programming: "",
         spoken: ""
       });
+    }
+    else{
+      this.setState({ signupMessage: "Username already exists" });
     }
 
     // Reset the local state variables
@@ -153,13 +171,14 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     } else {
       // save the sessionStorage profiles (not sure if this is necessary)
       sessionStorage.setItem("profiles", JSON.stringify(profiles));
+
     }
   }
 
 
   public render() {
     let { loggedIn, profiles } = this.props;
-
+    let {loginMessage} = this.state;
     if (loggedIn === true || sessionStorage.getItem("loggedIn") === "true") {
       let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
 
@@ -227,7 +246,9 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
               >
                 Login
               </Button>
+              <span>{this.state.loginMessage}</span>
             </Grid.Column>
+           
           </Grid.Row>
           {/* <div id="animated_div">Techcareers HIVE</div> */}
           <Divider horizontal>
@@ -273,10 +294,12 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                 />{" "}
               </Divider>
             </Grid.Column>
+            
             <Grid.Column>
               <Header as="h2" color="green" textAlign="center">
                 Sign -Up
               </Header>
+              <span>{this.state.signupMessage}</span>
               <Form size="large">
                 <Segment stacked>
                   <Form.Input

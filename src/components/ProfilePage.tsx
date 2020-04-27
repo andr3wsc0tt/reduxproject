@@ -97,7 +97,7 @@ export class ProfilePage extends React.Component<
       <Container>
       <Segment>
       
-      <Grid divided="vertically">
+      <Grid stackable divided="vertically">
         <Grid.Row columns={8}>
           <Grid.Column>
           {/* <Container>
