@@ -93,16 +93,16 @@ export class ProfilePage extends React.Component<
 
     return (
       // If there is no redirect request. Render the Profile Page
-        <Segment>
+        <Container>
         <NavBar redirect = {this.handleRedirect} goto= "Edit Profile"/>
-        <Grid divided="vertically">
-          <Grid.Row columns={8}>
-            <Grid.Column>
-            <Container>
-            <Image src={LOGO} size="large" circular centered/>
-            </Container>
-            </Grid.Column>
-          </Grid.Row>
+           <Grid divided="vertically">
+            <Grid.Row columns={8}>
+              <Grid.Column>
+              <Container>
+              <Image src={LOGO} size="large" circular centered/>
+              </Container>
+              </Grid.Column>
+            </Grid.Row>
 
           <Grid.Row columns={3}>
             <Grid.Column>
@@ -210,7 +210,7 @@ export class ProfilePage extends React.Component<
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        </Segment>
+        </Container>
 
     );
   }
