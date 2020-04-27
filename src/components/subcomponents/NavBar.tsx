@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { RootState } from "../../store";
 import { connect } from "react-redux";
-import { Menu, Dropdown, Input, Button } from 'semantic-ui-react';
+import { Menu, Dropdown, Input, Button, Image } from 'semantic-ui-react';
 import { Profile } from "../../store/types/types";
 import { logOut } from "../../store/actions/actions";
+import Logo from "../Logo.png";
 
 export interface INavBarProps {
     goto:string;
@@ -39,9 +40,10 @@ export class NavBar extends React.Component<INavBarProps, INavBarState> {
         let { goto } = this.props; // load in the profiles from the store state
       
         return (
-            <Menu>
+            <Menu >
+              <Image src={Logo} size="large" circular centered/>
                                
-                <Menu.Item>
+                <Menu.Item className ="background-nav">  
                         
                     <Dropdown text="Groups" className ="item1" >
                         <Dropdown.Menu>

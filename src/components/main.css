@@ -121,3 +121,7 @@ body {
 .edit-profile{
 	padding-left: 30px ;
 }
+
+.background-nav {
+	background-image: url('./NavBar-Background.png');
+}

@@ -100,9 +100,9 @@ export class ProfilePage extends React.Component<
       <Grid divided="vertically">
         <Grid.Row columns={8}>
           <Grid.Column>
-          {/* <Container>
-          <Image src={LOGO} size="large" circular centered/>
-          </Container> */}
+           <Container>
+              <Image src={LOGO} size="large" circular centered/>
+          </Container> 
           </Grid.Column>
         </Grid.Row>
         <Grid.Row columns={3}>
