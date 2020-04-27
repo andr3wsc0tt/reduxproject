@@ -97,7 +97,7 @@ export class ProfilePage extends React.Component<
       <Container>
       <Segment>
       
-      <Grid divided="vertically">
+      <Grid stackable divided="vertically">
         <Grid.Row columns={8}>
           <Grid.Column>
           {/* <Container>
@@ -108,7 +108,7 @@ export class ProfilePage extends React.Component<
         <Grid.Row columns={3}>
           <Grid.Column>
             <Card>
-            <Responsive as={Card} minWidth={768}>
+            {/* <Responsive as={Card} minWidth={768}> */}
               <Image src={profilePic} wrapped ui={false}/>
               <Card.Content>
                <Card.Header>{name}</Card.Header>
@@ -129,7 +129,7 @@ export class ProfilePage extends React.Component<
             22 Friends
           </a> */}
               </Card.Content>
-              </Responsive>
+              {/* </Responsive> */}
             </Card>
           </Grid.Column>
           <Grid.Column>

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Menu, Dropdown, Input, Button } from 'semantic-ui-react';
 import { Profile } from "../../store/types/types";
 import { logOut } from "../../store/actions/actions";
+import '../main.css';
 
 export interface INavBarProps {
     goto:string;
@@ -39,7 +40,7 @@ export class NavBar extends React.Component<INavBarProps, INavBarState> {
         let { goto } = this.props; // load in the profiles from the store state
       
         return (
-            <Menu>
+            <Menu stackable className="NavBar">
                                
                 <Menu.Item>
                         
@@ -64,7 +65,7 @@ export class NavBar extends React.Component<INavBarProps, INavBarState> {
                         </Dropdown.Menu>
                 </Dropdown>
               </Menu.Item>
-                <Menu.Menu position="right">
+                <Menu.Menu fluid position="right">
                <Menu.Item className ="item3">
                     <Input className='icon' icon='search' placeholder='Search...' />
                 </Menu.Item>  
