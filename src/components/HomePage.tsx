@@ -162,6 +162,8 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 
     if (loggedIn === true || sessionStorage.getItem("loggedIn") === "true") {
       let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
+
+      // On first log in or sign up the sessionStorage will not have been set, so get the destString from the store's update profile
       let destString = sessionStorage.getItem("userName") ? sessionStorage.getItem("userName") : uName[0].name;
 
       return (
