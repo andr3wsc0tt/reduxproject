@@ -13,7 +13,7 @@ import {
 } from "semantic-ui-react";
 
 import { checkPass, addProfile } from "../store/actions/actions";
-
+import MediaQuery from 'react-responsive';
 import { Profile } from "../store/types/types";
 import { RootState } from "../store";
 import { connect } from "react-redux";
@@ -183,12 +183,15 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     return (
       <Segment>
         <Grid columns="equal">
+       
           <Grid.Row>
+          <MediaQuery query="(min-width: 768px)">
             <div className="thumb">
               <a href="#">
                 <span>TechCareers Hive</span>
               </a>
             </div>
+            </MediaQuery>
             <Grid.Column></Grid.Column>
             <Grid.Column></Grid.Column>
             <Grid.Column floated="right">
@@ -231,6 +234,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
           </Grid.Row>
           {/* <div id="animated_div">Techcareers HIVE</div> */}
           <Divider horizontal>
+          <MediaQuery query="(min-width: 768px)">
             {" "}
             <div className="sk-wave">
               <div className="sk-wave-rect">T</div>
@@ -249,9 +253,11 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
               <div className="sk-wave-rect">V</div>
               <div className="sk-wave-rect">E</div>
             </div>
+            </MediaQuery>
           </Divider>
           <Grid.Row>
             <Grid.Column>
+            <MediaQuery query="(min-width: 768px)">
               <Container fluid>
                 <Header as="h2">TECHCareers Hive</Header>
                 <br></br>
@@ -260,10 +266,13 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                 <p>Check networking events.</p>
                 <p>AND More!!!!!!!.</p>
               </Container>
+              </MediaQuery>
             </Grid.Column>
             <Grid.Column>
               {" "}
+              <MediaQuery query="(min-width: 768px)">
               <Divider vertical>
+              
                 {" "}
                 <Icon
                   loading
@@ -271,7 +280,9 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                   size="massive"
                   color="yellow"
                 />{" "}
+               
               </Divider>
+              </MediaQuery>
             </Grid.Column>
             <Grid.Column>
               <Header as="h2" color="green" textAlign="center">
