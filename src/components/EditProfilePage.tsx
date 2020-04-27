@@ -10,20 +10,13 @@ import NavBar from "./subcomponents/NavBar";
 
 
 import {
-  Card,
-  Image,
   Grid,
-  Input,
-  Divider,
-  Container,
   Header,
-  Radio,
   Form,
   Segment,
   TextArea,
   Button,
-  List,
-  Icon
+  Container
 
 } from "semantic-ui-react";
 
@@ -140,83 +133,85 @@ export class EditProfilePage extends React.Component<
     }
 
     return (
-    
-        <Container>
+      <React.Fragment>
+      <NavBar redirect = {this.handleRedirect} goto= "Profile"/>
+      <Container>
+        <Segment>
+       
+       <Grid columns="equal">
          
-            <NavBar redirect = {this.handleRedirect} goto= "Profile"/>
-          
-    
-          <Grid columns="equal">
-            
-            <Grid.Row>
-              <Grid.Column>
-                  <h3>Current city:{city}</h3>
-                  <h3>Cohort:{cohort}</h3>
-                  <h3>Spoken languages:{spoken}</h3>
-                  <h3>Programming languages interested in:{programming}</h3>
-                  <h3>About Me: {aboutMe}</h3>
-              </Grid.Column> 
-        
-              <Grid.Column>
-                <Header as="h2" color="green" textAlign="center">
-                  Edit profile
-                </Header>
-                <Form size="large">
-                  <Segment stacked>
-                    <Form.Input
-                      fluid
-                      icon="home"
-                      iconPosition="left"
-                      placeholder="Current City"
-                      value={this.state.city}
-                      onChange={this.handleCityChange}
-                    />
-                    <Form.Input
-                      fluid
-                      icon="users"
-                      iconPosition="left"
-                      placeholder="Cohort"
-                      type="text"
-                      value={this.state.cohort}
-                      onChange={this.handleCohortChange}
-                    />
-                    <Form.Input
-                      fluid
-                      icon="language"
-                      iconPosition="left"
-                      placeholder="Spoken Languages"
-                      type="text"
-                      value={this.state.spoken}
-                      onChange={this.handleSpokenChange}
-                    />
-                    <Form.Input
-                      fluid
-                      icon="code"
-                      iconPosition="left"
-                      placeholder="Programming Languages"
-                      type="text"
-                      value={this.state.programming}
-                      onChange={this.handleProgrammingChange}
-                    />
-                    <Form.Field
-                      control={TextArea}
-                      label="About"
-                      placeholder="Tell us more about you..."
-                      value={this.state.aboutMe}
-                      onChange={this.handleAboutMeChange}
-                    />
-                    <Button onClick={this.handleClick} color="green">
-                      Save Changes
-                    </Button>
-                  </Segment>
-    
-                </Form>
-              </Grid.Column>
-              <Grid.Column></Grid.Column>
-            </Grid.Row>
-          </Grid>
-      </Container>
-    
+       
+         <Grid.Row>
+         
+           <Grid.Column>
+               <h3>Current city:{city}</h3>
+               <h3>Cohort:{cohort}</h3>
+               <h3>Spoken languages:{spoken}</h3>
+               <h3>Programming languages interested in:{programming}</h3>
+               <h3>About Me: {aboutMe}</h3>
+           </Grid.Column> 
+     
+           <Grid.Column>
+             <Header as="h2" color="green" textAlign="center">
+               Edit profile
+             </Header>
+             <Form size="large">
+               <Segment stacked>
+                 <Form.Input
+                   fluid
+                   icon="home"
+                   iconPosition="left"
+                   placeholder="Current City"
+                   value={this.state.city}
+                   onChange={this.handleCityChange}
+                 />
+                 <Form.Input
+                   fluid
+                   icon="users"
+                   iconPosition="left"
+                   placeholder="Cohort"
+                   type="text"
+                   value={this.state.cohort}
+                   onChange={this.handleCohortChange}
+                 />
+                 <Form.Input
+                   fluid
+                   icon="language"
+                   iconPosition="left"
+                   placeholder="Spoken Languages"
+                   type="text"
+                   value={this.state.spoken}
+                   onChange={this.handleSpokenChange}
+                 />
+                 <Form.Input
+                   fluid
+                   icon="code"
+                   iconPosition="left"
+                   placeholder="Programming Languages"
+                   type="text"
+                   value={this.state.programming}
+                   onChange={this.handleProgrammingChange}
+                 />
+                 <Form.Field
+                   control={TextArea}
+                   label="About"
+                   placeholder="Tell us more about you..."
+                   value={this.state.aboutMe}
+                   onChange={this.handleAboutMeChange}
+                 />
+                 <Button onClick={this.handleClick} color="green">
+                   Save Changes
+                 </Button>
+               </Segment>
+ 
+             </Form>
+           </Grid.Column>
+           <Grid.Column></Grid.Column>
+         </Grid.Row>
+       </Grid>
+       </Segment>
+     </Container>
+     </React.Fragment>
     );     
   }
 }
