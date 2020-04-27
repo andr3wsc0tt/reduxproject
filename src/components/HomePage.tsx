@@ -43,6 +43,7 @@ export interface IHomeState {
   // Sign up form
   signUpUser: string;
   signUpPass: string;
+  confirmSignUpPass: string
 
   // Warning messages
   loginMessage: string
@@ -52,7 +53,7 @@ export interface IHomeState {
 export class Home extends React.Component<IHomeProps, IHomeState> {
   constructor(props: IHomeProps) {
     super(props);
-    this.state = { userName: "", passWord: "", signUpPass: "", signUpUser: "" , loginMessage: "", signupMessage: ""};
+    this.state = { userName: "", passWord: "", signUpPass: "", signUpUser: "" , loginMessage: "", signupMessage: "", confirmSignUpPass: ""};
   }
 
   // the 4 functions (methods) below update our form fields as the user inputs them
@@ -68,9 +69,14 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     this.setState({ signUpUser: e.currentTarget.value });
   };
 
+  handleConfirmSignPassChange = (e: React.FormEvent<HTMLInputElement>) => {
+    this.setState({ confirmSignUpPass: e.currentTarget.value });
+  };
+
   handleSignPassChange = (e: React.FormEvent<HTMLInputElement>) => {
     this.setState({ signUpPass: e.currentTarget.value });
   };
+
 
   // This is our login method that call the checkPass REDUCER!
   handleOnClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -103,7 +109,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
   handleSignUp = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     // info put into form
-    let { signUpPass, signUpUser } = this.state;
+    let { signUpPass, signUpUser, confirmSignUpPass } = this.state;
     // store variables and reducers
     let { addProfile, profiles } = this.props;
     // variable to check is a user by that name already exists
@@ -116,28 +122,32 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         duplicated = true;
       }
     });
-
     // if you didn't find a user with the same name that was entered in the sign up input box
-    if (duplicated === false) {
-      //add that user to the stores profile array using the addProfile REDUCER!
-      addProfile({
-        id: 2,
-        name: signUpUser,
-        password: signUpPass,
-        aboutMe: "",
-        loggedIn: true,
-        city: "",
-        cohort: "",
-        programming: "",
-        spoken: ""
-      });
+    if (confirmSignUpPass !== signUpPass && duplicated === false){
+      this.setState({ signupMessage: "Passwords don't match" });
     }
     else{
-      this.setState({ signupMessage: "Username already exists" });
+      if (duplicated === false) {
+        //add that user to the stores profile array using the addProfile REDUCER!
+        addProfile({
+          id: 2,
+          name: signUpUser,
+          password: signUpPass,
+          aboutMe: "",
+          loggedIn: true,
+          city: "",
+          cohort: "",
+          programming: "",
+          spoken: ""
+        });
+      }
+      else{
+        this.setState({ signupMessage: "Username already exists" });
+      }
     }
 
     // Reset the local state variables
-    this.setState({ signUpUser: "", signUpPass: "" });
+    this.setState({ signUpUser: "", signUpPass: "", confirmSignUpPass: "" });
   };
 
 
@@ -322,6 +332,8 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                     iconPosition="left"
                     placeholder="Password"
                     type="password"
+                    value={this.state.confirmSignUpPass}
+                    onChange={this.handleConfirmSignPassChange}
                   />
                   <Form.Input
                     fluid
@@ -346,6 +358,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
           </Grid.Row>
         </Grid>
       </Segment>
+
     );
   }
 }
