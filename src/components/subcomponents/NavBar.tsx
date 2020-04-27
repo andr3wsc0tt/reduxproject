@@ -19,13 +19,6 @@ export interface INavBarState { // our local state variables
   
 
 export class NavBar extends React.Component<INavBarProps, INavBarState> {    
-
-    componentDidMount(){
-        console.log(window.location.href)
-        
-
-    }
-
     loggedOut = () => { // The function that calls our logOut REDUCER!
         let { logOut, profiles } = this.props; // The store states logOut REDUCER and profiles array
     

@@ -20,18 +20,27 @@ import { connect } from "react-redux";
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import ProfilePage from "./ProfilePage";
 
-export interface IHomeProps { // our store state variables
-  checkPass: typeof checkPass; // reducer
-  addProfile: typeof addProfile; // reducer
-  profiles: Profile[]; // our users
-  loggedIn: boolean; // a state variable
+// our store state variables
+export interface IHomeProps { 
+  // reducer
+  checkPass: typeof checkPass; 
+  // reducer
+  addProfile: typeof addProfile; 
+  // our users
+  profiles: Profile[]; 
+  // a state variable
+  loggedIn: boolean; 
   location?: Router;
 }
 
-export interface IHomeState { // Our local state variables that change as we input either our login and password, or our new user information.
-  userName: string; // username for login
+// Our local state variables that change as we input either our login and password, or our new user information.
+export interface IHomeState { 
+  // Login forms
+  userName: string; 
   passWord: string;
-  signUpUser: string; // sign up username
+
+  // Sign up form
+  signUpUser: string; 
   signUpPass: string;
 }
 
@@ -62,31 +71,50 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
   // This is our login method that call the checkPass REDUCER!
   handleOnClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
-    let { userName, passWord } = this.state; // our local state login and password
-    let { checkPass } = this.props; // our store variables and reducers that are passed from mapStateToProps and connect!
 
-    let cred: Array<string> = [userName, passWord]; // Our reducer (checkPass) takes in a string[]...so a ['username', 'password'] array
-    checkPass(cred); // a REDUCER!
+    // our local state login and password
+    let { userName, passWord } = this.state; 
 
-    this.setState({ userName: "", passWord: "" }); // Resets our local state username and password
+    // our store variables and reducers that are passed from mapStateToProps and connect!
+    let { checkPass } = this.props; 
+
+    // Our reducer (checkPass) takes in a string[]...so a ['username', 'password'] array
+    let cred: Array<string> = [userName, passWord]; 
+
+    // a REDUCER!
+    checkPass(cred); 
+
+    // Resets our local state username and password
+    this.setState({ userName: "", passWord: "" }); 
   };
 
-  handleSignUp = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => { // our sign up function that calls our addProfile REDUCER!
+  // our sign up function that calls our addProfile REDUCER!
+  handleSignUp = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => { 
     e.preventDefault();
 
-    let { signUpPass, signUpUser } = this.state; // info put into form
-    let { addProfile, profiles } = this.props; // store variables and reducers
+    // info put into form
+    let { signUpPass, signUpUser } = this.state; 
+
+    // store variables and reducers
+    let { addProfile, profiles } = this.props; 
+
+    // variable to check is a user by that name already exists
     let duplicated: boolean = false;
 
-    profiles.forEach((profile, i) => { // Go through each profile in the store's profiles
-      if (profile.name === signUpUser) { // Check if that profile has the same name as the text entered in the sign up field
-        duplicated = true; // if the text entered in the sign up field matches a name in the store's profile array, set duplicated to true (Tell the function that you found a user that already has that name)
+    // Go through each profile in the store's profiles
+    profiles.forEach((profile, i) => { 
+      // Check if that profile has the same name as the text entered in the sign up field
+      if (profile.name === signUpUser) { 
+
+        // if the text entered in the sign up field matches a name in the store's profile array, set duplicated to true (Tell the function that you found a user that already has that name)
+        duplicated = true; 
       }
     });
 
-    if (duplicated === false) { // if you didn't find a user with the same name that was entered in the sign up input box
-      addProfile({ //add that user to the stores profile array using the addProfile REDUCER!
-        // reducer/action
+    // if you didn't find a user with the same name that was entered in the sign up input box
+    if (duplicated === false) { 
+      //add that user to the stores profile array using the addProfile REDUCER!
+      addProfile({ 
         id: 2,
         name: signUpUser,
         password: signUpPass,
@@ -99,33 +127,56 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
       });
     }
 
-    this.setState({ signUpUser: "", signUpPass: "" }); // Reset the local state variables
+    // Reset the local state variables
+    this.setState({ signUpUser: "", signUpPass: "" }); 
   }; 
   public render() {
-    
-    let { loggedIn, profiles } = this.props; // Get the store's initial state's loggedIn variable and profile array
 
-    if (loggedIn === true || sessionStorage.getItem("loggedIn") === "true") { // if the store's loggedIn variable is set, or the sessionState loggedIn variable is set then we can set up our Router for moving to the appropriate page
-      sessionStorage.setItem("profiles", JSON.stringify(profiles)); // save the sessionStorage profiles (not sure if this is necessary)
-      let userName = sessionStorage.getItem("userName"); // save the sessionStorage username 
-      let uName = profiles.filter(profile => profile.loggedIn === true); // find the profile of the user that is logged in
+    // Get the store's initial state's loggedIn variable and profile array
+    let { loggedIn, profiles } = this.props; 
 
-      let destString = ""; // intialize null string for the Redirect Route
+    // if the store's loggedIn variable is set, or the sessionState loggedIn variable is set then we can set up our Router for moving to the appropriate page
+    if (loggedIn === true || sessionStorage.getItem("loggedIn") === "true") { 
 
-      if (loggedIn === true) { // If a user is logged in through the store state
-        sessionStorage.setItem("userName", uName[0].name); // save to global
-        sessionStorage.setItem("loggedIn", "true"); // save to global
-        destString = uName[0].name; // set the destination for Redirect Route to the name of the logged in User
-      } else if (userName != undefined) { // if the global username is set
-        sessionStorage.setItem("userName", userName); // I dont think this is necessary
-        destString = userName; // set the destination for Redirect Route to the name of the sessionStorage username
+       // save the sessionStorage profiles (not sure if this is necessary)
+      sessionStorage.setItem("profiles", JSON.stringify(profiles));
+
+      // save the sessionStorage username 
+      let userName = sessionStorage.getItem("userName"); 
+
+      // find the profile of the user that is logged in
+      let uName = profiles.filter(profile => profile.loggedIn === true); 
+
+       // intialize null string for the Redirect Route
+      let destString = "";
+
+      // If a user is logged in through the store state
+      if (loggedIn === true) { 
+
+        // save to global
+        sessionStorage.setItem("userName", uName[0].name); 
+
+        // save to global
+        sessionStorage.setItem("loggedIn", "true"); 
+
+        // set the destination for Redirect Route to the name of the logged in User
+        destString = uName[0].name; 
+
+        // if the global username is set
+      } else if (userName != undefined) { 
+        sessionStorage.setItem("userName", userName); 
+
+        // set the destination for Redirect Route to the name of the sessionStorage username
+        destString = userName; 
       }
 
-      return ( // If the user is logged in, take them to the profile page
+      // If the user is logged in, take them to the profile page
+      return ( 
         <>
           <Router>
             {/* Redirect to the /profile/ page with their username == destString */}
             <Redirect to={`/profile/${destString}`} /> 
+
             {/* Render the ProfilePage component */}
             <Link to="" component={ProfilePage} /> 
           </Router>
@@ -133,9 +184,12 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
       );
     }
     else{
-      sessionStorage.setItem("profiles", JSON.stringify(profiles)); // save the sessionStorage profiles (not sure if this is necessary)
+       // save the sessionStorage profiles (not sure if this is necessary)
+      sessionStorage.setItem("profiles", JSON.stringify(profiles));
     }
-    return ( // If the user isn't logged in, render the HomePage
+
+     // If the user isn't logged in, render the HomePage
+    return (
       <Segment>
   
       <Grid columns="equal">
@@ -147,11 +201,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 		<span>TechCareers Hive</span>
 	</a>
 </div>
-        {/* <div>
-    <Image src={LOGO}  height='150' width='150' circular/>
-    <span></span>
-  </div> */}
-  
           <Grid.Column></Grid.Column>
           <Grid.Column></Grid.Column>
           <Grid.Column floated="right"><br></br><br></br>
@@ -271,11 +320,13 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
   }
 }
 
-const mapStateToProps = (state: RootState, ownProps: IHomeProps) => { // mapStateToProps connects our store with this component
+// mapStateToProps connects our store with this component
+const mapStateToProps = (state: RootState, ownProps: IHomeProps) => { 
   return {
     profiles: state.profile.profiles,
     loggedIn: state.profile.loggedIn
   };
 };
 
-export default connect(mapStateToProps, { checkPass, addProfile })(Home); // connect loads in the checkPass and addProfile REDUCERS!. It also exports our Component with the store connected
+// connect loads in the checkPass and addProfile REDUCERS!. It also exports our Component with the store connected
+export default connect(mapStateToProps, { checkPass, addProfile })(Home); 
