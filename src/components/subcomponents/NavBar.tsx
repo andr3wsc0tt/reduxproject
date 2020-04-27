@@ -58,13 +58,10 @@ export class NavBar extends React.Component<INavBarProps, INavBarState> {
         let {page} = this.state;
        
         let { profiles, goto } = this.props; // load in the profiles from the store state
-     
-
         let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
         let { aboutMe, name, password, id, loggedIn, cohort, programming, city, spoken } = uName[0]; // Deconstructing the current user's store profile fields
     
         
-      
         return (  
             <Menu class ='menu' >
                                         
