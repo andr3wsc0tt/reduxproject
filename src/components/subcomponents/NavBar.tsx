@@ -35,6 +35,7 @@ export class NavBar extends React.Component<INavBarProps, INavBarState> {
           
     public render() {
        
+
         let { goto } = this.props; // load in the profiles from the store state
       
         return (
@@ -42,7 +43,7 @@ export class NavBar extends React.Component<INavBarProps, INavBarState> {
                                
                 <Menu.Item>
                         
-                    <Dropdown text="Groups">
+                    <Dropdown text="Groups" className ="item1" >
                         <Dropdown.Menu>
                         <Dropdown.Item text="Group 1" />
                         <Dropdown.Item text="Group 2" />
@@ -52,8 +53,8 @@ export class NavBar extends React.Component<INavBarProps, INavBarState> {
          
                 </Menu.Item>
 
-              <Menu.Item>
-                <Dropdown text="Class Mates">
+              <Menu.Item >
+                <Dropdown text="Class Mates" className ="item2">
                         <Dropdown.Menu>
                         <Dropdown.Item text="Andrew" />
                         <Dropdown.Item text="Charles" />
@@ -64,24 +65,24 @@ export class NavBar extends React.Component<INavBarProps, INavBarState> {
                 </Dropdown>
               </Menu.Item>
 
-               <Menu.Item>
+               <Menu.Item className ="item3">
                     <Input className='icon' icon='search' placeholder='Search...' />
                 </Menu.Item>  
 
-                <Menu.Item>
-                <Button.Group>
-                    <Button color="green" onClick={this.props.redirect}>
-                        {goto}
-                    </Button>
-
-                    <Button.Or/>
-                    <Button color="yellow" onClick={this.loggedOut}>
-                        Log Out
+                <Menu.Item >
+                   <Button.Group className ="item4">
+                        <Button color="green" onClick={this.props.redirect}>
+                            {goto}
                         </Button>
+                        <Button.Or/>
+                        <Button color="yellow" onClick={this.loggedOut}>
+                            Log Out
+                    </Button>
                     </Button.Group>
-                </Menu.Item>           
+                </Menu.Item> 
+                       
             </Menu>
-            
+           
         );
     }
 }
