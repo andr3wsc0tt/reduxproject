@@ -2,7 +2,6 @@ import React, {Fragment} from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Switch,
   Redirect
 } from "react-router-dom";
@@ -13,7 +12,6 @@ import ErrorPage from "./components/ErrorPage";
 import { Profile } from "./store/types/types";
 import { RootState } from "./store";
 import { connect } from "react-redux";
-import NavBar from "./components/subcomponents/NavBar";
 
 export interface IAppProps {
   loggedIn: boolean;
@@ -24,7 +22,6 @@ export class App extends React.Component<IAppProps> {
   public render() {
 
     if (sessionStorage.getItem("loggedIn") === 'true') { // check session Storage to see if the global logged in variable is set. This variable is changed in ProfilePage.tsx in loggedOut(), in HomePage.tsx within the render()  fucntion
-      const uName = sessionStorage.getItem("userName"); // if the loggedIn global variable is set, then the global userName variable should be set
 
       return ( // if you're logged in, switch through the paths in the order shown below. There should be a reroute to the profile page if you manually enter the homepage url.
         <>

@@ -10,20 +10,12 @@ import NavBar from "./subcomponents/NavBar";
 
 
 import {
-  Card,
-  Image,
   Grid,
-  Input,
-  Divider,
-  Container,
   Header,
-  Radio,
   Form,
   Segment,
   TextArea,
   Button,
-  List,
-  Icon
 
 } from "semantic-ui-react";
 

@@ -4,15 +4,6 @@ import { connect } from "react-redux";
 import { Menu, Dropdown, Input, Button } from 'semantic-ui-react';
 import { Profile } from "../../store/types/types";
 import { logOut } from "../../store/actions/actions";
-import EditProfilePage from "../EditProfilePage";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  Redirect
-} from "react-router-dom";
-
 
 export interface INavBarProps {
     goto:string;
@@ -28,17 +19,6 @@ export interface INavBarState { // our local state variables
   
 
 export class NavBar extends React.Component<INavBarProps, INavBarState> {    
-    constructor (props:INavBarProps){
-        super(props);
-        this.state = {page:""}
-    }
-
-    componentDidMount(){
-        console.log(window.location.href)
-        
-
-    }
-
     loggedOut = () => { // The function that calls our logOut REDUCER!
         let { logOut, profiles } = this.props; // The store states logOut REDUCER and profiles array
     
@@ -54,15 +34,8 @@ export class NavBar extends React.Component<INavBarProps, INavBarState> {
 
           
     public render() {
-        let {page} = this.state;
        
-        let { profiles, goto } = this.props; // load in the profiles from the store state
-     
-
-        let uName = profiles.filter(profile => profile.loggedIn == true); // find out who user is logged in
-        let { aboutMe, name, password, id, loggedIn, cohort, programming, city, spoken } = uName[0]; // Deconstructing the current user's store profile fields
-    
-        
+        let { goto } = this.props; // load in the profiles from the store state
       
         return (
             <Menu>
