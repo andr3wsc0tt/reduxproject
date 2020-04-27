@@ -50,7 +50,6 @@ export interface IHomeState {
   signupMessage: string
 }
 
-
 export class Home extends React.Component<IHomeProps, IHomeState> {
   constructor(props: IHomeProps) {
     super(props);
