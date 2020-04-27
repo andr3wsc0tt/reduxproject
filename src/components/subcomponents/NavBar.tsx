@@ -98,7 +98,6 @@ export class NavBar extends React.Component<INavBarProps, INavBarState> {
                         <Button color="green" onClick={this.props.redirect}>
                             {goto}
                         </Button>
-
                         <Button.Or/>
                         <Button color="yellow" onClick={this.loggedOut}>
                             Log Out

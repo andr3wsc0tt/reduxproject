@@ -94,122 +94,124 @@ export class ProfilePage extends React.Component<
     return (
       // If there is no redirect request. Render the Profile Page
         <Container>
-        <NavBar redirect = {this.handleRedirect} goto= "Edit Profile"/>
-           <Grid divided="vertically">
-            <Grid.Row columns={8}>
+           <Segment>
+           <NavBar redirect = {this.handleRedirect} goto= "Edit Profile"/>
+            <Grid divided="vertically">
+              <Grid.Row columns={8}>
+                <Grid.Column>
+                <Container>
+                <Image src={LOGO} size="large" circular centered/>
+                </Container>
+                </Grid.Column>
+              </Grid.Row>
+
+            <Grid.Row columns={3}>
               <Grid.Column>
-              <Container>
-              <Image src={LOGO} size="large" circular centered/>
-              </Container>
+                <Card>
+                <Responsive as={Card} minWidth={768}>
+                  <Image
+                    src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
+                    wrapped
+                    ui={false}
+                  />
+                  <Card.Content>
+
+                  <Card.Header>{name}</Card.Header>
+                    <Card.Meta>
+                      <span className="date"><h3>Cohort:{cohort}</h3></span>
+                    </Card.Meta>
+                    <br></br>
+                    <Card.Description>
+                    <h3>Current city:{city}</h3>
+                    <h3>Spoken languages:{spoken}</h3>
+                    <h3>Programming languages interested in:{programming}</h3>
+                    <h3>About Me: {aboutMe}</h3>
+                    </Card.Description>
+                  </Card.Content>
+                  <Card.Content extra>
+                    {/* <a>
+                <Icon name='user' />
+                22 Friends
+
+              </a> */}
+                  </Card.Content>
+                  </Responsive>
+                </Card>
+                <Container>
+                    <Responsive as={Container} minWidth={768}>
+                      <Header as="h3"> Explore </Header>
+
+                      <Radio as="h4" label="Networking Events" defaultChecked />
+                      <br></br>
+                      <Radio as="h2" label="Previous Cohorts" defaultChecked />
+                      <br></br>
+                      <Radio as="h2" label="Groups" defaultChecked />
+                      <br></br>
+                      <Radio
+                        as="h2"
+                        label="Additional Resources"
+                        defaultChecked
+                      />
+                      <br></br>
+                      <Radio as="h2" label="Linkedin" defaultChecked />
+                    </Responsive>
+                  </Container>
+              </Grid.Column>
+              <Grid.Column>
+                <h2>Welcome {name}!</h2>
+                <Form>
+                  <Segment>
+                    <TextArea
+                      placeholder="Create a Post"
+                      style={{ minHeight: 150 }}
+                    />
+                    <Segment>
+                      {" "}
+                      <Button icon>
+                        <Icon name="photo" color="green" />
+                        Photo
+                      </Button>
+                      <Button icon>
+                        <Icon name="user outline" color="green" />
+                        Tag a Class Mate
+                      </Button>
+                    </Segment>
+                  </Segment>
+                </Form>{" "}
+                <br></br>
+                <Form>
+                  <Segment>
+                    <TextArea
+                      placeholder="Ask a question"
+                      style={{ minHeight: 150 }}
+                    />
+                    <Segment>
+                      {" "}
+                      <Button icon>
+                        <Icon name="image outline" color="green" />
+                        Screen Shot
+                      </Button>
+                      <Button icon>
+                        <Icon name="file code outline" color="green" />
+                        Group
+                      </Button>
+                    </Segment>
+                  </Segment>
+                </Form>
+              </Grid.Column>
+              <Grid.Column>
+                <Container>
+              <Responsive as={Container} minWidth={768}>
+                <Calendar />
+                </Responsive>
+                </Container>
+                <br></br>
+                <br></br>
+                
               </Grid.Column>
             </Grid.Row>
-
-          <Grid.Row columns={3}>
-            <Grid.Column>
-              <Card>
-              <Responsive as={Card} minWidth={768}>
-                <Image
-                  src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
-                  wrapped
-                  ui={false}
-                />
-                <Card.Content>
-
-                 <Card.Header>{name}</Card.Header>
-                  <Card.Meta>
-                    <span className="date"><h3>Cohort:{cohort}</h3></span>
-                  </Card.Meta>
-                  <br></br>
-                  <Card.Description>
-                  <h3>Current city:{city}</h3>
-                  <h3>Spoken languages:{spoken}</h3>
-                  <h3>Programming languages interested in:{programming}</h3>
-                  <h3>About Me: {aboutMe}</h3>
-                  </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                  {/* <a>
-              <Icon name='user' />
-              22 Friends
-
-            </a> */}
-                </Card.Content>
-                </Responsive>
-              </Card>
-              <Container>
-                  <Responsive as={Container} minWidth={768}>
-                    <Header as="h3"> Explore </Header>
-
-                    <Radio as="h4" label="Networking Events" defaultChecked />
-                    <br></br>
-                    <Radio as="h2" label="Previous Cohorts" defaultChecked />
-                    <br></br>
-                    <Radio as="h2" label="Groups" defaultChecked />
-                    <br></br>
-                    <Radio
-                      as="h2"
-                      label="Additional Resources"
-                      defaultChecked
-                    />
-                    <br></br>
-                    <Radio as="h2" label="Linkedin" defaultChecked />
-                  </Responsive>
-                </Container>
-            </Grid.Column>
-            <Grid.Column>
-              <h2>Welcome {name}!</h2>
-              <Form>
-                <Segment>
-                  <TextArea
-                    placeholder="Create a Post"
-                    style={{ minHeight: 150 }}
-                  />
-                  <Segment>
-                    {" "}
-                    <Button icon>
-                      <Icon name="photo" color="green" />
-                      Photo
-                    </Button>
-                    <Button icon>
-                      <Icon name="user outline" color="green" />
-                      Tag a Class Mate
-                    </Button>
-                  </Segment>
-                </Segment>
-              </Form>{" "}
-              <br></br>
-              <Form>
-                <Segment>
-                  <TextArea
-                    placeholder="Ask a question"
-                    style={{ minHeight: 150 }}
-                  />
-                  <Segment>
-                    {" "}
-                    <Button icon>
-                      <Icon name="image outline" color="green" />
-                      Screen Shot
-                    </Button>
-                    <Button icon>
-                      <Icon name="file code outline" color="green" />
-                      Group
-                    </Button>
-                  </Segment>
-                </Segment>
-              </Form>
-            </Grid.Column>
-            <Grid.Column>
-              <Container>
-            <Responsive as={Container} minWidth={768}>
-              <Calendar />
-              </Responsive>
-              </Container>
-              <br></br>
-              <br></br>
-              
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+          </Grid>
+           </Segment>
         </Container>
 
     );
