@@ -9,7 +9,8 @@ import {
   Segment,
   Container,
   Input,
-  Icon
+  Icon,
+  Responsive
 } from "semantic-ui-react";
 
 import { checkPass, addProfile } from "../store/actions/actions";
@@ -201,16 +202,18 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     // If the user isn't logged in, render the HomePage
     return (
       <Segment>
-        <Grid columns="equal">
+        <Grid stackable columns="equal">
           <Grid.Row>
             <div className="thumb">
               <a href="#">
                 <span>TechCareers Hive</span>
               </a>
             </div>
-            <Grid.Column></Grid.Column>
-            <Grid.Column></Grid.Column>
-            <Grid.Column floated="right">
+            <Responsive as={Grid.Column} minWidth={768}></Responsive>
+            <Responsive as={Grid.Column} minWidth={768}></Responsive>
+            {/* <Grid.Column></Grid.Column>
+            <Grid.Column></Grid.Column> */}
+            <Grid.Column floated="right" className="floated-dissapear">
               <br></br>
               <br></br>
               <Input
@@ -222,7 +225,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                 onChange={this.handleUserChange}
               />
             </Grid.Column>
-            <Grid.Column floated="right">
+            <Grid.Column floated="right" className="floated-dissapear">
               <br></br>
               <br></br>
               <Input
@@ -272,7 +275,8 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
             </div>
           </Divider>
           <Grid.Row>
-            <Grid.Column>
+          <Responsive as={Grid.Column} minWidth={768}>
+            {/* <Grid.Column> */}
               <Container fluid>
                 <Header as="h2">TECHCareers Hive</Header>
                 <br></br>
@@ -281,7 +285,8 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                 <p>Check networking events.</p>
                 <p>AND More!!!!!!!.</p>
               </Container>
-            </Grid.Column>
+              </Responsive>
+            {/* </Grid.Column> */}
             <Grid.Column>
               {" "}
               <Divider vertical>
