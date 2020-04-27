@@ -7,7 +7,7 @@ import { RootState } from "../store";
 import ProfilePage from "./ProfilePage";
 import { connect } from "react-redux";
 import NavBar from "./subcomponents/NavBar";
-
+import MediaQuery from 'react-responsive';
 
 import {
   Grid,
@@ -135,6 +135,7 @@ export class EditProfilePage extends React.Component<
     return (
       <React.Fragment>
       <NavBar redirect = {this.handleRedirect} goto= "Profile"/>
+     
       <Container>
         <Segment>
        
@@ -142,7 +143,7 @@ export class EditProfilePage extends React.Component<
          
        
          <Grid.Row>
-         
+         <MediaQuery query="(min-width: 768px)">
            <Grid.Column>
                <h3>Current city:{city}</h3>
                <h3>Cohort:{cohort}</h3>
@@ -150,7 +151,7 @@ export class EditProfilePage extends React.Component<
                <h3>Programming languages interested in:{programming}</h3>
                <h3>About Me: {aboutMe}</h3>
            </Grid.Column> 
-     
+           </MediaQuery>
            <Grid.Column>
              <Header as="h2" color="green" textAlign="center">
                Edit profile
@@ -211,6 +212,7 @@ export class EditProfilePage extends React.Component<
        </Grid>
        </Segment>
      </Container>
+    
      </React.Fragment>
     );     
   }
