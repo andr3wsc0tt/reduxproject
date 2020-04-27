@@ -143,12 +143,16 @@ export class EditProfilePage extends React.Component<
        
          <Grid.Row>
          
-           <Grid.Column>
-               <h3>Current city:{city}</h3>
-               <h3>Cohort:{cohort}</h3>
-               <h3>Spoken languages:{spoken}</h3>
-               <h3>Programming languages interested in:{programming}</h3>
-               <h3>About Me: {aboutMe}</h3>
+           <Grid.Column >
+    
+             <Container style={{marginTop: 70}} className= "edit-profile">
+               <h5>Current city:{" "}{city}</h5>
+               <h5>Cohort:{" "}{cohort}</h5>
+               <h5>Spoken languages:{" "}{spoken}</h5>
+               <h5>Programming languages interested in:{" "}{programming}</h5>
+               <h5>About Me:{" "}{aboutMe}</h5>
+             </Container>
+         
            </Grid.Column> 
      
            <Grid.Column>
