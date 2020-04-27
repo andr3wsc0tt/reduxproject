@@ -48,6 +48,7 @@
 html, body {min-height: 100%;}
 /*a nice BG*/
 body {
+	font-family: 'Segoe UI', Roboto, 'Open Sans', 'Helvetica Neue', Arial,Helvetica,sans-serif;
 	/* background: #544; fallback */
 	/* background: linear-gradient(#544, #565); */
 }
@@ -112,12 +113,11 @@ body {
 	transform: rotateX(0) translateZ(-60px) scale(0.85);
 }
 
- .item1 , .item2{ 
+.item1 , .item2{ 
 	margin: 0 80px 0 80px;
 	text-align: center;
 }
 
-.item3 , .item4 { 
-	margin: 0 15px 0 70px;
-	text-align: center;
+.edit-profile{
+	padding-left: 30px ;
 }

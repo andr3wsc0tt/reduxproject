@@ -64,8 +64,9 @@ export class NavBar extends React.Component<INavBarProps, INavBarState> {
                         </Dropdown.Menu>
                 </Dropdown>
               </Menu.Item>
+
                 <Menu.Menu position="right">
-               <Menu.Item className ="item3">
+                    <Menu.Item className ="item3">
                     <Input className='icon' icon='search' placeholder='Search...' />
                 </Menu.Item>  
 
