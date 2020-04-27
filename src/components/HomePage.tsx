@@ -9,7 +9,8 @@ import {
   Segment,
   Container,
   Input,
-  Icon
+  Icon,
+  Responsive
 } from "semantic-ui-react";
 
 import { checkPass, addProfile } from "../store/actions/actions";
@@ -42,12 +43,17 @@ export interface IHomeState {
   // Sign up form
   signUpUser: string;
   signUpPass: string;
+  confirmSignUpPass: string
+
+  // Warning messages
+  loginMessage: string
+  signupMessage: string
 }
 
 export class Home extends React.Component<IHomeProps, IHomeState> {
   constructor(props: IHomeProps) {
     super(props);
-    this.state = { userName: "", passWord: "", signUpPass: "", signUpUser: "" };
+    this.state = { userName: "", passWord: "", signUpPass: "", signUpUser: "" , loginMessage: "", signupMessage: "", confirmSignUpPass: ""};
   }
 
   // the 4 functions (methods) below update our form fields as the user inputs them
@@ -63,22 +69,38 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     this.setState({ signUpUser: e.currentTarget.value });
   };
 
+  handleConfirmSignPassChange = (e: React.FormEvent<HTMLInputElement>) => {
+    this.setState({ confirmSignUpPass: e.currentTarget.value });
+  };
+
   handleSignPassChange = (e: React.FormEvent<HTMLInputElement>) => {
     this.setState({ signUpPass: e.currentTarget.value });
   };
+
 
   // This is our login method that call the checkPass REDUCER!
   handleOnClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
 
     // our local state login and password
-    let { userName, passWord } = this.state;
+    let { userName, passWord, loginMessage} = this.state;
     // our store variables and reducers that are passed from mapStateToProps and connect!
-    let { checkPass } = this.props;
+    let { checkPass, profiles } = this.props;
     // Our reducer (checkPass) takes in a string[]...so a ['username', 'password'] array
     let cred: Array<string> = [userName, passWord];
     // a REDUCER!
+
+    let uName = profiles.filter((profile) => profile.name === userName);
+
+    if (uName.length === 0)
+      this.setState({loginMessage : "Incorrect Username or Password"})
+
+    if (uName.length > 0 && uName[0].password !== passWord)
+      this.setState({loginMessage : "Incorrect Username or Password"})
+
+
     checkPass(cred);
+
     // Resets our local state username and password
     this.setState({ userName: "", passWord: "" });
   };
@@ -87,7 +109,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
   handleSignUp = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     // info put into form
-    let { signUpPass, signUpUser } = this.state;
+    let { signUpPass, signUpUser, confirmSignUpPass } = this.state;
     // store variables and reducers
     let { addProfile, profiles } = this.props;
     // variable to check is a user by that name already exists
@@ -100,25 +122,32 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         duplicated = true;
       }
     });
-
     // if you didn't find a user with the same name that was entered in the sign up input box
-    if (duplicated === false) {
-      //add that user to the stores profile array using the addProfile REDUCER!
-      addProfile({
-        id: 2,
-        name: signUpUser,
-        password: signUpPass,
-        aboutMe: "",
-        loggedIn: true,
-        city: "",
-        cohort: "",
-        programming: "",
-        spoken: ""
-      });
+    if (confirmSignUpPass !== signUpPass && duplicated === false){
+      this.setState({ signupMessage: "Passwords don't match" });
+    }
+    else{
+      if (duplicated === false) {
+        //add that user to the stores profile array using the addProfile REDUCER!
+        addProfile({
+          id: 2,
+          name: signUpUser,
+          password: signUpPass,
+          aboutMe: "",
+          loggedIn: true,
+          city: "",
+          cohort: "",
+          programming: "",
+          spoken: ""
+        });
+      }
+      else{
+        this.setState({ signupMessage: "Username already exists" });
+      }
     }
 
     // Reset the local state variables
-    this.setState({ signUpUser: "", signUpPass: "" });
+    this.setState({ signUpUser: "", signUpPass: "", confirmSignUpPass: "" });
   };
 
 
@@ -153,13 +182,14 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     } else {
       // save the sessionStorage profiles (not sure if this is necessary)
       sessionStorage.setItem("profiles", JSON.stringify(profiles));
+
     }
   }
 
 
   public render() {
     let { loggedIn, profiles } = this.props;
-
+    let {loginMessage} = this.state;
     if (loggedIn === true || sessionStorage.getItem("loggedIn") === "true") {
       let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
 
@@ -182,8 +212,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     // If the user isn't logged in, render the HomePage
     return (
       <Segment>
-        <Grid columns="equal">
-       
+        <Grid stackable columns="equal">
           <Grid.Row>
           <MediaQuery query="(min-width: 768px)">
             <div className="thumb">
@@ -191,10 +220,11 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                 <span>TechCareers Hive</span>
               </a>
             </div>
-            </MediaQuery>
-            <Grid.Column></Grid.Column>
-            <Grid.Column></Grid.Column>
-            <Grid.Column floated="right">
+            <Responsive as={Grid.Column} minWidth={768}></Responsive>
+            <Responsive as={Grid.Column} minWidth={768}></Responsive>
+            {/* <Grid.Column></Grid.Column>
+            <Grid.Column></Grid.Column> */}
+            <Grid.Column floated="right" className="floated-dissapear">
               <br></br>
               <br></br>
               <Input
@@ -206,7 +236,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                 onChange={this.handleUserChange}
               />
             </Grid.Column>
-            <Grid.Column floated="right">
+            <Grid.Column floated="right" className="floated-dissapear">
               <br></br>
               <br></br>
               <Input
@@ -230,7 +260,9 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
               >
                 Login
               </Button>
+              <span>{this.state.loginMessage}</span>
             </Grid.Column>
+           </MediaQuery>
           </Grid.Row>
           {/* <div id="animated_div">Techcareers HIVE</div> */}
           <Divider horizontal>
@@ -256,8 +288,8 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
             </MediaQuery>
           </Divider>
           <Grid.Row>
-            <Grid.Column>
-            <MediaQuery query="(min-width: 768px)">
+          <Responsive as={Grid.Column} minWidth={768}>
+            {/* <Grid.Column> */}
               <Container fluid>
                 <Header as="h2">TECHCareers Hive</Header>
                 <br></br>
@@ -266,8 +298,8 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                 <p>Check networking events.</p>
                 <p>AND More!!!!!!!.</p>
               </Container>
-              </MediaQuery>
-            </Grid.Column>
+              </Responsive>
+            {/* </Grid.Column> */}
             <Grid.Column>
               {" "}
               <MediaQuery query="(min-width: 768px)">
@@ -284,10 +316,12 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
               </Divider>
               </MediaQuery>
             </Grid.Column>
+            
             <Grid.Column>
               <Header as="h2" color="green" textAlign="center">
                 Sign -Up
               </Header>
+              <span>{this.state.signupMessage}</span>
               <Form size="large">
                 <Segment stacked>
                   <Form.Input
@@ -305,6 +339,8 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                     iconPosition="left"
                     placeholder="Password"
                     type="password"
+                    value={this.state.confirmSignUpPass}
+                    onChange={this.handleConfirmSignPassChange}
                   />
                   <Form.Input
                     fluid
@@ -329,6 +365,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
           </Grid.Row>
         </Grid>
       </Segment>
+
     );
   }
 }

@@ -97,7 +97,7 @@ export class ProfilePage extends React.Component<
       <Container>
       <Segment>
       
-      <Grid divided="vertically">
+      <Grid stackable divided="vertically">
         <Grid.Row columns={8}>
           <Grid.Column>
           {/* <Container>
@@ -108,19 +108,19 @@ export class ProfilePage extends React.Component<
         <Grid.Row columns={3}>
           <Grid.Column>
             <Card>
-            <Responsive as={Card} minWidth={768}>
+            {/* <Responsive as={Card} minWidth={768}> */}
               <Image src={profilePic} wrapped ui={false}/>
               <Card.Content>
                <Card.Header>{name}</Card.Header>
                 <Card.Meta>
-                  <span className="date"><h3>Cohort:{cohort}</h3></span>
+                  <span className="date"><h5>Cohort:{" "}{cohort}</h5></span>
                 </Card.Meta>
                 <br></br>
                 <Card.Description>
-                <h3>Current city:{city}</h3>
-                <h3>Spoken languages:{spoken}</h3>
-                <h3>Programming languages interested in:{programming}</h3>
-                <h3>About Me: {aboutMe}</h3>
+                <h5>Current city:{" "}{city}</h5>
+                <h5>Spoken languages:{" "}{spoken}</h5>
+                <h5>Programming languages interested in:{" "}{programming}</h5>
+                <h5>About Me:{" "}{aboutMe}</h5>
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
@@ -129,7 +129,7 @@ export class ProfilePage extends React.Component<
             22 Friends
           </a> */}
               </Card.Content>
-              </Responsive>
+              {/* </Responsive> */}
             </Card>
           </Grid.Column>
           <Grid.Column>
