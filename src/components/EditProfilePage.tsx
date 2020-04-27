@@ -16,6 +16,7 @@ import {
   Segment,
   TextArea,
   Button,
+  Container
 
 } from "semantic-ui-react";
 
@@ -132,9 +133,11 @@ export class EditProfilePage extends React.Component<
     }
 
     return (
-
+      <React.Fragment>
+      <NavBar redirect = {this.handleRedirect} goto= "Profile"/>
       <Container>
-       <NavBar redirect = {this.handleRedirect} goto= "Profile"/>
+        <Segment>
+       
        <Grid columns="equal">
          
        
@@ -206,7 +209,9 @@ export class EditProfilePage extends React.Component<
            <Grid.Column></Grid.Column>
          </Grid.Row>
        </Grid>
+       </Segment>
      </Container>
+     </React.Fragment>
     );     
   }
 }
