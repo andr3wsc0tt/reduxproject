@@ -1,5 +1,5 @@
 import * as React from "react";
-import './main.css';
+import "./main.css";
 import {
   Divider,
   Button,
@@ -9,7 +9,7 @@ import {
   Segment,
   Container,
   Input,
-  Icon,
+  Icon
 } from "semantic-ui-react";
 
 import { checkPass, addProfile } from "../store/actions/actions";
@@ -21,26 +21,26 @@ import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import ProfilePage from "./ProfilePage";
 
 // our store state variables
-export interface IHomeProps { 
+export interface IHomeProps {
   // reducer
-  checkPass: typeof checkPass; 
+  checkPass: typeof checkPass;
   // reducer
-  addProfile: typeof addProfile; 
+  addProfile: typeof addProfile;
   // our users
-  profiles: Profile[]; 
+  profiles: Profile[];
   // a state variable
-  loggedIn: boolean; 
+  loggedIn: boolean;
   location?: Router;
 }
 
 // Our local state variables that change as we input either our login and password, or our new user information.
-export interface IHomeState { 
+export interface IHomeState {
   // Login forms
-  userName: string; 
+  userName: string;
   passWord: string;
 
   // Sign up form
-  signUpUser: string; 
+  signUpUser: string;
   signUpPass: string;
 }
 
@@ -49,7 +49,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     super(props);
     this.state = { userName: "", passWord: "", signUpPass: "", signUpUser: "" };
   }
- 
+
   // the 4 functions (methods) below update our form fields as the user inputs them
   handleUserChange = (e: React.FormEvent<HTMLInputElement>) => {
     this.setState({ userName: e.currentTarget.value });
@@ -67,54 +67,44 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     this.setState({ signUpPass: e.currentTarget.value });
   };
 
-
   // This is our login method that call the checkPass REDUCER!
   handleOnClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
 
     // our local state login and password
-    let { userName, passWord } = this.state; 
-
+    let { userName, passWord } = this.state;
     // our store variables and reducers that are passed from mapStateToProps and connect!
-    let { checkPass } = this.props; 
-
+    let { checkPass } = this.props;
     // Our reducer (checkPass) takes in a string[]...so a ['username', 'password'] array
-    let cred: Array<string> = [userName, passWord]; 
-
+    let cred: Array<string> = [userName, passWord];
     // a REDUCER!
-    checkPass(cred); 
-
+    checkPass(cred);
     // Resets our local state username and password
-    this.setState({ userName: "", passWord: "" }); 
+    this.setState({ userName: "", passWord: "" });
   };
 
   // our sign up function that calls our addProfile REDUCER!
-  handleSignUp = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => { 
+  handleSignUp = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-
     // info put into form
-    let { signUpPass, signUpUser } = this.state; 
-
+    let { signUpPass, signUpUser } = this.state;
     // store variables and reducers
-    let { addProfile, profiles } = this.props; 
-
+    let { addProfile, profiles } = this.props;
     // variable to check is a user by that name already exists
     let duplicated: boolean = false;
-
     // Go through each profile in the store's profiles
-    profiles.forEach((profile, i) => { 
+    profiles.forEach((profile, i) => {
       // Check if that profile has the same name as the text entered in the sign up field
-      if (profile.name === signUpUser) { 
-
+      if (profile.name === signUpUser) {
         // if the text entered in the sign up field matches a name in the store's profile array, set duplicated to true (Tell the function that you found a user that already has that name)
-        duplicated = true; 
+        duplicated = true;
       }
     });
 
     // if you didn't find a user with the same name that was entered in the sign up input box
-    if (duplicated === false) { 
+    if (duplicated === false) {
       //add that user to the stores profile array using the addProfile REDUCER!
-      addProfile({ 
+      addProfile({
         id: 2,
         name: signUpUser,
         password: signUpPass,
@@ -128,200 +118,210 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     }
 
     // Reset the local state variables
-    this.setState({ signUpUser: "", signUpPass: "" }); 
-  }; 
-  public render() {
+    this.setState({ signUpUser: "", signUpPass: "" });
+  };
 
+
+  componentDidUpdate(){
     // Get the store's initial state's loggedIn variable and profile array
-    let { loggedIn, profiles } = this.props; 
-
+    let { loggedIn, profiles } = this.props;
     // if the store's loggedIn variable is set, or the sessionState loggedIn variable is set then we can set up our Router for moving to the appropriate page
-    if (loggedIn === true || sessionStorage.getItem("loggedIn") === "true") { 
-
-       // save the sessionStorage profiles (not sure if this is necessary)
+    if (loggedIn === true || sessionStorage.getItem("loggedIn") === "true") {
+      // save the sessionStorage profiles (not sure if this is necessary)
       sessionStorage.setItem("profiles", JSON.stringify(profiles));
-
-      // save the sessionStorage username 
-      let userName = sessionStorage.getItem("userName"); 
-
+      // save the sessionStorage username
+      let userName = sessionStorage.getItem("userName");
       // find the profile of the user that is logged in
-      let uName = profiles.filter(profile => profile.loggedIn === true); 
-
-       // intialize null string for the Redirect Route
+      let uName = profiles.filter(profile => profile.loggedIn === true);
+      // intialize null string for the Redirect Route
       let destString = "";
-
       // If a user is logged in through the store state
-      if (loggedIn === true) { 
-
+      if (loggedIn === true) {
         // save to global
-        sessionStorage.setItem("userName", uName[0].name); 
-
+        sessionStorage.setItem("userName", uName[0].name);
         // save to global
-        sessionStorage.setItem("loggedIn", "true"); 
-
+        sessionStorage.setItem("loggedIn", "true");
         // set the destination for Redirect Route to the name of the logged in User
-        destString = uName[0].name; 
-
+        destString = uName[0].name;
         // if the global username is set
-      } else if (userName != undefined) { 
-        sessionStorage.setItem("userName", userName); 
-
+      } else if (userName != undefined) {
+        sessionStorage.setItem("userName", userName);
         // set the destination for Redirect Route to the name of the sessionStorage username
-        destString = userName; 
+        destString = userName;
       }
 
-      // If the user is logged in, take them to the profile page
-      return ( 
+    } else {
+      // save the sessionStorage profiles (not sure if this is necessary)
+      sessionStorage.setItem("profiles", JSON.stringify(profiles));
+    }
+  }
+
+
+  public render() {
+    let { loggedIn, profiles } = this.props;
+
+    if (loggedIn === true || sessionStorage.getItem("loggedIn") === "true") {
+      let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
+      let destString = sessionStorage.getItem("userName") ? sessionStorage.getItem("userName") : uName[0].name;
+
+      return (
         <>
           <Router>
             {/* Redirect to the /profile/ page with their username == destString */}
-            <Redirect to={`/profile/${destString}`} /> 
+            <Redirect to={`/profile/${destString}`} />
 
             {/* Render the ProfilePage component */}
-            <Link to="" component={ProfilePage} /> 
+            <Link to="" component={ProfilePage} />
           </Router>
         </>
       );
     }
-    else{
-       // save the sessionStorage profiles (not sure if this is necessary)
-      sessionStorage.setItem("profiles", JSON.stringify(profiles));
-    }
 
-     // If the user isn't logged in, render the HomePage
+    // If the user isn't logged in, render the HomePage
     return (
       <Segment>
-  
-      <Grid columns="equal">
-        <Grid.Row>
-        <div className="thumb">
-	
-	<a href="#">
-		
-		<span>TechCareers Hive</span>
-	</a>
-</div>
-          <Grid.Column></Grid.Column>
-          <Grid.Column></Grid.Column>
-          <Grid.Column floated="right"><br></br><br></br>
-            <Input
-              fluid
-              icon="user"
-              iconPosition="left"
-              placeholder="Username"
-              value={this.state.userName}
-              onChange={this.handleUserChange}
-            />
-          </Grid.Column>
-          <Grid.Column floated="right"><br></br><br></br>
-            <Input
-              fluid
-              icon="lock"
-              iconPosition="left"
-              placeholder="Password"
-              type="password"
-              value={this.state.passWord}
-              onChange={this.handlePassChange}
-            />
-          </Grid.Column>
-          <Grid.Column floated="right"><br></br><br></br>
-            <Button
-              color="yellow"
-              fluid
-              size="large"
-              onClick={this.handleOnClick}
-            >
-              Login
-            </Button>
-          </Grid.Column>
-        </Grid.Row>
-        {/* <div id="animated_div">Techcareers HIVE</div> */}
-        <Divider horizontal> <div className="sk-wave">
-        <div className="sk-wave-rect">T</div>
-        <div className="sk-wave-rect">e</div>
-        <div className="sk-wave-rect">c</div>
-        <div className="sk-wave-rect">h</div>
-        <div className="sk-wave-rect">C</div>
-        <div className="sk-wave-rect">a</div>
-        <div className="sk-wave-rect">r</div>
-        <div className="sk-wave-rect">e</div>
-        <div className="sk-wave-rect">e</div>
-        <div className="sk-wave-rect">r</div>
-        <div className="sk-wave-rect">s</div>
-        <div className="sk-wave-rect">H</div>
-        <div className="sk-wave-rect">I</div>
-        <div className="sk-wave-rect">V</div>
-        <div className="sk-wave-rect">E</div>
-      </div></Divider>
-        <Grid.Row>
-          <Grid.Column>
-            <Container fluid>
-              <Header as="h2">TECHCareers Hive</Header><br></br>
-              <p>Connect with classmates and techcareers alumni.</p>
-              <p>Join groups of your interest.</p>
-              <p>Check networking events.</p>
-              <p>AND More!!!!!!!.</p>
-            </Container>
-          </Grid.Column>
-          <Grid.Column>
+        <Grid columns="equal">
+          <Grid.Row>
+            <div className="thumb">
+              <a href="#">
+                <span>TechCareers Hive</span>
+              </a>
+            </div>
+            <Grid.Column></Grid.Column>
+            <Grid.Column></Grid.Column>
+            <Grid.Column floated="right">
+              <br></br>
+              <br></br>
+              <Input
+                fluid
+                icon="user"
+                iconPosition="left"
+                placeholder="Username"
+                value={this.state.userName}
+                onChange={this.handleUserChange}
+              />
+            </Grid.Column>
+            <Grid.Column floated="right">
+              <br></br>
+              <br></br>
+              <Input
+                fluid
+                icon="lock"
+                iconPosition="left"
+                placeholder="Password"
+                type="password"
+                value={this.state.passWord}
+                onChange={this.handlePassChange}
+              />
+            </Grid.Column>
+            <Grid.Column floated="right">
+              <br></br>
+              <br></br>
+              <Button
+                color="yellow"
+                fluid
+                size="large"
+                onClick={this.handleOnClick}
+              >
+                Login
+              </Button>
+            </Grid.Column>
+          </Grid.Row>
+          {/* <div id="animated_div">Techcareers HIVE</div> */}
+          <Divider horizontal>
             {" "}
-            <Divider vertical>  <Icon loading name='forumbee' size='massive' color='yellow' /> </Divider>
-          </Grid.Column>
-          <Grid.Column>
-            <Header as="h2" color="green" textAlign="center">
-              Sign -Up
-            </Header>
-            <Form size="large">
-              <Segment stacked>
-                <Form.Input
-                  fluid
-                  icon="user"
-                  iconPosition="left"
-                  placeholder="username"
-                  value={this.state.signUpUser}
-                  onChange={this.handleSignUserChange}
-                />
+            <div className="sk-wave">
+              <div className="sk-wave-rect">T</div>
+              <div className="sk-wave-rect">e</div>
+              <div className="sk-wave-rect">c</div>
+              <div className="sk-wave-rect">h</div>
+              <div className="sk-wave-rect">C</div>
+              <div className="sk-wave-rect">a</div>
+              <div className="sk-wave-rect">r</div>
+              <div className="sk-wave-rect">e</div>
+              <div className="sk-wave-rect">e</div>
+              <div className="sk-wave-rect">r</div>
+              <div className="sk-wave-rect">s</div>
+              <div className="sk-wave-rect">H</div>
+              <div className="sk-wave-rect">I</div>
+              <div className="sk-wave-rect">V</div>
+              <div className="sk-wave-rect">E</div>
+            </div>
+          </Divider>
+          <Grid.Row>
+            <Grid.Column>
+              <Container fluid>
+                <Header as="h2">TECHCareers Hive</Header>
+                <br></br>
+                <p>Connect with classmates and techcareers alumni.</p>
+                <p>Join groups of your interest.</p>
+                <p>Check networking events.</p>
+                <p>AND More!!!!!!!.</p>
+              </Container>
+            </Grid.Column>
+            <Grid.Column>
+              {" "}
+              <Divider vertical>
+                {" "}
+                <Icon
+                  loading
+                  name="forumbee"
+                  size="massive"
+                  color="yellow"
+                />{" "}
+              </Divider>
+            </Grid.Column>
+            <Grid.Column>
+              <Header as="h2" color="green" textAlign="center">
+                Sign -Up
+              </Header>
+              <Form size="large">
+                <Segment stacked>
+                  <Form.Input
+                    fluid
+                    icon="user"
+                    iconPosition="left"
+                    placeholder="username"
+                    value={this.state.signUpUser}
+                    onChange={this.handleSignUserChange}
+                  />
 
-                <Form.Input
-                  fluid
-                  icon="lock"
-                  iconPosition="left"
-                  placeholder="Password"
-                  type="password"
-                />
-                <Form.Input
-                  fluid
-                  icon="lock"
-                  iconPosition="left"
-                  placeholder="confirm-Password"
-                  type="password"
-                  value={this.state.signUpPass}
-                  onChange={this.handleSignPassChange}
-                />
-                <Button
-                  color="green"
-                  fluid
-                  size="large"
-                  onClick={this.handleSignUp}
-                >
-                  SignUp
-                </Button>
-              </Segment>
-            </Form>
-          </Grid.Column>
-         
-        </Grid.Row>
-   
-      </Grid>
-     
+                  <Form.Input
+                    fluid
+                    icon="lock"
+                    iconPosition="left"
+                    placeholder="Password"
+                    type="password"
+                  />
+                  <Form.Input
+                    fluid
+                    icon="lock"
+                    iconPosition="left"
+                    placeholder="confirm-Password"
+                    type="password"
+                    value={this.state.signUpPass}
+                    onChange={this.handleSignPassChange}
+                  />
+                  <Button
+                    color="green"
+                    fluid
+                    size="large"
+                    onClick={this.handleSignUp}
+                  >
+                    SignUp
+                  </Button>
+                </Segment>
+              </Form>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </Segment>
-      
     );
   }
 }
 
 // mapStateToProps connects our store with this component
-const mapStateToProps = (state: RootState, ownProps: IHomeProps) => { 
+const mapStateToProps = (state: RootState, ownProps: IHomeProps) => {
   return {
     profiles: state.profile.profiles,
     loggedIn: state.profile.loggedIn
@@ -329,4 +329,4 @@ const mapStateToProps = (state: RootState, ownProps: IHomeProps) => {
 };
 
 // connect loads in the checkPass and addProfile REDUCERS!. It also exports our Component with the store connected
-export default connect(mapStateToProps, { checkPass, addProfile })(Home); 
+export default connect(mapStateToProps, { checkPass, addProfile })(Home);
