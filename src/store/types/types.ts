@@ -1,5 +1,3 @@
-import { StringLiteral } from "@babel/types";
-
 export interface Profile { // Template for our Profile type
   id: number;
   name: string;

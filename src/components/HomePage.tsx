@@ -8,7 +8,6 @@ import {
   Header,
   Segment,
   Container,
-  Input,
   Icon,
   Responsive
 } from "semantic-ui-react";
@@ -83,7 +82,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     event.preventDefault();
 
     // our local state login and password
-    let { userName, passWord, loginMessage} = this.state;
+    let { userName, passWord} = this.state;
     // our store variables and reducers that are passed from mapStateToProps and connect!
     let { checkPass, profiles } = this.props;
     // Our reducer (checkPass) takes in a string[]...so a ['username', 'password'] array
@@ -163,7 +162,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
       // find the profile of the user that is logged in
       let uName = profiles.filter(profile => profile.loggedIn === true);
       // intialize null string for the Redirect Route
-      let destString = "";
       // If a user is logged in through the store state
       if (loggedIn === true) {
         // save to global
@@ -171,12 +169,10 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         // save to global
         sessionStorage.setItem("loggedIn", "true");
         // set the destination for Redirect Route to the name of the logged in User
-        destString = uName[0].name;
         // if the global username is set
-      } else if (userName != undefined) {
+      } else if (userName !== null) {
         sessionStorage.setItem("userName", userName);
         // set the destination for Redirect Route to the name of the sessionStorage username
-        destString = userName;
       }
 
     } else {
@@ -189,7 +185,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 
   public render() {
     let { loggedIn, profiles } = this.props;
-    let {loginMessage} = this.state;
+    let {loginMessage, signupMessage} = this.state;
     if (loggedIn === true || sessionStorage.getItem("loggedIn") === "true") {
       let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
 
@@ -216,55 +212,59 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
           <Grid.Row>
           <MediaQuery query="(min-width: 768px)">
             <div className="thumb">
-              <a href="#">
+              <button>
                 <span>TechCareers Hive</span>
-              </a>
+              </button>
             </div>
             <Responsive as={Grid.Column} minWidth={768}></Responsive>
-            <Responsive as={Grid.Column} minWidth={768}></Responsive>
+
             {/* <Grid.Column></Grid.Column>
             <Grid.Column></Grid.Column> */}
             <Grid.Column floated="right" className="floated-dissapear">
               <br></br>
               <br></br>
-              <Input
-                fluid
+              <Form >
+                <Form.Group>
+              <Form.Input
                 icon="user"
                 iconPosition="left"
+                className="login-name"
                 placeholder="Username"
+                width={5}
                 value={this.state.userName}
                 onChange={this.handleUserChange}
               />
-            </Grid.Column>
-            <Grid.Column floated="right" className="floated-dissapear">
-              <br></br>
-              <br></br>
-              <Input
-                fluid
+              <Form.Input
                 icon="lock"
+                width={5}
+                className="login-pass"
                 iconPosition="left"
                 placeholder="Password"
                 type="password"
                 value={this.state.passWord}
                 onChange={this.handlePassChange}
               />
-            </Grid.Column>
-            <Grid.Column floated="right">
-              <br></br>
-              <br></br>
               <Button
+                type="submit"
                 color="yellow"
-                fluid
                 size="large"
+                className="login-button"
                 onClick={this.handleOnClick}
               >
                 Login
               </Button>
-              <span>{this.state.loginMessage}</span>
+              </Form.Group>
+              </Form>
             </Grid.Column>
+<<<<<<< HEAD
            </MediaQuery>
+=======
+            <span>{loginMessage}</span>
+>>>>>>> 0eaf1cd31b001179e6687c791e705e2b14e62eeb
           </Grid.Row>
+          
           {/* <div id="animated_div">Techcareers HIVE</div> */}
+          
           <Divider horizontal>
           <MediaQuery query="(min-width: 768px)">
             {" "}
@@ -321,7 +321,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
               <Header as="h2" color="green" textAlign="center">
                 Sign -Up
               </Header>
-              <span>{this.state.signupMessage}</span>
+              <span>{signupMessage}</span>
               <Form size="large">
                 <Segment stacked>
                   <Form.Input
