@@ -89,7 +89,7 @@ export class EditProfilePage extends React.Component<
       updateProfile(update); // our update profile REDUCER!
     }
 
-    this.setState({ city: "" }); // resets the input fields after update.
+    this.setState({ redirect: true }); // Sets a state that tells us which page to link to
   };
 
   handleRedirect = () => {
