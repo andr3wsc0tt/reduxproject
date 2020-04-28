@@ -118,6 +118,11 @@ body {
 .NavBar{
 	width: 100vw;
 }
+.login-button{
+	margin-left:6px!important;
+	height:38px;
+	line-height:0.5em;
+}
 
 @media only screen and (max-width: 767px) {
 	.right.floated.column.floated-dissapear{
@@ -126,5 +131,12 @@ body {
 	.thumb{
 		margin-left: auto;
 		margin-bottom: 0px;
+	}
+	
+	.login-button{
+		margin-top:5px!important;
+	}
+	.login-pass{
+		margin-top:5px!important;
 	}
   }

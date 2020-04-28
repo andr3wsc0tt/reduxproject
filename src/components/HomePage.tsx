@@ -8,7 +8,6 @@ import {
   Header,
   Segment,
   Container,
-  Input,
   Icon,
   Responsive
 } from "semantic-ui-react";
@@ -217,50 +216,46 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
               </button>
             </div>
             <Responsive as={Grid.Column} minWidth={768}></Responsive>
-            <Responsive as={Grid.Column} minWidth={768}></Responsive>
+
             {/* <Grid.Column></Grid.Column>
             <Grid.Column></Grid.Column> */}
             <Grid.Column floated="right" className="floated-dissapear">
               <br></br>
               <br></br>
-              <Input
-                fluid
+              <Form >
+                <Form.Group>
+              <Form.Input
                 icon="user"
                 iconPosition="left"
+                className="login-name"
                 placeholder="Username"
+                width={5}
                 value={this.state.userName}
                 onChange={this.handleUserChange}
               />
-            </Grid.Column>
-            <Grid.Column floated="right" className="floated-dissapear">
-              <br></br>
-              <br></br>
-              <Input
-                fluid
+              <Form.Input
                 icon="lock"
+                width={5}
+                className="login-pass"
                 iconPosition="left"
                 placeholder="Password"
                 type="password"
                 value={this.state.passWord}
                 onChange={this.handlePassChange}
               />
-            </Grid.Column>
-            <Grid.Column floated="right">
-              <br></br>
-              <br></br>
               <Button
+                type="submit"
                 color="yellow"
-                fluid
                 size="large"
+                className="login-button"
                 onClick={this.handleOnClick}
               >
                 Login
               </Button>
-             
-              <span>{loginMessage}</span>
-              
+              </Form.Group>
+              </Form>
             </Grid.Column>
-           
+            <span>{loginMessage}</span>
           </Grid.Row>
           
           {/* <div id="animated_div">Techcareers HIVE</div> */}
