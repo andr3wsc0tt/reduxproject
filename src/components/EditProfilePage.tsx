@@ -138,7 +138,7 @@ export class EditProfilePage extends React.Component<
       <Container>
         <Segment>
        
-       <Grid stackable columns="equal">
+       <Grid stackable  columns="equal">
          
        
          <Grid.Row>
