@@ -161,7 +161,7 @@ export function profileReducer(
           indexUpdate = i;
         }
       });
-      console.log(action.payload);
+
       return {
         ...state,
         profiles: [
