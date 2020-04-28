@@ -133,12 +133,12 @@ export class EditProfilePage extends React.Component<
     }
 
     return (
-      <React.Fragment>
-      <NavBar redirect = {this.handleRedirect} goto= "Profile"/>
+    
+    
       <Container>
+        <NavBar redirect = {this.handleRedirect} goto= "Profile"/>
         <Segment>
-       
-       <Grid columns="equal">
+       <Grid stackable columns="equal">
          
        
          <Grid.Row>
@@ -215,7 +215,7 @@ export class EditProfilePage extends React.Component<
        </Grid>
        </Segment>
      </Container>
-     </React.Fragment>
+     
     );     
   }
 }

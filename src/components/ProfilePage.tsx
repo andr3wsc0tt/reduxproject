@@ -29,7 +29,6 @@ import {
 } from "semantic-ui-react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";  
-import LOGO from "./Logo.png";
 import profilePic from './profile.gif'
 import NavBar from "./subcomponents/NavBar";
 
@@ -93,13 +92,14 @@ export class ProfilePage extends React.Component<
     }
 
     return (
-      // If there is no redirect request. Render the Profile Page
-      <React.Fragment>
-      <NavBar redirect = {this.handleRedirect} goto= "Edit Profile"/>
+    
+
       <Container>
+         <NavBar redirect = {this.handleRedirect} goto= "Edit Profile"/>
       <Segment>
-      
-      <Grid divided="vertically">
+       
+     
+      <Grid >
         <Grid.Row columns={8}>
           <Grid.Column>
            {/*<Container>
@@ -110,7 +110,7 @@ export class ProfilePage extends React.Component<
         <Grid.Row columns={3}>
           <Grid.Column>
             <Card>
-            <Responsive as={Card} minWidth={768}>
+            {/* <Responsive as={Card} minWidth={768}> */}
               <Image src={profilePic} wrapped ui={false}/>
               <Card.Content>
                <Card.Header>{name}</Card.Header>
@@ -126,12 +126,9 @@ export class ProfilePage extends React.Component<
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                {/* <a>
-            <Icon name='user' />
-            22 Friends
-          </a> */}
+             
               </Card.Content>
-              </Responsive>
+              {/* </Responsive> */}
             </Card>
           </Grid.Column>
           <Grid.Column>
@@ -205,9 +202,10 @@ export class ProfilePage extends React.Component<
           </Grid.Column>
         </Grid.Row>
       </Grid>
+    
       </Segment>
       </Container>
-      </React.Fragment>
+      
     );
   }
 }

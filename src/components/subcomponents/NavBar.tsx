@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { RootState } from "../../store";
 import { connect } from "react-redux";
-import { Menu, Dropdown, Input, Button, Image,Container} from 'semantic-ui-react';
+import { Menu, Dropdown, Input, Button, Container, Image } from 'semantic-ui-react';
 import { Profile } from "../../store/types/types";
-import { logOut } from "../../store/actions/actions"
-import Hive from "../Hive.png";
-
-
-
+import { logOut } from "../../store/actions/actions";
+import '../main.css';
+import Background from "./Background.png";
+import Logo from "../Logo.png";
 export interface INavBarProps {
     goto:string;
     profiles: Profile[];
@@ -22,8 +21,6 @@ export interface INavBarState { // our local state variables
   
 
 export class NavBar extends React.Component<INavBarProps, INavBarState> {    
-    
-
     loggedOut = () => { // The function that calls our logOut REDUCER!
         let { logOut, profiles } = this.props; // The store states logOut REDUCER and profiles array
     
@@ -44,61 +41,66 @@ export class NavBar extends React.Component<INavBarProps, INavBarState> {
         let { goto } = this.props; // load in the profiles from the store state
       
         return (
-
-
-                    <Menu className ="background-nav" >                    
-                                                             
-                        <Menu.Item >  
+            <Menu stackable className="NavBar">
                                
-                            <Dropdown text="Groups" className ="item1" >
-                                <Dropdown.Menu>
-                                <Dropdown.Item text="Group 1" />
-                                <Dropdown.Item text="Group 2" />
-                                <Dropdown.Item text="Group 3" />
-                                </Dropdown.Menu>
-                            </Dropdown>
-                
-                        </Menu.Item>
-
-                        <Menu.Item >
-                            <Dropdown text="Class Mates" className ="item2">
-                                <Dropdown.Menu>
-                                    <Dropdown.Item text="Andrew" />
-                                    <Dropdown.Item text="Charles" />
-                                    <Dropdown.Item text="Cai" />
-                                    <Dropdown.Item text="Trina" />
-                                    <Dropdown.Item text="Mohammad" />
-                                </Dropdown.Menu>
-                            </Dropdown>
-                           
-                        </Menu.Item>
+                <Menu.Item>
                         
-                        <Menu.Menu position="right">
-                            <Menu.Item className ="item3">
+                    <Dropdown text="Groups" className ="item1" >
+                        <Dropdown.Menu>
+                        <Dropdown.Item text="Group 1" />
+                        <Dropdown.Item text="Group 2" />
+                        <Dropdown.Item text="Group 3" />
+                        </Dropdown.Menu>
+                    </Dropdown>
+         
+                </Menu.Item>
+
+              <Menu.Item >
+                <Dropdown text="Class Mates" className ="item2">
+                        <Dropdown.Menu>
+                        <Dropdown.Item text="Andrew" />
+                        <Dropdown.Item text="Charles" />
+                        <Dropdown.Item text="Cai" />
+                        <Dropdown.Item text="Trina" />
+                        <Dropdown.Item text="Mohammad" />
+                        </Dropdown.Menu>
+                </Dropdown>
+              </Menu.Item>
+
+              <Menu.Item >
+                <Dropdown text="Networking Events" className ="item2">
+                        <Dropdown.Menu>
+                        <Dropdown.Item text="MeetUp" />
+                        <Dropdown.Item text="JavaScript Bootcamp" />
+                        </Dropdown.Menu>
+                </Dropdown>
+              </Menu.Item>
+
+              <Menu.Menu fluid position="right">
+                    <Menu.Item className ="item3">
+                        
                             <Input className='icon' icon='search' placeholder='Search...' />
-                        </Menu.Item>  
+                    </Menu.Item>  
 
-                        <Menu.Item >
-                            <Button.Group className ="item4">
-                                <Button color="green" onClick={this.props.redirect}>
-                                    {goto}
-                                </Button>
-                                <Button.Or/>
-                                <Button color="yellow" onClick={this.loggedOut}>
-                                    Log Out
-                            </Button>
-                            </Button.Group>
-                        </Menu.Item> 
-                        </Menu.Menu>
-                    </Menu>
-                    
-                );
-            }
-            }
+               
+                   <Button.Group className ="item4">
+                        <Button color="green" onClick={this.props.redirect}>
+                            {goto}
+                        </Button>
+                        <Button.Or/>
+                        <Button color="yellow" onClick={this.loggedOut}>
+                            Log Out
+                    </Button>
+                    </Button.Group>
+                </Menu.Menu >
+               
+            </Menu>
+           
+        );
+    }
+}
 
 
-            
-            
 
 const mapStateToProps = (state: RootState) => { // mapStateToProps connects the store's initial state variables with ProfilePage component
   return {
