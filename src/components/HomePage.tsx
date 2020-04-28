@@ -83,7 +83,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
     event.preventDefault();
 
     // our local state login and password
-    let { userName, passWord, loginMessage} = this.state;
+    let { userName, passWord} = this.state;
     // our store variables and reducers that are passed from mapStateToProps and connect!
     let { checkPass, profiles } = this.props;
     // Our reducer (checkPass) takes in a string[]...so a ['username', 'password'] array
@@ -163,7 +163,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
       // find the profile of the user that is logged in
       let uName = profiles.filter(profile => profile.loggedIn === true);
       // intialize null string for the Redirect Route
-      let destString = "";
       // If a user is logged in through the store state
       if (loggedIn === true) {
         // save to global
@@ -171,12 +170,10 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         // save to global
         sessionStorage.setItem("loggedIn", "true");
         // set the destination for Redirect Route to the name of the logged in User
-        destString = uName[0].name;
         // if the global username is set
-      } else if (userName != undefined) {
+      } else if (userName !== null) {
         sessionStorage.setItem("userName", userName);
         // set the destination for Redirect Route to the name of the sessionStorage username
-        destString = userName;
       }
 
     } else {
@@ -189,7 +186,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
 
   public render() {
     let { loggedIn, profiles } = this.props;
-    let {loginMessage} = this.state;
+    let {loginMessage, signupMessage} = this.state;
     if (loggedIn === true || sessionStorage.getItem("loggedIn") === "true") {
       let uName = profiles.filter(profile => profile.loggedIn === true); // find out who user is logged in
 
@@ -215,9 +212,9 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
         <Grid stackable columns="equal">
           <Grid.Row>
             <div className="thumb">
-              <a href="#">
+              <button>
                 <span>TechCareers Hive</span>
-              </a>
+              </button>
             </div>
             <Responsive as={Grid.Column} minWidth={768}></Responsive>
             <Responsive as={Grid.Column} minWidth={768}></Responsive>
@@ -259,11 +256,15 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
               >
                 Login
               </Button>
-              <span>{this.state.loginMessage}</span>
+             
+              <span>{loginMessage}</span>
+              
             </Grid.Column>
            
           </Grid.Row>
+          
           {/* <div id="animated_div">Techcareers HIVE</div> */}
+          
           <Divider horizontal>
             {" "}
             <div className="sk-wave">
@@ -314,7 +315,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
               <Header as="h2" color="green" textAlign="center">
                 Sign -Up
               </Header>
-              <span>{this.state.signupMessage}</span>
+              <span>{signupMessage}</span>
               <Form size="large">
                 <Segment stacked>
                   <Form.Input
