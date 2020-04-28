@@ -67,20 +67,13 @@ export class NavBar extends React.Component<INavBarProps, INavBarState> {
                 </Dropdown>
               </Menu.Item>
 
-              <Menu.Item >
-                <Dropdown text="Networking Events" className ="item2">
-                        <Dropdown.Menu>
-                        <Dropdown.Item text="MeetUp" />
-                        <Dropdown.Item text="JavaScript Bootcamp" />
-                        </Dropdown.Menu>
-                </Dropdown>
-              </Menu.Item>
 
-              <Menu.Menu fluid position="right">
-                    <Menu.Item className ="item3">
-                        
-                            <Input className='icon' icon='search' placeholder='Search...' />
-                    </Menu.Item>  
+                <Menu.Menu position="right">
+               <Menu.Item className ="item3">
+                 
+                    <Input className='icon' icon='search' placeholder='Search...' />
+                </Menu.Item>  
+
 
                
                    <Button.Group className ="item4">

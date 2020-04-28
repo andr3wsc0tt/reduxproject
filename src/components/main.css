@@ -59,7 +59,7 @@ body {
     margin-left: 25px;
 	perspective: 150px;
 }
-.thumb a {
+.thumb button {
 	display: block; width: 100%; height: 100%;
 	/*double layered BG for lighting effect*/
 	background: 
@@ -70,10 +70,11 @@ body {
 	/*3d space for children*/
 	transform-style: preserve-3d;
 	transition: all 0.5s;
+	pointer-events: none;
 }
-.thumb:hover a {transform: rotateX(80deg); transform-origin: bottom;}
+.thumb:hover button {transform: rotateX(80deg); transform-origin: bottom;}
 /*bottom surface */
-.thumb a:after {
+.thumb button:after {
 	/*36px high element positioned at the bottom of the image*/
 	content: ''; position: absolute; left: 0; bottom: 0; 
 	width: 100%; height: 36px;
@@ -85,16 +86,17 @@ body {
 	transform: rotateX(90deg); transform-origin: bottom;
 }
 /*label style*/
-.thumb a span {
+.thumb button span {
 	color: white; text-transform: uppercase;
 	position: absolute; top: 100%; left: 0; width: 100%;
 	font: bold 12px/36px Montserrat; text-align: center;
 	/*the rotation is a bit less than the bottom surface to avoid flickering*/
 	transform: rotateX(-89.99deg); transform-origin: top;
 	z-index: 1;
+	user-select: none;
 }
 /*shadow*/
-.thumb a:before {
+.thumb button:before {
 	content: ''; position: absolute; top: 0; left: 0;
 	width: 100%; height: 100%;
 	background: rgba(0, 0, 0, 0.5); 
@@ -105,7 +107,7 @@ body {
 	transform: rotateX(95deg) translateZ(-80px) scale(0.75);
 	transform-origin: bottom;
 }
-.thumb:hover a:before {
+.thumb:hover button:before {
 	opacity: 1;
 	/*blurred effect using box shadow as filter: blur is not supported in all browsers*/
 	box-shadow: 0 0 25px 25px rgba(0, 0, 0, 0.5);
@@ -118,9 +120,27 @@ body {
 .edit-profile{
 	padding-left: 30px ;
 }
-
-
-.item3 ,.item4{
-	margin-right: 100px;
-	
+.login-button{
+	margin-left:6px!important;
+	height:38px;
+	line-height:0.5em;
 }
+
+
+@media only screen and (max-width: 767px) {
+	.right.floated.column.floated-dissapear{
+		padding-bottom: 0px;
+	}
+	.thumb{
+		margin-left: auto;
+		margin-bottom: 0px;
+	}
+	
+	.login-button{
+		margin-top:5px!important;
+	}
+	.login-pass{
+		margin-top:5px!important;
+	}
+  }
+

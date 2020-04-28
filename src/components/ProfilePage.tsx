@@ -75,7 +75,7 @@ export class ProfilePage extends React.Component<
   public render() {
     let { profiles } = this.props; // load in the profiles from the store state
 
-    let uName = profiles.filter((profile) => profile.loggedIn == true); // find out who user is logged in
+    let uName = profiles.filter((profile) => profile.loggedIn === true); // find out who user is logged in
 
     let { aboutMe, name, cohort, programming, city, spoken } = uName[0]; // Deconstructing the current user's store profile fields
 

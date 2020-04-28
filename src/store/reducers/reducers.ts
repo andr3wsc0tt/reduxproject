@@ -8,11 +8,20 @@ import {
   Profile
 } from "../types/types";
 
-import { identifier } from "@babel/types";
-
 let initialState: ProfileState = {
   // Our base initial state - We have 2 profiles with their fields, a loggedIn state set initially to false, and the number of users numUsers after we add another profile.
   profiles: [
+    {
+      id: 0,
+      name: "",
+      aboutMe: "",
+      password:"10293uj1o4nn,xv9c092304jlkmxldk09fd4",
+      loggedIn:false,
+      city: "",
+      cohort: "",
+      programming: "",
+      spoken: ""
+    },
     {
       id: 1,
       name: "Andrew",
@@ -152,7 +161,7 @@ export function profileReducer(
           indexUpdate = i;
         }
       });
-      console.log(action.payload);
+
       return {
         ...state,
         profiles: [
