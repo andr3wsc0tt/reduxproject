@@ -36,25 +36,27 @@ The aim of this form is to validate the identity of the new user as a sign up wi
 Introduction Text: This container sits in the left grid and gives an introduction of the app and the intention of a sign up
 
 
-2.	PROFILE PAGE: This is a vertical grid contains two dropdown input:
+2.	PROFILE PAGE: This page first houses at the top of the page, a navigation bar housing two dropdown menus (groups and class mates), a search bar and an options button - edit profile and logout. This page also contains three vertical grids explained below:
 
 Group: Currently built with groups 1, 2, and 3, this dropdown list will contain groups that registered users wish to be a part of and contribute to. 
 
 Class Mates: This currently consists of the names of all group members – Andrew, Charles, Cailenys, Mohammad, and Trina
 
-Grid A: Sitting at the left hand side of this page, this grid consists of labels such as Current city, Cohort, Spoken Language, Programming language of interest and information about the user. This grid also includes a container that holds radio links such as networking events, previous cohorts, groups, additional resources, LinkedIn.
+    Grid A: Sitting at the left hand side of this page, this grid consists of an image card and details of a registered user which is populated against labels such as cohort, surrent city, spoken languages, programming languages of interest and about. 
 
-This grid is intended to display information provided by the user on the edit page explained in 3 below.
+    Grid B: This grid sits at the center of the localhost display and holds forms containing placeholders, icons and buttons of interest to a registered user with text areas that will input posts of interest and questions of interest.
 
-Group B: This grid sits at the center of the localhost display and holds forms containing placeholders, icons and buttons of interest to a registered user.
-
-Group C: This grid sits with a calendar and options button (edit profile and log out)
+    Grid C: This grid sits with a calendar and radio labels to network events, previous cohorts, groups, additional resources, and linkedin enlisted under explore header. In a live lunch, these labels will be web links.
 
 
-3.	EDIT-PROFILE PAGE: This page consists of 3 grid localhost displays separated by horizontal and vertical dividers:
+3.	EDIT-PROFILE PAGE: This page first houses at the top of the page, a navigation bar housing two dropdown menus (groups and class mates), a search bar and an options button - edit profile and logout. This page consists of two grid localhost displays:
 
-Grid A: This vertical grid consists of a search placeholder and search button to allow users filter any user or information of interest.
+    Grid A: This vertical grid consists of labels such as cohort, surrent city, spoken languages, programming languages of interest and about. These labels are populated when the edit form beside, is populated.
 
-Grid B: This grid sits on the left side of the localhost display and consists of container and its content such as card and radio links to interests (education and groups) of registered users.
+    Grid B (edit profile): This grid sits vertically beside the labels enlisted in grid A and a save changes button that allows a user save all changes made to the profile. 
 
-Grid C: This grid sits on the right side of the localhost display and consists of the edit profile form that houses labels that allow the user profile more information about interests that can be added in the placeholders provided. This grid also includes containers that house buttons such as save changes and log out.
+
+Note:
+ All buttons have been colored distintinctively to allow ease of use and have been placed consistently across all pages. 
+
+
