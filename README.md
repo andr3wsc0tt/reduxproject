@@ -1,4 +1,3 @@
-
 "Milestone Project 2 (TECHCAREER HIVE) with Redux-Project"
 
 AVAILABLE SCRIPTS
