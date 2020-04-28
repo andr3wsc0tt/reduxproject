@@ -13,6 +13,7 @@ import { Profile } from "./store/types/types";
 import { RootState } from "./store";
 import { connect } from "react-redux";
 
+
 export interface IAppProps {
   loggedIn: boolean;
   profiles: Profile[];

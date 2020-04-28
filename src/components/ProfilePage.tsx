@@ -24,6 +24,8 @@ import {
   Icon,
   Button,
   Responsive,
+  Label,
+  List,
 } from "semantic-ui-react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";  
@@ -100,9 +102,9 @@ export class ProfilePage extends React.Component<
       <Grid divided="vertically">
         <Grid.Row columns={8}>
           <Grid.Column>
-           <Container>
+           {/*<Container>
               <Image src={LOGO} size="large" circular centered/>
-          </Container> 
+          </Container>*/}
           </Grid.Column>
         </Grid.Row>
         <Grid.Row columns={3}>
@@ -142,14 +144,14 @@ export class ProfilePage extends React.Component<
                 />
                 <Segment>
                   {" "}
-                  <Button icon>
-                    <Icon name="photo" color="green" />
+                  <Label>
+                    <Icon name='photo'color="green"  /> 
                     Photo
-                  </Button>
-                  <Button icon>
-                    <Icon name="user outline" color="green" />
+                  </Label>
+                  <Label>
+                    <Icon name='user outline'color="green"  /> 
                     Tag a Class Mate
-                  </Button>
+                  </Label>
                 </Segment>
               </Segment>
             </Form>{" "}
@@ -162,22 +164,27 @@ export class ProfilePage extends React.Component<
                 />
                 <Segment>
                   {" "}
-                  <Button icon>
-                    <Icon name="image outline" color="green" />
+                  
+                  <Label>
+                    <Icon name='image outline'color="green"  /> 
                     Screen Shot
-                  </Button>
-                  <Button icon>
-                    <Icon name="file code outline" color="green" />
+                  </Label>
+                  <Label>
+                    <Icon name='file code outline'color="green"  /> 
                     Group
-                  </Button>
+                  </Label>
                 </Segment>
+              
               </Segment>
             </Form>
           </Grid.Column>
           <Grid.Column>
             <Container>
           <Responsive as={Container} minWidth={768}>
-            <Calendar />
+            <Container >
+             <Calendar className={'calendar'}/>
+            </Container>
+            
             </Responsive>
             </Container>
             <br></br>
@@ -185,19 +192,14 @@ export class ProfilePage extends React.Component<
             <Container>
                 <Responsive as={Container} minWidth={768}>
                   <Header as="h3"> Explore </Header>
-                  <Radio as="h4" label="Networking Events" defaultChecked />
-                  <br></br>
-                  <Radio as="h2" label="Previous Cohorts" defaultChecked />
-                  <br></br>
-                  <Radio as="h2" label="Groups" defaultChecked />
-                  <br></br>
-                  <Radio
-                    as="h2"
-                    label="Additional Resources"
-                    defaultChecked
-                  />
-                  <br></br>
-                  <Radio as="h2" label="Linkedin" defaultChecked />
+
+                  <List>
+                    <List.Item icon='calendar alternate outline' content='Networking Events' />
+                    <List.Item icon='graduation cap' content='Previous Cohorts' />
+                    <List.Item icon='users' content='Networking Events' />
+                    <List.Item icon='linkedin' content='Linkedin' />
+                  </List>               
+              
                 </Responsive>
               </Container>
           </Grid.Column>
