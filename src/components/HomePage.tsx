@@ -256,11 +256,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
               </Form.Group>
               </Form>
             </Grid.Column>
-<<<<<<< HEAD
-           </MediaQuery>
-=======
             <span>{loginMessage}</span>
->>>>>>> 0eaf1cd31b001179e6687c791e705e2b14e62eeb
           </Grid.Row>
           
           {/* <div id="animated_div">Techcareers HIVE</div> */}
