@@ -13,7 +13,7 @@ import {
 } from "semantic-ui-react";
 
 import { checkPass, addProfile } from "../store/actions/actions";
-import MediaQuery from 'react-responsive';
+
 import { Profile } from "../store/types/types";
 import { RootState } from "../store";
 import { connect } from "react-redux";
@@ -210,7 +210,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
       <Segment>
         <Grid stackable columns="equal">
           <Grid.Row>
-          <MediaQuery query="(min-width: 768px)">
             <div className="thumb">
               <button>
                 <span>TechCareers Hive</span>
@@ -262,7 +261,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
           {/* <div id="animated_div">Techcareers HIVE</div> */}
           
           <Divider horizontal>
-          <MediaQuery query="(min-width: 768px)">
             {" "}
             <div className="sk-wave">
               <div className="sk-wave-rect">T</div>
@@ -281,7 +279,6 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
               <div className="sk-wave-rect">V</div>
               <div className="sk-wave-rect">E</div>
             </div>
-            </MediaQuery>
           </Divider>
           <Grid.Row>
           <Responsive as={Grid.Column} minWidth={768}>
@@ -298,9 +295,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
             {/* </Grid.Column> */}
             <Grid.Column>
               {" "}
-              <MediaQuery query="(min-width: 768px)">
               <Divider vertical>
-              
                 {" "}
                 <Icon
                   loading
@@ -308,9 +303,7 @@ export class Home extends React.Component<IHomeProps, IHomeState> {
                   size="massive"
                   color="yellow"
                 />{" "}
-               
               </Divider>
-              </MediaQuery>
             </Grid.Column>
             
             <Grid.Column>
