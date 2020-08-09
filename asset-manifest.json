@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/andr3wsc0tt/reduxproject/static/css/main.6fbfe849.chunk.css",
-    "main.js": "/andr3wsc0tt/reduxproject/static/js/main.6317188c.chunk.js",
-    "main.js.map": "/andr3wsc0tt/reduxproject/static/js/main.6317188c.chunk.js.map",
-    "runtime-main.js": "/andr3wsc0tt/reduxproject/static/js/runtime-main.700ca57b.js",
-    "runtime-main.js.map": "/andr3wsc0tt/reduxproject/static/js/runtime-main.700ca57b.js.map",
-    "static/css/2.8dbe6964.chunk.css": "/andr3wsc0tt/reduxproject/static/css/2.8dbe6964.chunk.css",
-    "static/js/2.57f67256.chunk.js": "/andr3wsc0tt/reduxproject/static/js/2.57f67256.chunk.js",
-    "static/js/2.57f67256.chunk.js.map": "/andr3wsc0tt/reduxproject/static/js/2.57f67256.chunk.js.map",
-    "index.html": "/andr3wsc0tt/reduxproject/index.html",
-    "precache-manifest.bbe57cfae6764ddf5d82bda98da7948f.js": "/andr3wsc0tt/reduxproject/precache-manifest.bbe57cfae6764ddf5d82bda98da7948f.js",
-    "service-worker.js": "/andr3wsc0tt/reduxproject/service-worker.js",
-    "static/css/2.8dbe6964.chunk.css.map": "/andr3wsc0tt/reduxproject/static/css/2.8dbe6964.chunk.css.map",
-    "static/css/main.6fbfe849.chunk.css.map": "/andr3wsc0tt/reduxproject/static/css/main.6fbfe849.chunk.css.map",
-    "static/js/2.57f67256.chunk.js.LICENSE.txt": "/andr3wsc0tt/reduxproject/static/js/2.57f67256.chunk.js.LICENSE.txt",
-    "static/media/main.css": "/andr3wsc0tt/reduxproject/static/media/Logo.45711a7f.png",
-    "static/media/profile.gif": "/andr3wsc0tt/reduxproject/static/media/profile.f45e432e.gif"
+    "main.css": "/reduxproject/static/css/main.a1293761.chunk.css",
+    "main.js": "/reduxproject/static/js/main.d6d3c5fc.chunk.js",
+    "main.js.map": "/reduxproject/static/js/main.d6d3c5fc.chunk.js.map",
+    "runtime-main.js": "/reduxproject/static/js/runtime-main.289344a0.js",
+    "runtime-main.js.map": "/reduxproject/static/js/runtime-main.289344a0.js.map",
+    "static/css/2.8dbe6964.chunk.css": "/reduxproject/static/css/2.8dbe6964.chunk.css",
+    "static/js/2.57f67256.chunk.js": "/reduxproject/static/js/2.57f67256.chunk.js",
+    "static/js/2.57f67256.chunk.js.map": "/reduxproject/static/js/2.57f67256.chunk.js.map",
+    "index.html": "/reduxproject/index.html",
+    "precache-manifest.2ec12140b984b655b1f8540f9058be7f.js": "/reduxproject/precache-manifest.2ec12140b984b655b1f8540f9058be7f.js",
+    "service-worker.js": "/reduxproject/service-worker.js",
+    "static/css/2.8dbe6964.chunk.css.map": "/reduxproject/static/css/2.8dbe6964.chunk.css.map",
+    "static/css/main.a1293761.chunk.css.map": "/reduxproject/static/css/main.a1293761.chunk.css.map",
+    "static/js/2.57f67256.chunk.js.LICENSE.txt": "/reduxproject/static/js/2.57f67256.chunk.js.LICENSE.txt",
+    "static/media/main.css": "/reduxproject/static/media/Logo.45711a7f.png",
+    "static/media/profile.gif": "/reduxproject/static/media/profile.f45e432e.gif"
   },
   "entrypoints": [
-    "static/js/runtime-main.700ca57b.js",
+    "static/js/runtime-main.289344a0.js",
     "static/css/2.8dbe6964.chunk.css",
     "static/js/2.57f67256.chunk.js",
-    "static/css/main.6fbfe849.chunk.css",
-    "static/js/main.6317188c.chunk.js"
+    "static/css/main.a1293761.chunk.css",
+    "static/js/main.d6d3c5fc.chunk.js"
   ]
 }
