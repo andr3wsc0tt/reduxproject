@@ -1,25 +1,27 @@
 {
   "files": {
-    "main.css": "/andr3wsc0tt/Redux-Project/static/css/main.ddb47f1c.chunk.css",
-    "main.js": "/andr3wsc0tt/Redux-Project/static/js/main.68205932.chunk.js",
-    "main.js.map": "/andr3wsc0tt/Redux-Project/static/js/main.68205932.chunk.js.map",
+    "main.css": "/andr3wsc0tt/Redux-Project/static/css/main.71381ab3.chunk.css",
+    "main.js": "/andr3wsc0tt/Redux-Project/static/js/main.caa6c36b.chunk.js",
+    "main.js.map": "/andr3wsc0tt/Redux-Project/static/js/main.caa6c36b.chunk.js.map",
     "runtime-main.js": "/andr3wsc0tt/Redux-Project/static/js/runtime-main.ef8bc0df.js",
     "runtime-main.js.map": "/andr3wsc0tt/Redux-Project/static/js/runtime-main.ef8bc0df.js.map",
     "static/css/2.8dbe6964.chunk.css": "/andr3wsc0tt/Redux-Project/static/css/2.8dbe6964.chunk.css",
-    "static/js/2.0d1c2c16.chunk.js": "/andr3wsc0tt/Redux-Project/static/js/2.0d1c2c16.chunk.js",
-    "static/js/2.0d1c2c16.chunk.js.map": "/andr3wsc0tt/Redux-Project/static/js/2.0d1c2c16.chunk.js.map",
+    "static/js/2.0ce0a7ce.chunk.js": "/andr3wsc0tt/Redux-Project/static/js/2.0ce0a7ce.chunk.js",
+    "static/js/2.0ce0a7ce.chunk.js.map": "/andr3wsc0tt/Redux-Project/static/js/2.0ce0a7ce.chunk.js.map",
     "index.html": "/andr3wsc0tt/Redux-Project/index.html",
-    "precache-manifest.cb359a86a3b30f2f35fdd97a3f84e6e4.js": "/andr3wsc0tt/Redux-Project/precache-manifest.cb359a86a3b30f2f35fdd97a3f84e6e4.js",
+    "precache-manifest.23997c5f92f6d76b77c82d819af85173.js": "/andr3wsc0tt/Redux-Project/precache-manifest.23997c5f92f6d76b77c82d819af85173.js",
     "service-worker.js": "/andr3wsc0tt/Redux-Project/service-worker.js",
     "static/css/2.8dbe6964.chunk.css.map": "/andr3wsc0tt/Redux-Project/static/css/2.8dbe6964.chunk.css.map",
-    "static/css/main.ddb47f1c.chunk.css.map": "/andr3wsc0tt/Redux-Project/static/css/main.ddb47f1c.chunk.css.map",
-    "static/js/2.0d1c2c16.chunk.js.LICENSE.txt": "/andr3wsc0tt/Redux-Project/static/js/2.0d1c2c16.chunk.js.LICENSE.txt"
+    "static/css/main.71381ab3.chunk.css.map": "/andr3wsc0tt/Redux-Project/static/css/main.71381ab3.chunk.css.map",
+    "static/js/2.0ce0a7ce.chunk.js.LICENSE.txt": "/andr3wsc0tt/Redux-Project/static/js/2.0ce0a7ce.chunk.js.LICENSE.txt",
+    "static/media/main.css": "/andr3wsc0tt/Redux-Project/static/media/Logo.45711a7f.png",
+    "static/media/profile.gif": "/andr3wsc0tt/Redux-Project/static/media/profile.f45e432e.gif"
   },
   "entrypoints": [
     "static/js/runtime-main.ef8bc0df.js",
     "static/css/2.8dbe6964.chunk.css",
-    "static/js/2.0d1c2c16.chunk.js",
-    "static/css/main.ddb47f1c.chunk.css",
-    "static/js/main.68205932.chunk.js"
+    "static/js/2.0ce0a7ce.chunk.js",
+    "static/css/main.71381ab3.chunk.css",
+    "static/js/main.caa6c36b.chunk.js"
   ]
 }
